@@ -29,6 +29,8 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
         navigateFallback: '/index.html',
+        // Never hijack the employer dashboard — it lives under /dashboard/.
+        navigateFallbackDenylist: [/^\/dashboard/],
       },
       devOptions: {
         enabled: true,
