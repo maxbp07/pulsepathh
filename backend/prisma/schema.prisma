@@ -32,6 +32,9 @@ model AccessCode {
   codeHash    String    @unique @map("code_hash")
   department  String
   shift       String?
+  gender      String?
+  ageBand     String?   @map("age_band")
+  tenureBand  String?   @map("tenure_band")
   activatedAt DateTime? @map("activated_at") @db.Timestamptz(6)
   revoked     Boolean   @default(false)
 
@@ -49,6 +52,9 @@ model Session {
   codeHash       String   @map("code_hash")
   department     String
   shift          String?
+  gender         String?
+  ageBand        String?  @map("age_band")
+  tenureBand     String?  @map("tenure_band")
   takenAt        DateTime @map("taken_at") @db.Timestamptz(6)
   riskIndexEnc   Bytes    @map("risk_index_enc")
   pvtIndexEnc    Bytes    @map("pvt_index_enc")

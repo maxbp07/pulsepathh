@@ -78,6 +78,31 @@ const PROFILES = {
   },
 };
 
+// ---------------------------------------------------------------------------
+// Dimensiones demográficas / organizativas (para segmentar el dashboard).
+//
+// Se reparten de forma DETERMINISTA por índice de código, de modo que cada
+// vista de UNA dimensión (turno, género, edad, antigüedad) tenga grupos con
+// ≥5 personas únicas y supere el filtro de K-anonimidad (K=5). Los cruces
+// (p. ej. "mujeres del turno de noche de Informática") sí pueden quedar por
+// debajo de 5 y se suprimen automáticamente — eso demuestra la privacidad.
+// ---------------------------------------------------------------------------
+
+const GENDERS = ['male', 'female'];
+const AGE_BANDS = ['u30', '30_45', '45_60', 'o60'];
+const TENURE_BANDS = ['u2', '2_5', '5_10', 'o10'];
+
+// Modificador de riesgo por turno (puntos sobre la fatiga/sueño).
+// El turno de noche es el más penalizado → historia clara para el empleador.
+const SHIFT_RISK = {
+  morning: { pvt: 0, sleep: 0 },
+  afternoon: { pvt: 3, sleep: -0.3 },
+  night: { pvt: 12, sleep: -1.1 },
+};
+
+// Modificador de burnout por edad (el agotamiento acumulado sube con la edad).
+const AGE_CBI = { u30: 1, '30_45': 0, '45_60': 4, o60: 7 };
+
 function hashCode(code) {
   return createHash('sha256').update(code, 'utf8').digest('hex');
 }
@@ -86,8 +111,32 @@ function buildAccessCode(index) {
   return `BCN-2026-A${String(index).padStart(3, '0')}`;
 }
 
-function profileForIndex(index) {
-  return index <= 25 ? PROFILES.atencion_ciudadana : PROFILES.informatica;
+// Departamento + turno por índice (mantiene la narrativa del pitch y crea
+// 4 celdas pobladas en el mapa de calor Departamento × Turno).
+function deptShiftForIndex(index) {
+  if (index <= 18) return { department: 'atencion_ciudadana', shift: 'morning' };
+  if (index <= 25) return { department: 'atencion_ciudadana', shift: 'afternoon' };
+  if (index <= 37) return { department: 'informatica', shift: 'afternoon' };
+  return { department: 'informatica', shift: 'night' };
+}
+
+// Conjunto completo de dimensiones para un código.
+function dimensionsForIndex(index) {
+  const { department, shift } = deptShiftForIndex(index);
+  return {
+    department,
+    shift,
+    gender: GENDERS[index % GENDERS.length],
+    ageBand: AGE_BANDS[index % AGE_BANDS.length],
+    // Desfase respecto a la edad para que antigüedad y edad no estén correladas.
+    tenureBand: TENURE_BANDS[(index + 2) % TENURE_BANDS.length],
+  };
+}
+
+function baseProfileForDept(department) {
+  return department === 'atencion_ciudadana'
+    ? PROFILES.atencion_ciudadana
+    : PROFILES.informatica;
 }
 
 // Ruido pseudo-gaussiano (suma de uniformes) en el rango [-spread, +spread].
@@ -131,15 +180,19 @@ function dateInWeek(weekIdx) {
   return day;
 }
 
-// Construye las métricas de una sesión a partir del perfil y la semana.
-function buildSessionMetrics(profile, weekIdx) {
+// Construye las métricas de una sesión a partir del perfil, la semana y las
+// dimensiones del trabajador (turno y edad modulan el riesgo).
+function buildSessionMetrics(profile, weekIdx, dims) {
   // Factor de tendencia centrado en la semana media; signo según perfil.
   const trend = profile.trendSign * (weekIdx - (WEEKS - 1) / 2) * 1.7;
 
-  const pvt = clamp(profile.pvtBase + trend + noise(9), 2, 98);
+  const shiftMod = SHIFT_RISK[dims.shift] || SHIFT_RISK.morning;
+  const ageCbi = AGE_CBI[dims.ageBand] ?? 0;
+
+  const pvt = clamp(profile.pvtBase + trend + shiftMod.pvt + noise(9), 2, 98);
   const stroop = clamp(profile.stroopBase + trend + noise(9), 2, 98);
-  const cbi = clamp(profile.cbiBase + trend + noise(8), 2, 98);
-  const sleepHours = clamp(profile.sleepBase + noise(1.1), 3.5, 9);
+  const cbi = clamp(profile.cbiBase + trend + ageCbi + noise(8), 2, 98);
+  const sleepHours = clamp(profile.sleepBase + shiftMod.sleep + noise(1.1), 3.2, 9);
 
   const risk = clamp(
     pvt * W.pvt + stroop * W.stroop + cbi * W.cbi + sleepPenalty(sleepHours) * W.sleep,
@@ -174,11 +227,12 @@ async function ensureOrgAndCodes() {
 
   for (let i = 1; i <= ACCESS_CODE_COUNT; i += 1) {
     const codeHash = hashCode(buildAccessCode(i));
-    const { department, shift } = profileForIndex(i);
+    const { department, shift, gender, ageBand, tenureBand } = dimensionsForIndex(i);
+    const data = { orgId: organization.id, department, shift, gender, ageBand, tenureBand, revoked: false };
     await prisma.accessCode.upsert({
       where: { codeHash },
-      create: { orgId: organization.id, codeHash, department, shift, revoked: false },
-      update: { orgId: organization.id, department, shift, revoked: false },
+      create: { codeHash, ...data },
+      update: data,
     });
   }
 
@@ -209,7 +263,8 @@ async function main() {
   for (let i = 1; i <= ACCESS_CODE_COUNT; i += 1) {
     if (i === RESERVED_LIVE_CODE) continue; // A050 limpio para la demo en vivo
 
-    const profile = profileForIndex(i);
+    const dims = dimensionsForIndex(i);
+    const profile = baseProfileForDept(dims.department);
     const codeHash = hashCode(buildAccessCode(i));
 
     for (let week = 0; week < WEEKS; week += 1) {
@@ -218,14 +273,17 @@ async function main() {
         Math.floor(Math.random() * (SESSIONS_PER_WEEK_MAX - SESSIONS_PER_WEEK_MIN + 1));
 
       for (let s = 0; s < sessionsThisWeek; s += 1) {
-        const m = buildSessionMetrics(profile, week);
+        const m = buildSessionMetrics(profile, week, dims);
         if (m.risk_index >= 60) highRiskCount += 1;
 
         rows.push({
           orgId: organization.id,
           codeHash,
-          department: profile.department,
-          shift: profile.shift,
+          department: dims.department,
+          shift: dims.shift,
+          gender: dims.gender,
+          ageBand: dims.ageBand,
+          tenureBand: dims.tenureBand,
           takenAt: dateInWeek(week),
           riskIndexEnc: encryptNumber(m.risk_index),
           pvtIndexEnc: encryptNumber(m.pvt_index),
@@ -249,9 +307,11 @@ async function main() {
   console.log(`Sesiones generadas: ${rows.length}`);
   console.log(`  · de las cuales en riesgo alto (≥60): ${highRiskCount}`);
   console.log(`Semanas de historial: ${WEEKS}`);
-  console.log('Departamentos:');
-  console.log('  · atencion_ciudadana (A001–A025, mañana) → sano, mejora');
-  console.log('  · informatica (A026–A049, tarde) → riesgo alto por burnout, empeora');
+  console.log('Departamentos y turnos:');
+  console.log('  · atencion_ciudadana (A001–A018 mañana, A019–A025 tarde) → sano, mejora');
+  console.log('  · informatica (A026–A037 tarde, A038–A049 noche) → riesgo alto por burnout, empeora');
+  console.log('Dimensiones añadidas: género (male/female), edad (u30/30_45/45_60/o60), antigüedad (u2/2_5/5_10/o10)');
+  console.log('  · El turno de NOCHE es el de mayor riesgo (fatiga + déficit de sueño)');
   console.log(`Código limpio para demo en vivo: ${buildAccessCode(RESERVED_LIVE_CODE)}`);
   console.log(`Login RRHH: ${EMPLOYER_USER.email} / ${EMPLOYER_USER.password}`);
   console.log('Seed DEMO completado.');
