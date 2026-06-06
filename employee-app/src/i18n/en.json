@@ -43,7 +43,9 @@
     "tap": "Tap now!",
     "progress": "{current} of {total}",
     "false_start": "Too soon! Wait for the green signal.",
-    "done": "PVT test completed"
+    "done": "PVT test completed",
+    "start": "Start",
+    "lapse": "Slow"
   },
   "stroop": {
     "instruction": "Select the ink colour of the word, not the meaning of the word.",

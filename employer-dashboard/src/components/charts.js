@@ -1,4 +1,5 @@
 import Chart from 'chart.js/auto';
+import { formatDepartment } from '../lib/labels.js';
 
 /** Instancias activas para destruirlas antes de redibujar. */
 let barChart = null;
@@ -75,7 +76,7 @@ export function renderCharts(container, data) {
   barChart = new Chart(container.querySelector('#chart-bar'), {
     type: 'bar',
     data: {
-      labels: visibleGroups.map((g) => g.department),
+      labels: visibleGroups.map((g) => formatDepartment(g.department)),
       datasets: [
         {
           label: 'Índice de riesgo medio',
@@ -118,47 +119,54 @@ export function renderCharts(container, data) {
     },
   });
 
-  /* ── Gráfica de línea: tendencia temporal ── */
-  const deptWithTrend = visibleGroups.find(
+  /* ── Gráfica de línea: tendencia temporal (todas las series) ── */
+  const deptsWithTrend = visibleGroups.filter(
     (g) => Array.isArray(g.trend) && g.trend.length >= 2,
   );
 
-  if (deptWithTrend) {
-    const { department, trend } = deptWithTrend;
+  if (deptsWithTrend.length > 0) {
+    // Número máximo de semanas entre todos los departamentos.
+    const maxWeeks = deptsWithTrend.reduce((m, g) => Math.max(m, g.trend.length), 0);
+    const labels = Array.from({ length: maxWeeks }, (_, i) => `Sem ${i + 1}`);
 
-    // Calcular color de la línea según media de la tendencia
-    const avgTrend = trend.reduce((a, b) => a + b, 0) / trend.length;
-    const lineColor = riskColor(avgTrend, 1);
-    const lineBg = riskColor(avgTrend, 0.1);
+    const datasets = deptsWithTrend.map((g) => {
+      const avgTrend = g.trend.reduce((a, b) => a + b, 0) / g.trend.length;
+      const lineColor = riskColor(avgTrend, 1);
+      return {
+        label: formatDepartment(g.department),
+        data: g.trend,
+        borderColor: lineColor,
+        backgroundColor: riskColor(avgTrend, 0.08),
+        fill: true,
+        tension: 0.35,
+        pointRadius: 3,
+        pointHoverRadius: 6,
+        pointBackgroundColor: lineColor,
+        pointBorderColor: 'rgba(7,9,15,0.6)',
+        pointBorderWidth: 1.5,
+        borderWidth: 2.5,
+      };
+    });
 
     lineChart = new Chart(container.querySelector('#chart-line'), {
       type: 'line',
-      data: {
-        labels: trend.map((_, i) => `Sem ${i + 1}`),
-        datasets: [
-          {
-            label: department,
-            data: trend,
-            borderColor: lineColor,
-            backgroundColor: lineBg,
-            fill: true,
-            tension: 0.35,
-            pointRadius: 4,
-            pointHoverRadius: 6,
-            pointBackgroundColor: lineColor,
-            borderWidth: 2,
-          },
-        ],
-      },
+      data: { labels, datasets },
       options: {
         responsive: true,
+        interaction: { mode: 'index', intersect: false },
         plugins: {
           legend: {
-            labels: { color: '#94a3b8', font: { size: 11 } },
+            labels: {
+              color: '#cbd5e1',
+              font: { size: 12, weight: '500' },
+              usePointStyle: true,
+              pointStyleWidth: 12,
+              padding: 16,
+            },
           },
           tooltip: {
             callbacks: {
-              label: (ctx) => ` ${ctx.parsed.y} / 100`,
+              label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y} / 100`,
             },
           },
         },

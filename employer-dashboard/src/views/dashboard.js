@@ -4,6 +4,7 @@ import { renderCharts } from '../components/charts.js';
 import { renderAlerts } from '../components/alerts.js';
 import { renderExportCsv } from '../components/exportCsv.js';
 import { renderReportButton } from '../components/reportButton.js';
+import { formatDepartment } from '../lib/labels.js';
 
 /**
  * Construye la URL con query params opcionales, omitiendo valores vacíos.
@@ -133,7 +134,7 @@ function renderDeptTable(container, data) {
       if (g.kanon_protected) {
         return `
           <tr>
-            <td class="dept-name">${escapeHtml(g.department)}</td>
+            <td class="dept-name">${escapeHtml(formatDepartment(g.department))}</td>
             <td colspan="4" style="text-align:left; padding-left:1rem">
               <span class="badge-kanon">Protegido (K-anonimidad)</span>
             </td>
@@ -147,11 +148,20 @@ function renderDeptTable(container, data) {
             ? 'risk-pill--yellow'
             : 'risk-pill--green';
 
+      const dotColor =
+        g.avg_risk_index >= 50
+          ? 'var(--risk-red)'
+          : g.avg_risk_index >= 35
+            ? 'var(--risk-yellow)'
+            : 'var(--risk-green)';
+
       const trendHtml = buildTrendHtml(g.trend);
 
       return `
         <tr>
-          <td class="dept-name">${escapeHtml(g.department)}</td>
+          <td class="dept-name">
+            <span class="dept-dot" style="background:${dotColor}"></span>
+            ${escapeHtml(formatDepartment(g.department))}</td>
           <td>${g.count_unique_users ?? '—'}</td>
           <td>
             <span class="risk-pill ${riskPillClass}">

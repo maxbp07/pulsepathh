@@ -43,7 +43,9 @@
     "tap": "¡Toque ahora!",
     "progress": "{current} de {total}",
     "false_start": "¡Demasiado pronto! Espere la señal verde.",
-    "done": "Test PVT completado"
+    "done": "Test PVT completado",
+    "start": "Comenzar",
+    "lapse": "Lento"
   },
   "stroop": {
     "instruction": "Seleccione el color de la tinta de la palabra, no el significado de la palabra.",

@@ -1,3 +1,5 @@
+import { formatDepartment } from '../lib/labels.js';
+
 /**
  * Icono SVG de advertencia (triángulo). Sin dependencias externas.
  */
@@ -38,7 +40,7 @@ export function renderAlerts(container, data) {
         <div class="alert-item alert-danger" role="alert">
           ${warnIcon}
           <span>
-            <strong>${escapeHtml(g.department)}</strong> —
+            <strong>${escapeHtml(formatDepartment(g.department))}</strong> —
             ${g.pct_high_risk}% de trabajadores en riesgo alto
             <span style="font-size:0.8rem; color:#fca5a5; margin-left:0.4rem">(umbral &gt;20%)</span>
           </span>

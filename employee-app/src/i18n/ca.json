@@ -43,7 +43,9 @@
     "tap": "Toca ara!",
     "progress": "{current} de {total}",
     "false_start": "Massa aviat! Espereu el senyal verd.",
-    "done": "Test PVT completat"
+    "done": "Test PVT completat",
+    "start": "Començar",
+    "lapse": "Lent"
   },
   "stroop": {
     "instruction": "Seleccioneu el color de la tinta de la paraula, no el significat de la paraula.",
