@@ -1,6 +1,9 @@
 import { apiFetch, clearToken, getOrgId, getRole } from '../api/client.js';
 import { renderFilters } from '../components/filters.js';
 import { renderCharts } from '../components/charts.js';
+import { renderHeatmap } from '../components/heatmap.js';
+import { renderInsights } from '../components/insights.js';
+import { renderSegmentOverview } from '../components/segmentOverview.js';
 import { renderAlerts } from '../components/alerts.js';
 import { renderExportCsv } from '../components/exportCsv.js';
 import { renderReportButton } from '../components/reportButton.js';
@@ -63,13 +66,24 @@ function updateOrgTotal(statsEl, orgTotal) {
     return;
   }
 
-  const { avg_risk_index, pct_high_risk, count_unique_users, count } = orgTotal;
+  const { avg_risk_index, pct_high_risk, count_unique_users, count, drivers } = orgTotal;
   const sem = semaphoreLevel(avg_risk_index ?? 0);
   const riskClass = riskKpiClass(avg_risk_index ?? 0);
   const highRiskClass = highRiskKpiClass(pct_high_risk ?? 0);
 
   const pctTrendClass = (pct_high_risk ?? 0) > 20 ? 'kpi-trend--up' : 'kpi-trend--down';
   const pctTrendLabel = (pct_high_risk ?? 0) > 20 ? '↑ Alerta' : '↓ OK';
+
+  const driverLabels = {
+    pvt: 'Fatiga / vigilancia',
+    stroop: 'Control cognitivo',
+    cbi: 'Burnout',
+    sleep: 'Déficit de sueño',
+  };
+  const driverBadge =
+    drivers?.dominant
+      ? `<span class="driver-badge" title="Principal factor del índice de riesgo">🧠 ${driverLabels[drivers.dominant] || drivers.dominant}</span>`
+      : '';
 
   statsEl.innerHTML = `
     <div class="semaphore-block">
@@ -79,7 +93,7 @@ function updateOrgTotal(statsEl, orgTotal) {
       <div class="semaphore-info">
         <span class="semaphore-label">Índice de riesgo global</span>
         <span class="semaphore-level">${sem.emoji} ${sem.label}</span>
-        <span class="semaphore-desc">Metodología CoPsoQ·istas21 · K-anonimidad K=5</span>
+        <span class="semaphore-desc">Metodología CoPsoQ·istas21 · K-anonimidad K=5 ${driverBadge}</span>
       </div>
     </div>
 
@@ -124,18 +138,31 @@ function updateOrgTotal(statsEl, orgTotal) {
  * Grupos con kanon_protected muestran fila con badge en lugar de métricas.
  */
 function renderDeptTable(container, data) {
-  if (!data || !data.groups || data.groups.length === 0) {
+  const deptSegs = data?.segments?.department;
+  const groups = deptSegs?.length
+    ? deptSegs.map((g) => ({ ...g, department: g.group ?? g.department }))
+    : data?.groups;
+
+  if (!groups || groups.length === 0) {
     container.innerHTML = '';
     return;
   }
 
-  const rows = data.groups
+  const hasDrivers = groups.some((g) => g.drivers?.dominant);
+  const driverLabels = {
+    pvt: 'Fatiga',
+    stroop: 'Cognitivo',
+    cbi: 'Burnout',
+    sleep: 'Sueño',
+  };
+
+  const rows = groups
     .map((g) => {
       if (g.kanon_protected) {
         return `
           <tr>
             <td class="dept-name">${escapeHtml(formatDepartment(g.department))}</td>
-            <td colspan="4" style="text-align:left; padding-left:1rem">
+            <td colspan="${hasDrivers ? 5 : 4}" style="text-align:left; padding-left:1rem">
               <span class="badge-kanon">Protegido (K-anonimidad)</span>
             </td>
           </tr>`;
@@ -156,6 +183,9 @@ function renderDeptTable(container, data) {
             : 'var(--risk-green)';
 
       const trendHtml = buildTrendHtml(g.trend);
+      const driverHtml = hasDrivers
+        ? `<td><span class="driver-pill">${driverLabels[g.drivers?.dominant] || '—'}</span></td>`
+        : '';
 
       return `
         <tr>
@@ -169,6 +199,7 @@ function renderDeptTable(container, data) {
             </span>
           </td>
           <td>${typeof g.pct_high_risk === 'number' ? g.pct_high_risk + '%' : '—'}</td>
+          ${driverHtml}
           <td>${trendHtml}</td>
         </tr>`;
     })
@@ -185,6 +216,7 @@ function renderDeptTable(container, data) {
               <th>Usuarios únicos</th>
               <th>Riesgo medio</th>
               <th>% Riesgo alto</th>
+              ${hasDrivers ? '<th>Factor principal</th>' : ''}
               <th>Tendencia</th>
             </tr>
           </thead>
@@ -299,13 +331,17 @@ export function renderDashboard(container) {
           <div id="org-stats"></div>
         </section>
 
+        <div id="insights-area"></div>
+
         <div class="dashboard-grid">
           <section class="card" id="filters-area"></section>
           <section id="alerts-area"></section>
+          <div id="segment-overview-area"></div>
           <section class="card" id="charts-area">
-            <h2 class="card-title">Visualizaciones por departamento</h2>
+            <h2 class="card-title">Visualizaciones</h2>
             <div id="charts-mount"></div>
           </section>
+          <div id="heatmap-area"></div>
           <div id="dept-table-area"></div>
         </div>
       </main>
@@ -321,7 +357,10 @@ export function renderDashboard(container) {
   const errorEl = container.querySelector('#error-banner');
   const statsEl = container.querySelector('#org-stats');
   const alertsEl = container.querySelector('#alerts-area');
+  const insightsEl = container.querySelector('#insights-area');
+  const segmentOverviewEl = container.querySelector('#segment-overview-area');
   const chartsMount = container.querySelector('#charts-mount');
+  const heatmapEl = container.querySelector('#heatmap-area');
   const deptTableEl = container.querySelector('#dept-table-area');
 
   /**
@@ -340,13 +379,19 @@ export function renderDashboard(container) {
       const data = await apiFetch(buildApiUrl(orgId, filters));
 
       updateOrgTotal(statsEl, data.org_total ?? null);
+      renderInsights(insightsEl, data);
       renderAlerts(alertsEl, data);
+      renderSegmentOverview(segmentOverviewEl, data);
       renderCharts(chartsMount, data);
+      renderHeatmap(heatmapEl, data);
       renderDeptTable(deptTableEl, data);
     } catch (err) {
       updateOrgTotal(statsEl, null);
+      renderInsights(insightsEl, null);
       renderAlerts(alertsEl, null);
+      renderSegmentOverview(segmentOverviewEl, null);
       renderCharts(chartsMount, null);
+      heatmapEl.innerHTML = '';
       deptTableEl.innerHTML = '';
       setError(errorEl, err.message || 'No se pudieron cargar los datos.');
     } finally {

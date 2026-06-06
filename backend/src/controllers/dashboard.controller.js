@@ -1,6 +1,15 @@
 import { PrismaClient } from '@prisma/client';
 import { decryptNumber } from '../lib/crypto.js';
-import { buildGroupsFromSessions, buildOrgTotal } from '../lib/kanon.js';
+import {
+  buildGroupsFromSessions,
+  buildOrgTotal,
+  decryptSessions,
+  buildSegments,
+  buildHeatmap,
+} from '../lib/kanon.js';
+
+// Dimensiones de segmentación expuestas por el dashboard.
+const SEGMENT_DIMENSIONS = ['department', 'shift', 'gender', 'ageBand', 'tenureBand'];
 
 /** Escapa una celda CSV (rodea con comillas si contiene coma, comilla o salto de línea). */
 function csvCell(value) {
@@ -32,7 +41,7 @@ const prisma = new PrismaClient();
  *
  * Query params (all optional):
  *   department  string   — filter to a single department
- *   shift       string   — filter to a single shift ("morning" | "afternoon")
+ *   shift       string   — filter to a single shift ("morning" | "afternoon" | "night")
  *   from        ISO date — sessions taken on or after this date (UTC midnight)
  *   to          ISO date — sessions taken on or before end of this date
  */
@@ -80,38 +89,61 @@ export async function getDashboard(req, res) {
         // It is never included in the API response.
         codeHash: true,
         department: true,
+        shift: true,
+        gender: true,
+        ageBand: true,
+        tenureBand: true,
         takenAt: true,
         riskIndexEnc: true,
         pvtIndexEnc: true,
         stroopIndexEnc: true,
+        cbiScoreEnc: true,
+        sleepHoursEnc: true,
       },
     });
   } catch {
     return res.status(500).json({ error: 'Database error.' });
   }
 
-  // Department groups with K-anonymity suppression applied internally.
+  // Department groups with K-anonymity suppression applied internally
+  // (legacy shape, conserva `department` + trend para los gráficos existentes).
   const groups = buildGroupsFromSessions(rawSessions, decryptNumber);
 
-  // Org-wide totals: decrypt all (filtered) sessions, ignoring failures, then
-  // apply the global K-anonymity check.
-  const allDecrypted = [];
-  for (const s of rawSessions) {
-    try {
-      allDecrypted.push({
-        codeHash: s.codeHash,
-        takenAt: s.takenAt,
-        _risk: decryptNumber(s.riskIndexEnc),
-        _pvt: decryptNumber(s.pvtIndexEnc),
-        _stroop: decryptNumber(s.stroopIndexEnc),
-      });
-    } catch {
-      // Corrupted record — skip silently.
-    }
-  }
-  const org_total = buildOrgTotal(allDecrypted);
+  // Descifra una sola vez y reutiliza para segmentos, heatmap y org_total.
+  const decrypted = decryptSessions(rawSessions, decryptNumber);
 
-  return res.status(200).json({ groups, org_total });
+  // Segmentación por cada dimensión disponible (cada una con su K-anonimidad).
+  const segments = {};
+  for (const dim of SEGMENT_DIMENSIONS) {
+    segments[dim] = buildSegments(decrypted, dim);
+  }
+
+  // Mapas de calor: cruces útiles para RRHH (K-anonimidad por celda).
+  const HEATMAP_PAIRS = [
+    ['department', 'shift'],
+    ['department', 'gender'],
+    ['shift', 'gender'],
+    ['department', 'ageBand'],
+    ['shift', 'ageBand'],
+    ['department', 'tenureBand'],
+  ];
+  const heatmaps = HEATMAP_PAIRS.map(([rowKey, colKey]) =>
+    buildHeatmap(decrypted, rowKey, colKey),
+  );
+  const heatmap = heatmaps[0];
+
+  // Org-wide totals + drivers globales (un único grupo virtual que cubre toda
+  // la organización para reutilizar el mismo cálculo de drivers que un segmento).
+  const org_total = buildOrgTotal(decrypted);
+  if (!org_total.kanon_protected) {
+    const orgGroup = buildSegments(
+      decrypted.map((s) => ({ ...s, __all__: 'org' })),
+      '__all__',
+    )[0];
+    org_total.drivers = orgGroup && !orgGroup.kanon_protected ? orgGroup.drivers : null;
+  }
+
+  return res.status(200).json({ groups, org_total, segments, heatmap, heatmaps });
 }
 
 /**

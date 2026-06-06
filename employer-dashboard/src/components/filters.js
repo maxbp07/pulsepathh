@@ -8,6 +8,7 @@ const SHIFTS = [
   { value: '', label: 'Todos los turnos' },
   { value: 'morning', label: 'Mañana' },
   { value: 'afternoon', label: 'Tarde' },
+  { value: 'night', label: 'Noche' },
 ];
 
 function defaultDateRange() {
