@@ -8,6 +8,9 @@ const HEATMAP_TABS = [
   { rowKey: 'department', colKey: 'ageBand', label: 'Depto × Edad', icon: '🏢🎂' },
   { rowKey: 'shift', colKey: 'ageBand', label: 'Turno × Edad', icon: '🕒🎂' },
   { rowKey: 'department', colKey: 'tenureBand', label: 'Depto × Antigüedad', icon: '🏢📅' },
+  { rowKey: 'gender', colKey: 'ageBand', label: 'Género × Edad', icon: '⚧🎂' },
+  { rowKey: 'shift', colKey: 'tenureBand', label: 'Turno × Antigüedad', icon: '🕒📅' },
+  { rowKey: 'gender', colKey: 'tenureBand', label: 'Género × Antigüedad', icon: '⚧📅' },
 ];
 
 let selectedHeatmapIdx = 0;

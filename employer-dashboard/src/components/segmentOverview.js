@@ -33,9 +33,11 @@ export function renderSegmentOverview(container, data) {
         </div>`;
     }
 
-    const maxRisk = Math.max(...groups.map((g) => g.avg_risk_index), 1);
-    const rows = groups
-      .slice(0, 5)
+    const sorted = [...groups].sort((a, b) => b.avg_risk_index - a.avg_risk_index);
+    const maxRisk = Math.max(...sorted.map((g) => g.avg_risk_index), 1);
+    const limit = dim.key === 'shift' || dim.key === 'gender' ? sorted.length : 6;
+    const rows = sorted
+      .slice(0, limit)
       .map((g) => {
         const pct = Math.round((g.avg_risk_index / 100) * 100);
         const width = Math.round((g.avg_risk_index / maxRisk) * 100);

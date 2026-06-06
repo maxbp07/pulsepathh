@@ -126,6 +126,9 @@ export async function getDashboard(req, res) {
     ['department', 'ageBand'],
     ['shift', 'ageBand'],
     ['department', 'tenureBand'],
+    ['gender', 'ageBand'],
+    ['shift', 'tenureBand'],
+    ['gender', 'tenureBand'],
   ];
   const heatmaps = HEATMAP_PAIRS.map(([rowKey, colKey]) =>
     buildHeatmap(decrypted, rowKey, colKey),

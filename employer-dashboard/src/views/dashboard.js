@@ -4,6 +4,7 @@ import { renderCharts } from '../components/charts.js';
 import { renderHeatmap } from '../components/heatmap.js';
 import { renderInsights } from '../components/insights.js';
 import { renderSegmentOverview } from '../components/segmentOverview.js';
+import { renderSpotlights } from '../components/spotlights.js';
 import { renderAlerts } from '../components/alerts.js';
 import { renderExportCsv } from '../components/exportCsv.js';
 import { renderReportButton } from '../components/reportButton.js';
@@ -332,6 +333,7 @@ export function renderDashboard(container) {
         </section>
 
         <div id="insights-area"></div>
+        <div id="spotlights-area"></div>
 
         <div class="dashboard-grid">
           <section class="card" id="filters-area"></section>
@@ -358,6 +360,7 @@ export function renderDashboard(container) {
   const statsEl = container.querySelector('#org-stats');
   const alertsEl = container.querySelector('#alerts-area');
   const insightsEl = container.querySelector('#insights-area');
+  const spotlightsEl = container.querySelector('#spotlights-area');
   const segmentOverviewEl = container.querySelector('#segment-overview-area');
   const chartsMount = container.querySelector('#charts-mount');
   const heatmapEl = container.querySelector('#heatmap-area');
@@ -380,6 +383,7 @@ export function renderDashboard(container) {
 
       updateOrgTotal(statsEl, data.org_total ?? null);
       renderInsights(insightsEl, data);
+      renderSpotlights(spotlightsEl, data);
       renderAlerts(alertsEl, data);
       renderSegmentOverview(segmentOverviewEl, data);
       renderCharts(chartsMount, data);
@@ -388,6 +392,7 @@ export function renderDashboard(container) {
     } catch (err) {
       updateOrgTotal(statsEl, null);
       renderInsights(insightsEl, null);
+      renderSpotlights(spotlightsEl, null);
       renderAlerts(alertsEl, null);
       renderSegmentOverview(segmentOverviewEl, null);
       renderCharts(chartsMount, null);
