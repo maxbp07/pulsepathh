@@ -1,0 +1,91 @@
+{
+  "app": {
+    "name": "PulsePath"
+  },
+  "nav": {
+    "home": "Inici",
+    "history": "Historial"
+  },
+  "onboarding": {
+    "title": "Benvingut/da a PulsePath",
+    "consent_title": "Consentiment informat per al tractament de dades",
+    "consent_body": "En virtut del Reglament (UE) 2016/679 (RGPD) i de la Llei orgànica 3/2018, de 5 de desembre, de protecció de dades personals i garantia dels drets digitals (LOPDGDD), l'organització promotora del programa PulsePath us informa del següent:\n\n1. Responsable del tractament: l'organització empleadora participant en el programa pilot (en el cas del pilot, l'Ajuntament de Barcelona), amb suport tècnic del proveïdor del servei PulsePath.\n\n2. Finalitat: avaluar factors de risc psicosocial i cognitiu relacionats amb la salut laboral, dins del marc de la prevenció de riscos laborals (Llei 31/1995 de prevenció de riscos laborals). Els resultats s'agreguen de forma anònima per departament i torn; no es poden identificar persones individuals.\n\n3. Dades que es tracten: índexs numèrics derivats dels tests cognitius (PVT-B, Stroop, CBI) i dades declaratives del micro-check-in (hores de son, nivell d'estrès, consum d'estimulants), juntament amb metadades anònimes (departament i torn). No es recullen dades biomètriques en brut, temps de reacció individuals, respostes literals del CBI, adreça IP, nom, correu electrònic ni cap altre dada que permeti la vostra identificació directa.\n\n4. Processament al dispositiu (Edge AI): els tests cognitius s'executen íntegrament al vostre dispositiu. Els càlculs es realitzen localment abans de transmetre's només els índexs agregats al servidor, ubicat a la Unió Europea.\n\n5. Base jurídica: interès legítim de l'empresa en matèria de prevenció de riscos laborals i protecció de la salut dels treballadors (art. 6.1.f RGPD), així com el compliment d'obligacions legals en matèria de PRL.\n\n6. Conservació: les dades s'emmagatzemen durant la vigència del programa pilot i un període addicional de dotze (12) mesos posterior a la seva finalització, després del qual seran suprimides de forma irreversible.\n\n7. Destinataris: personal autoritzat de prevenció de riscos laborals i recursos humans de l'organització, exclusivament en format agregat i amb garanties de K-anonimitat (grups mínims de cinc persones). No es cediran dades a tercers excepte obligació legal.\n\n8. Drets: podeu exercir els drets d'accés, rectificació, supressió, limitació del tractament, oposició i portabilitat mitjançant sol·licitud a l'oficina de prevenció de riscos laborals de la vostra organització. També teniu dret a presentar una reclamació davant l'Autoritat Catalana de Protecció de Dades (APDCAT).\n\n9. Revocació: podeu retirar el consentiment en qualsevol moment des de l'aplicació o sol·licitant la supressió de les vostres dades. La revocació no afecta la licitud del tractament efectuat anteriorment.\n\nEn prémer «Accepto i continuo», declareu haver llegit i comprès la informació anterior i consentiu el tractament de les dades descrites exclusivament per a les finalitats indicades.",
+    "code_label": "Codi d'accés anònim",
+    "code_placeholder": "Ex.: BCN-2026-A007",
+    "submit": "Accepto i continuo",
+    "language_label": "Idioma",
+    "right_to_delete": "Dret de supressió (RGPD)",
+    "delete_confirm": "Segur que vols eliminar totes les teves dades? Aquesta acció és irreversible."
+  },
+  "home": {
+    "title": "El teu estat d'avui",
+    "test_pending": "Tens un test pendent per avui",
+    "test_done": "Has completat el test d'avui",
+    "start_test": "Començar test",
+    "cbi_pending": "Tens el qüestionari setmanal pendent",
+    "continue_weekly": "Continuar test setmanal",
+    "risk_low": "Risc baix",
+    "risk_medium": "Risc moderat",
+    "risk_high": "Risc alt",
+    "daily_reminder": "Completa el teu check-in diari",
+    "cbi_reminder": "Completa el qüestionari setmanal CBI"
+  },
+  "checkin": {
+    "sleep_label": "Quantes hores has dormit la darrera nit?",
+    "stress_label": "Com valores el teu nivell d'estrès avui?",
+    "stimulants_label": "Has consumit estimulants (cafèina, energètiques) en les darreres 6 hores?",
+    "continue": "Continuar",
+    "cbi_step": "Qüestionari CBI setmanal"
+  },
+  "pvt": {
+    "instruction": "Quan aparegui el cercle verd, toqueu la pantalla el més ràpid possible. No toqueu abans que aparegui.",
+    "wait": "Espereu…",
+    "tap": "Toca ara!",
+    "progress": "{current} de {total}",
+    "false_start": "Massa aviat! Espereu el senyal verd.",
+    "done": "Test PVT completat"
+  },
+  "stroop": {
+    "instruction": "Seleccioneu el color de la tinta de la paraula, no el significat de la paraula.",
+    "progress": "{current} / {total}",
+    "done": "Test Stroop completat"
+  },
+  "cbi": {
+    "instruction": "Indiqueu amb quina freqüència us ha passat el següent durant les darreres setmanes.",
+    "progress": "{current} / {total}",
+    "done": "Qüestionari CBI completat",
+    "scale_always": "Sempre",
+    "scale_often": "Sovint",
+    "scale_sometimes": "De vegades",
+    "scale_seldom": "Rarament",
+    "scale_never": "Mai"
+  },
+  "results": {
+    "title": "Resultats d'avui",
+    "risk_index": "Índex de risc",
+    "breakdown": "Desglossament"
+  },
+  "history": {
+    "title": "Historial",
+    "subtitle": "Els teus últims check-ins locals",
+    "empty_title": "Encara no hi ha registres",
+    "empty_body": "Els check-ins completats apareixeran aquí amb la tendència del teu índex de risc.",
+    "trend_title": "Tendència del risc",
+    "summary_title": "Resum",
+    "week_avg": "Mitjana setmanal",
+    "best_day": "Millor dia",
+    "worst_day": "Pitjor dia",
+    "sessions_title": "Sessions recents",
+    "risk_label": "Risc"
+  },
+  "errors": {
+    "network": "Error de connexió. Comproveu la xarxa i torneu-ho a provar.",
+    "invalid_code": "Codi d'accés no vàlid o ja utilitzat.",
+    "generic": "S'ha produït un error inesperat. Torneu-ho a provar més tard."
+  },
+  "common": {
+    "loading": "Carregant…",
+    "close": "Tancar",
+    "back": "Enrere"
+  }
+}

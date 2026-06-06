@@ -1,0 +1,91 @@
+{
+  "app": {
+    "name": "PulsePath"
+  },
+  "nav": {
+    "home": "Home",
+    "history": "History"
+  },
+  "onboarding": {
+    "title": "Welcome to PulsePath",
+    "consent_title": "Informed consent for data processing",
+    "consent_body": "In accordance with Regulation (EU) 2016/679 (GDPR) and applicable national data protection legislation, the organisation sponsoring the PulsePath programme informs you of the following:\n\n1. Data controller: the employer organisation participating in the pilot programme (for this pilot, Barcelona City Council), with technical support from the PulsePath service provider.\n\n2. Purpose: to assess psychosocial and cognitive risk factors related to occupational health, within the framework of occupational risk prevention. Results are aggregated anonymously by department and shift; individual persons cannot be identified.\n\n3. Data processed: numeric indices derived from cognitive tests (PVT-B, Stroop, CBI) and self-reported micro-check-in data (sleep hours, stress level, stimulant consumption), together with anonymous metadata (department and shift). No raw biometric data, individual reaction times, verbatim CBI responses, IP address, name, email address or any other data enabling your direct identification is collected.\n\n4. On-device processing (Edge AI): cognitive tests run entirely on your device. Calculations are performed locally before transmitting only aggregated indices to the server, hosted in the European Union.\n\n5. Legal basis: legitimate interest of the employer in occupational risk prevention and worker health protection (Art. 6(1)(f) GDPR), as well as compliance with legal obligations in occupational health and safety.\n\n6. Retention: data is stored for the duration of the pilot programme and an additional twelve (12) months after it ends, after which it is irreversibly deleted.\n\n7. Recipients: authorised occupational health and safety and human resources personnel within the organisation, exclusively in aggregated form and with K-anonymity guarantees (minimum group size of five). Data will not be disclosed to third parties except where required by law.\n\n8. Rights: you may exercise your rights of access, rectification, erasure, restriction of processing, objection and portability by contacting your organisation's occupational risk prevention office. You also have the right to lodge a complaint with your national data protection authority.\n\n9. Withdrawal: you may withdraw consent at any time from within the app or by requesting deletion of your data. Withdrawal does not affect the lawfulness of processing carried out before withdrawal.\n\nBy tapping «I accept and continue», you declare that you have read and understood the above information and consent to the processing of the described data solely for the stated purposes.",
+    "code_label": "Anonymous access code",
+    "code_placeholder": "E.g. BCN-2026-A007",
+    "submit": "I accept and continue",
+    "language_label": "Language",
+    "right_to_delete": "Right to erasure (GDPR)",
+    "delete_confirm": "Are you sure you want to delete all your data? This action is irreversible."
+  },
+  "home": {
+    "title": "Your status today",
+    "test_pending": "You have a test pending for today",
+    "test_done": "You have completed today's test",
+    "start_test": "Start test",
+    "cbi_pending": "You have the weekly questionnaire pending",
+    "continue_weekly": "Continue weekly test",
+    "risk_low": "Low risk",
+    "risk_medium": "Moderate risk",
+    "risk_high": "High risk",
+    "daily_reminder": "Complete your daily check-in",
+    "cbi_reminder": "Complete the weekly CBI questionnaire"
+  },
+  "checkin": {
+    "sleep_label": "How many hours did you sleep last night?",
+    "stress_label": "How would you rate your stress level today?",
+    "stimulants_label": "Have you consumed stimulants (caffeine, energy drinks) in the last 6 hours?",
+    "continue": "Continue",
+    "cbi_step": "Weekly CBI questionnaire"
+  },
+  "pvt": {
+    "instruction": "When the green circle appears, tap the screen as quickly as possible. Do not tap before it appears.",
+    "wait": "Wait…",
+    "tap": "Tap now!",
+    "progress": "{current} of {total}",
+    "false_start": "Too soon! Wait for the green signal.",
+    "done": "PVT test completed"
+  },
+  "stroop": {
+    "instruction": "Select the ink colour of the word, not the meaning of the word.",
+    "progress": "{current} / {total}",
+    "done": "Stroop test completed"
+  },
+  "cbi": {
+    "instruction": "Indicate how often the following has applied to you during recent weeks.",
+    "progress": "{current} / {total}",
+    "done": "CBI questionnaire completed",
+    "scale_always": "Always",
+    "scale_often": "Often",
+    "scale_sometimes": "Sometimes",
+    "scale_seldom": "Seldom",
+    "scale_never": "Never"
+  },
+  "results": {
+    "title": "Today's results",
+    "risk_index": "Risk index",
+    "breakdown": "Breakdown"
+  },
+  "history": {
+    "title": "History",
+    "subtitle": "Your recent local check-ins",
+    "empty_title": "No records yet",
+    "empty_body": "Completed check-ins will appear here with your risk index trend.",
+    "trend_title": "Risk trend",
+    "summary_title": "Summary",
+    "week_avg": "Weekly average",
+    "best_day": "Best day",
+    "worst_day": "Worst day",
+    "sessions_title": "Recent sessions",
+    "risk_label": "Risk"
+  },
+  "errors": {
+    "network": "Connection error. Check your network and try again.",
+    "invalid_code": "Invalid or already used access code.",
+    "generic": "An unexpected error occurred. Please try again later."
+  },
+  "common": {
+    "loading": "Loading…",
+    "close": "Close",
+    "back": "Back"
+  }
+}

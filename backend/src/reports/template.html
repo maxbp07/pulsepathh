@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulsePath — Informe de Impacto · {{ORG_NAME}}</title>
+  {{INJECTED_CSS}}
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     PORTADA
+═══════════════════════════════════════════════════════════════════ -->
+<section class="cover page-break-after">
+  <div class="cover-brand">
+    <div>
+      <div class="cover-logo">PulsePath</div>
+      <span class="cover-logo-sub">Salud digital B2B · Piloto Ayuntament de Barcelona</span>
+    </div>
+  </div>
+
+  <div class="cover-title">
+    <h1>Informe de Impacto</h1>
+    <h2>Bienestar Cognitivo de la Plantilla</h2>
+    <div class="cover-org">{{ORG_NAME}}</div>
+
+    <div class="cover-meta">
+      <div class="cover-meta-row">
+        <span>Expediente:</span>
+        <strong>{{PILOT_REF}}</strong>
+      </div>
+      <div class="cover-meta-row">
+        <span>Periodo analizado:</span>
+        <strong>{{PERIODO}}</strong>
+      </div>
+      <div class="cover-meta-row">
+        <span>Filtros activos:</span>
+        <strong>{{ACTIVE_FILTERS}}</strong>
+      </div>
+      <div class="cover-meta-row">
+        <span>Fecha de generación:</span>
+        <strong>{{FECHA_GENERACION}}</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-badges">
+    <span class="cover-badge cover-badge--kanon">🔒 Datos anonimizados · K-anonimidad K=5</span>
+    <span class="cover-badge">Ley 31/1995 PRL</span>
+    <span class="cover-badge">Metodología CoPsoQ-istas21</span>
+    <span class="cover-badge">Generado por PulsePath v2</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SECCIÓN 1 — RESUMEN EJECUTIVO
+═══════════════════════════════════════════════════════════════════ -->
+<section class="report-section">
+  <div class="section-header">
+    <span class="section-number">1</span>
+    <span class="section-title">Resumen Ejecutivo</span>
+  </div>
+  <p class="section-subtitle">
+    Estado global del bienestar cognitivo · Indicadores clave del periodo
+  </p>
+
+  <div class="exec-headline avoid-break">
+    {{SEMAPHORE_EMOJI}} {{HEADLINE}}
+  </div>
+
+  <div class="mt-12">
+    {{EXECUTIVE_SUMMARY_HTML}}
+  </div>
+
+  <div class="kpi-grid avoid-break" style="margin-top:20px">
+    <div class="kpi-card kpi-card--{{SEMAPHORE_COLOR}}">
+      <div class="kpi-label">Índice de riesgo medio</div>
+      <div class="kpi-value">{{KPI_AVG_RISK}}</div>
+      <div class="kpi-unit">sobre 100 · Metodología PulsePath</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Plantilla en riesgo alto (≥50)</div>
+      <div class="kpi-value">{{KPI_PCT_HIGH}}</div>
+      <div class="kpi-unit">del total de participantes</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Adherencia (tests completados)</div>
+      <div class="kpi-value">{{KPI_ADHERENCE}}</div>
+      <div class="kpi-unit">calidad del dato</div>
+    </div>
+  </div>
+
+  <div class="info-row mt-12 text-muted text-sm">
+    <span>Sesiones totales: <strong>{{TOTAL_SESSIONS}}</strong></span>
+    <span>Personas únicas: <strong>{{TOTAL_USERS}}</strong></span>
+    <span>Umbral K-anonimidad: <strong>K=5</strong></span>
+  </div>
+
+  <div class="page-footer">
+    PulsePath — Informe de Impacto · {{ORG_NAME}} · {{PILOT_REF}} · {{FECHA_GENERACION}}
+    &nbsp;·&nbsp; Datos anonimizados. Uso interno. No expone datos individuales.
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SECCIÓN 2 — METODOLOGÍA Y PRIVACIDAD
+     (page-break-before para que empiece en página nueva)
+═══════════════════════════════════════════════════════════════════ -->
+<section class="report-section page-break-before">
+  <div class="section-header">
+    <span class="section-number">2</span>
+    <span class="section-title">Metodología y Privacidad</span>
+  </div>
+  <p class="section-subtitle">
+    Qué mide PulsePath, cómo se protegen los datos y base legal PRL
+  </p>
+
+  <div class="privacy-block avoid-break">
+    <h4>🔒 Garantías de privacidad — léalo antes de interpretar los datos</h4>
+    <ul>
+      <li><strong>Procesamiento Edge AI:</strong> los tests se ejecutan en el dispositivo del empleado. Solo los índices numéricos anónimos abandonan el dispositivo; ningún tiempo de reacción crudo, nombre, email ni ubicación llega al servidor.</li>
+      <li><strong>K-anonimidad K=5:</strong> cualquier grupo departamental con menos de 5 personas únicas queda suprimido en este informe y marcado como "Protegido". Es imposible identificar a un individuo a partir de los datos.</li>
+      <li><strong>Cifrado en reposo:</strong> los índices se almacenan cifrados con AES-256-GCM en el servidor. Se descifran solo en memoria durante la agregación y nunca se persisten en claro.</li>
+      <li><strong>Sin metadatos sensibles:</strong> solo se registran departamento y turno. No hay género, edad, nombre ni ninguna otra variable que permita cruzar con datos externos.</li>
+      <li><strong>Derecho de supresión:</strong> cualquier empleado puede borrar todas sus sesiones con un solo clic desde la app.</li>
+    </ul>
+  </div>
+
+  <div class="methodology-grid avoid-break">
+    <div class="methodology-item">
+      <h5>PVT-B — Vigilancia psicomotora</h5>
+      <p>30 ensayos de reacción con ISI aleatorio 1000–4000ms. Detecta lapses (&gt;355ms) y false starts. Índice 0-100: a más lapses y mayor tiempo de reacción, mayor índice. Valida la fatiga atencional aguda.</p>
+    </div>
+    <div class="methodology-item">
+      <h5>Stroop — Control cognitivo</h5>
+      <p>20 ensayos incongruentes (color de tinta ≠ palabra). Mide la interferencia cognitiva, error rate y tiempo de reacción. Índice 0-100. Valida la capacidad de inhibición y el control ejecutivo bajo carga.</p>
+    </div>
+    <div class="methodology-item">
+      <h5>CBI — Copenhagen Burnout Inventory</h5>
+      <p>19 ítems distribuidos en tres subescalas: burnout personal, laboral y de cliente. Scoring 0-100. Umbral clínico de burnout: ≥50. Mide la fatiga acumulada estructural, no la fatiga aguda puntual.</p>
+    </div>
+    <div class="methodology-item">
+      <h5>Fórmula del Índice de Riesgo</h5>
+      <p>Índice = PVT×0,40 + Stroop×0,25 + CBI×0,25 + Sueño×0,10. Los pesos reflejan la evidencia disponible sobre predicción de riesgo psicosocial. La fórmula es determinista y reemplazable por ML en fases posteriores.</p>
+    </div>
+  </div>
+
+  <div class="legal-note avoid-break">
+    <strong>Base legal:</strong> este informe se enmarca en la obligación de evaluar riesgos psicosociales establecida por la <strong>Ley 31/1995 de Prevención de Riesgos Laborales</strong> y la metodología <strong>CoPsoQ-istas21</strong> (NTP 318, 704/705 del INSST). El semáforo de riesgo imita el código de colores istas21 para facilitar la interpretación por parte de técnicos de PRL.
+  </div>
+
+  <div class="page-footer">
+    PulsePath · Metodología · Sección 2
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SECCIÓN 3 — VISIÓN GLOBAL DE LA ORGANIZACIÓN
+═══════════════════════════════════════════════════════════════════ -->
+<section class="report-section page-break-before">
+  <div class="section-header">
+    <span class="section-number">3</span>
+    <span class="section-title">Visión Global de la Organización</span>
+  </div>
+  <p class="section-subtitle">
+    Semáforo global · Índice de riesgo medio · Dirección de la tendencia
+  </p>
+
+  <div class="semaphore-block avoid-break">
+    <div class="semaphore-circle semaphore-circle--{{SEMAPHORE_COLOR}}">
+      <span class="semaphore-number">{{KPI_AVG_RISK}}</span>
+      <span class="semaphore-unit">/ 100</span>
+    </div>
+    <div class="semaphore-info">
+      <h3>{{SEMAPHORE_EMOJI}} {{SEMAPHORE_LABEL}}</h3>
+      <p>{{HEADLINE}}</p>
+      <p class="methodology-note">
+        Metodología CoPsoQ-istas21 · Verde &lt;35 · Amarillo 35–49 · Rojo ≥50
+        &nbsp;·&nbsp; K-anonimidad K=5 activa
+      </p>
+    </div>
+  </div>
+
+  <div class="two-col mt-12 avoid-break">
+    <div>
+      <h4 style="font-size:10pt; color:#374151; margin-bottom:8px; font-weight:700">
+        Indicadores del periodo
+      </h4>
+      <table style="width:100%; border-collapse:collapse; font-size:9pt">
+        <tr>
+          <td style="padding:5px 0; border-bottom:1px solid #f1f5f9; color:#64748b">Índice de riesgo medio</td>
+          <td style="padding:5px 0; border-bottom:1px solid #f1f5f9; font-weight:700; text-align:right">{{KPI_AVG_RISK}} / 100</td>
+        </tr>
+        <tr>
+          <td style="padding:5px 0; border-bottom:1px solid #f1f5f9; color:#64748b">% plantilla en riesgo alto</td>
+          <td style="padding:5px 0; border-bottom:1px solid #f1f5f9; font-weight:700; text-align:right">{{KPI_PCT_HIGH}}</td>
+        </tr>
+        <tr>
+          <td style="padding:5px 0; border-bottom:1px solid #f1f5f9; color:#64748b">Adherencia (participación)</td>
+          <td style="padding:5px 0; border-bottom:1px solid #f1f5f9; font-weight:700; text-align:right">{{KPI_ADHERENCE}}</td>
+        </tr>
+        <tr>
+          <td style="padding:5px 0; border-bottom:1px solid #f1f5f9; color:#64748b">Sesiones registradas</td>
+          <td style="padding:5px 0; border-bottom:1px solid #f1f5f9; font-weight:700; text-align:right">{{TOTAL_SESSIONS}}</td>
+        </tr>
+        <tr>
+          <td style="padding:5px 0; color:#64748b">Personas únicas</td>
+          <td style="padding:5px 0; font-weight:700; text-align:right">{{TOTAL_USERS}}</td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <h4 style="font-size:10pt; color:#374151; margin-bottom:8px; font-weight:700">
+        Driver dominante del riesgo
+      </h4>
+      <div style="background:#fff7ed; border:1px solid #f59e0b; border-radius:8px; padding:12px">
+        <p style="font-size:9pt; color:#374151; font-weight:600">{{DRIVER_DOMINANT_LABEL}}</p>
+        <p style="font-size:8pt; color:#92400e; margin-top:4px">
+          Peso en la fórmula: PVT 40% · Stroop 25% · CBI 25% · Sueño 10%.<br>
+          El driver dominante es el que mayor contribución numérica aporta al índice de riesgo medio.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    PulsePath · Visión Global · Sección 3
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SECCIÓN 4 — ANÁLISIS POR DEPARTAMENTO
+═══════════════════════════════════════════════════════════════════ -->
+<section class="report-section page-break-before">
+  <div class="section-header">
+    <span class="section-number">4</span>
+    <span class="section-title">Análisis por Departamento</span>
+  </div>
+  <p class="section-subtitle">
+    Solo grupos con ≥ K=5 personas únicas · Grupos pequeños suprimidos por privacidad
+  </p>
+
+  {{DEPARTMENTS_TABLE_HTML}}
+
+  <div class="legal-note mt-12" style="font-size:8pt">
+    Los grupos marcados como "Protegido" tienen menos de 5 personas únicas. Esta supresión es obligatoria
+    para garantizar que ningún individuo sea identificable a partir de los datos agregados.
+    Su riesgo no se incluye en el cálculo de la media organizativa.
+  </div>
+
+  <div class="page-footer">
+    PulsePath · Análisis por Departamento · Sección 4
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SECCIÓN 5 — DESGLOSE DE DRIVERS
+═══════════════════════════════════════════════════════════════════ -->
+<section class="report-section page-break-before">
+  <div class="section-header">
+    <span class="section-number">5</span>
+    <span class="section-title">Desglose de Drivers de Riesgo</span>
+  </div>
+  <p class="section-subtitle">
+    ¿Qué factor pesa más? · Distingue entre fatiga aguda y burnout estructural
+  </p>
+
+  <p class="text-muted text-sm" style="margin-bottom:16px">
+    Contribución porcentual de cada dimensión al índice de riesgo medio. El driver dominante
+    es el que mayor peso tiene en el resultado final. Esta distinción es clave para priorizar
+    medidas: la fatiga aguda (PVT + sueño) suele ser reversible con descanso; el burnout CBI
+    requiere intervenciones organizativas más profundas.
+  </p>
+
+  {{DRIVERS_HTML}}
+
+  <div class="mt-16 avoid-break" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px">
+    <p style="font-size:8.5pt; color:#64748b; line-height:1.6">
+      <strong>Interpretación:</strong>
+      Si el driver dominante es <strong>CBI</strong> → problema estructural (redistribuir carga, revisar objetivos).
+      Si es <strong>PVT + sueño bajo</strong> → fatiga aguda reversible (revisar turnos, formación en higiene del sueño).
+      Si es <strong>Stroop</strong> → sobrecarga cognitiva (reducir multitarea, proteger bloques de trabajo profundo).
+    </p>
+  </div>
+
+  <div class="page-footer">
+    PulsePath · Desglose de Drivers · Sección 5
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SECCIÓN 6 — PATRONES TEMPORALES
+═══════════════════════════════════════════════════════════════════ -->
+<section class="report-section page-break-before">
+  <div class="section-header">
+    <span class="section-number">6</span>
+    <span class="section-title">Patrones Temporales</span>
+  </div>
+  <p class="section-subtitle">
+    Evolución del riesgo por departamento a lo largo del periodo · Solo grupos ≥ K=5
+  </p>
+
+  <p class="text-muted text-sm" style="margin-bottom:14px">
+    Cada punto representa el índice de riesgo medio del departamento en un subperiodo.
+    La progresión de izquierda a derecha muestra la dirección de la tendencia.
+    Verde &lt;35 · Amarillo 35–49 · Rojo ≥50.
+  </p>
+
+  {{TEMPORAL_HTML}}
+
+  <div class="mt-16 avoid-break" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px">
+    <p style="font-size:8.5pt; color:#64748b; line-height:1.6">
+      <strong>Nota:</strong> Los patrones por día de la semana y turno (mañana/tarde) se activarán
+      cuando el histórico acumulado sea suficiente para garantizar K=5 en cada celda
+      (mínimo 5 personas únicas por departamento × turno × día). Con el piloto de 8 semanas
+      estos patrones serán visibles a partir de la semana 3–4.
+    </p>
+  </div>
+
+  <div class="page-footer">
+    PulsePath · Patrones Temporales · Sección 6
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SECCIÓN 7 — CONCLUSIONES AUTOMÁTICAS
+═══════════════════════════════════════════════════════════════════ -->
+<section class="report-section page-break-before">
+  <div class="section-header">
+    <span class="section-number">7</span>
+    <span class="section-title">Conclusiones Automáticas</span>
+  </div>
+  <p class="section-subtitle">
+    Generadas por el motor de reglas PulsePath (sin IA generativa) · Ordenadas por severidad
+  </p>
+
+  <p class="text-muted text-sm" style="margin-bottom:14px">
+    Las conclusiones se generan evaluando todas las reglas <em>condición → frase</em> sobre los
+    datos agregados K-anónimos. Se muestran ordenadas por severidad: 🔴 alertas primero,
+    🟡 observaciones, 🟢 positivos. Los grupos suprimidos por K=5 no influyen en estos cálculos.
+  </p>
+
+  {{CONCLUSIONS_HTML}}
+
+  <div class="page-footer">
+    PulsePath · Conclusiones Automáticas · Sección 7
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SECCIÓN 8 — RECOMENDACIONES ACCIONABLES
+═══════════════════════════════════════════════════════════════════ -->
+<section class="report-section page-break-before">
+  <div class="section-header">
+    <span class="section-number">8</span>
+    <span class="section-title">Recomendaciones Accionables</span>
+  </div>
+  <p class="section-subtitle">
+    Lista priorizada de medidas · Enmarcadas en la evaluación de riesgos psicosociales (Ley 31/1995)
+  </p>
+
+  <p class="text-muted text-sm" style="margin-bottom:14px">
+    Las recomendaciones se activan en función de las conclusiones del apartado anterior.
+    Están redactadas en lenguaje de gestión y son compatibles con el plan de prevención
+    de riesgos psicosociales exigido por la normativa española.
+  </p>
+
+  {{RECOMMENDATIONS_HTML}}
+
+  <div class="page-footer">
+    PulsePath · Recomendaciones · Sección 8
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SECCIÓN 9 — ANEXO METODOLÓGICO Y LIMITACIONES
+═══════════════════════════════════════════════════════════════════ -->
+<section class="report-section page-break-before">
+  <div class="section-header">
+    <span class="section-number">9</span>
+    <span class="section-title">Anexo Metodológico y Limitaciones</span>
+  </div>
+  <p class="section-subtitle">
+    Limitaciones, glosario, referencias normativas y protección legal
+  </p>
+
+  <div class="annex-block avoid-break">
+    <h4>Limitaciones del sistema</h4>
+    <ul>
+      <li>Los índices PVT y Stroop se miden en dispositivos móviles. La latencia de pantalla táctil añade ruido al tiempo de reacción, por lo que las tendencias son más informativas que los valores absolutos.</li>
+      <li>La K-anonimidad K=5 puede suprimir grupos completos en organizaciones pequeñas, reduciendo la granularidad del informe. Con el piloto de 50 personas y pocos departamentos, es posible que algunos grupos queden protegidos durante las primeras semanas.</li>
+      <li>El CBI (Copenhagen Burnout Inventory) se administra semanalmente. En días sin CBI, el sistema usa la última puntuación conocida del empleado o 50 (valor neutro) si es la primera semana.</li>
+      <li>Este sistema mide indicadores de bienestar cognitivo, no diagnostica enfermedades ni condiciones clínicas. Los resultados son de apoyo a la gestión preventiva, no sustitutos de una evaluación médica.</li>
+      <li>La adherencia (% de tests completados) afecta a la representatividad de los datos. Una adherencia &lt;60% implica interpretar los resultados con mayor cautela.</li>
+    </ul>
+  </div>
+
+  <div class="annex-block avoid-break">
+    <h4>Glosario de indicadores</h4>
+    <table class="glossary-table">
+      <tr>
+        <td>Índice de Riesgo</td>
+        <td>Valor 0-100 calculado como: PVT×0,40 + Stroop×0,25 + CBI×0,25 + Sueño×0,10. 0=óptimo, 100=máximo riesgo.</td>
+      </tr>
+      <tr>
+        <td>PVT-B</td>
+        <td>Psychomotor Vigilance Task — test de vigilancia psicomotora de 30 ensayos. Mide lapses y tiempos de reacción.</td>
+      </tr>
+      <tr>
+        <td>Stroop</td>
+        <td>Test de interferencia cognitiva. 20 ensayos incongruentes. Mide control ejecutivo y atención selectiva.</td>
+      </tr>
+      <tr>
+        <td>CBI</td>
+        <td>Copenhagen Burnout Inventory. 19 ítems. Subescalas: burnout personal, laboral y de cliente. Umbral clínico: ≥50.</td>
+      </tr>
+      <tr>
+        <td>K-anonimidad</td>
+        <td>Técnica de privacidad: un grupo solo se muestra si tiene ≥K=5 personas únicas. Grupos menores se suprimen.</td>
+      </tr>
+      <tr>
+        <td>Adherencia</td>
+        <td>Porcentaje de tests completados sobre el total esperado en el periodo. Indicador de calidad del dato.</td>
+      </tr>
+      <tr>
+        <td>Driver dominante</td>
+        <td>La dimensión (PVT, Stroop, CBI o Sueño) que mayor contribución numérica aporta al índice de riesgo medio.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="annex-block avoid-break">
+    <h4>Referencias normativas</h4>
+    <ul>
+      <li><strong>Ley 31/1995, de 8 de noviembre, de Prevención de Riesgos Laborales</strong> — establece la obligación de evaluar y prevenir riesgos psicosociales.</li>
+      <li><strong>INSST — NTP 318</strong> (El estrés: proceso de generación en el ámbito laboral) y <strong>NTP 704/705</strong> (Síndrome de estar quemado por el trabajo: evaluación).</li>
+      <li><strong>Método CoPsoQ-istas21</strong> — adaptación española del Copenhagen Psychosocial Questionnaire. Referente para la evaluación de factores psicosociales en España. PulsePath adapta su código de colores semáforo.</li>
+      <li><strong>Reglamento (UE) 2016/679 (RGPD)</strong> y <strong>Ley Orgánica 3/2018 (LOPDGDD)</strong> — base legal para el tratamiento de datos de salud en el entorno laboral.</li>
+      <li><strong>Basner &amp; Dinges (2011)</strong> — "Maximizing Sensitivity of the Psychomotor Vigilance Test (PVT) to Sleep Loss". Sleep, 34(5). Referencia para el umbral de lapse (&gt;355ms) del PVT.</li>
+    </ul>
+  </div>
+
+  <div class="disclaimer-box avoid-break" style="margin-top:20px">
+    ⚖️ <strong>Aviso legal:</strong> Las conclusiones y recomendaciones de este informe son orientativas y de apoyo a la gestión preventiva. No sustituyen la evaluación de riesgos psicosociales regulada por la Ley 31/1995 ni el criterio del Servicio de Prevención. El Ayuntamiento es responsable de la interpretación y aplicación de las medidas en el marco de su normativa interna y convenio colectivo.
+  </div>
+
+  <div class="legal-note avoid-break" style="margin-top:12px">
+    Este documento contiene datos anonimizados protegidos por K-anonimidad K=5.
+    Ningún dato individual es identificable. Expediente <strong>{{PILOT_REF}}</strong>.
+    Generado por PulsePath v2 el <strong>{{FECHA_GENERACION}}</strong>.
+    Para consultas: <strong>hola@pulsepath.app</strong>
+  </div>
+
+  <div class="page-footer">
+    PulsePath · Anexo Metodológico · Sección 9 · Fin del informe
+  </div>
+</section>
+
+</body>
+</html>

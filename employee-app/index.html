@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#07090F" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="description" content="PulsePath — salud digital laboral" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>PulsePath</title>
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <header class="app-header">
+        <div class="app-header__row">
+          <span class="app-header__logo">PulsePath</span>
+          <div id="lang-switcher"></div>
+        </div>
+      </header>
+
+      <main id="view" class="view" role="main" aria-live="polite"></main>
+
+      <nav
+        id="bottom-nav"
+        class="bottom-nav bottom-nav--hidden"
+        aria-label="Navegación principal"
+      >
+        <button
+          type="button"
+          class="bottom-nav__item"
+          data-route="home"
+          aria-current="page"
+        >
+          <span class="bottom-nav__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M4 10.5 12 4l8 6.5V19a1.5 1.5 0 0 1-1.5 1.5H15v-5.5H9V20.5H5.5A1.5 1.5 0 0 1 4 19v-8.5Z"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <span class="bottom-nav__label" data-i18n="nav.home">Inici</span>
+        </button>
+        <button type="button" class="bottom-nav__item" data-route="history">
+          <span class="bottom-nav__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M5 6.5h14M5 12h14M5 17.5h9"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+              />
+              <circle cx="18" cy="17.5" r="2.25" stroke="currentColor" stroke-width="1.75"/>
+            </svg>
+          </span>
+          <span class="bottom-nav__label" data-i18n="nav.history">Historial</span>
+        </button>
+      </nav>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+// PulsePath — PostgreSQL schema (piloto Ayuntamiento de Barcelona)
+// Índices cifrados (BYTEA); nunca datos biométricos crudos ni PII de empleados.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id             String   @id @default(uuid()) @db.Uuid
+  name           String
+  slug           String   @unique
+  pilotRef       String?  @map("pilot_ref")
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  retentionUntil DateTime @map("retention_until") @db.Date
+
+  accessCodes   AccessCode[]
+  sessions      Session[]
+  employerUsers EmployerUser[]
+
+  @@map("organizations")
+}
+
+model AccessCode {
+  id          String    @id @default(uuid()) @db.Uuid
+  orgId       String    @map("org_id") @db.Uuid
+  codeHash    String    @unique @map("code_hash")
+  department  String
+  shift       String?
+  activatedAt DateTime? @map("activated_at") @db.Timestamptz(6)
+  revoked     Boolean   @default(false)
+
+  organization Organization @relation(fields: [orgId], references: [id])
+  sessions     Session[]
+  consent      Consent?
+
+  @@index([orgId])
+  @@map("access_codes")
+}
+
+model Session {
+  id             String   @id @default(uuid()) @db.Uuid
+  orgId          String   @map("org_id") @db.Uuid
+  codeHash       String   @map("code_hash")
+  department     String
+  shift          String?
+  takenAt        DateTime @map("taken_at") @db.Timestamptz(6)
+  riskIndexEnc   Bytes    @map("risk_index_enc")
+  pvtIndexEnc    Bytes    @map("pvt_index_enc")
+  stroopIndexEnc Bytes    @map("stroop_index_enc")
+  cbiScoreEnc    Bytes?   @map("cbi_score_enc")
+  sleepHoursEnc  Bytes    @map("sleep_hours_enc")
+
+  organization Organization @relation(fields: [orgId], references: [id])
+  accessCode   AccessCode   @relation(fields: [codeHash], references: [codeHash])
+
+  @@index([orgId])
+  @@index([codeHash])
+  @@index([department])
+  @@index([takenAt])
+  @@map("sessions")
+}
+
+model EmployerUser {
+  id           String   @id @default(uuid()) @db.Uuid
+  orgId        String   @map("org_id") @db.Uuid
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         String   @default("viewer")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [orgId], references: [id])
+
+  @@index([orgId])
+  @@map("employer_users")
+}
+
+model Consent {
+  id            String   @id @default(uuid()) @db.Uuid
+  codeHash      String   @unique @map("code_hash")
+  consentedAt   DateTime @map("consented_at") @db.Timestamptz(6)
+  policyVersion String   @map("policy_version")
+
+  accessCode AccessCode @relation(fields: [codeHash], references: [codeHash])
+
+  @@index([codeHash])
+  @@map("consents")
+}

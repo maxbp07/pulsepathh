@@ -1,0 +1,91 @@
+{
+  "app": {
+    "name": "PulsePath"
+  },
+  "nav": {
+    "home": "Inicio",
+    "history": "Historial"
+  },
+  "onboarding": {
+    "title": "Bienvenido/a a PulsePath",
+    "consent_title": "Consentimiento informado para el tratamiento de datos",
+    "consent_body": "De conformidad con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), la organización promotora del programa PulsePath le informa de lo siguiente:\n\n1. Responsable del tratamiento: la organización empleadora participante en el programa piloto (en el caso del piloto, el Ayuntamiento de Barcelona), con apoyo técnico del proveedor del servicio PulsePath.\n\n2. Finalidad: evaluar factores de riesgo psicosocial y cognitivo relacionados con la salud laboral, en el marco de la prevención de riesgos laborales (Ley 31/1995 de Prevención de Riesgos Laborales). Los resultados se agregan de forma anónima por departamento y turno; no es posible identificar a personas individuales.\n\n3. Datos que se tratan: índices numéricos derivados de los tests cognitivos (PVT-B, Stroop, CBI) y datos declarativos del micro-check-in (horas de sueño, nivel de estrés, consumo de estimulantes), junto con metadatos anónimos (departamento y turno). No se recogen datos biométricos en bruto, tiempos de reacción individuales, respuestas literales del CBI, dirección IP, nombre, correo electrónico ni ningún otro dato que permita su identificación directa.\n\n4. Procesamiento en el dispositivo (Edge AI): los tests cognitivos se ejecutan íntegramente en su dispositivo. Los cálculos se realizan localmente antes de transmitir únicamente los índices agregados al servidor, ubicado en la Unión Europea.\n\n5. Base jurídica: interés legítimo de la empresa en materia de prevención de riesgos laborales y protección de la salud de los trabajadores (art. 6.1.f RGPD), así como el cumplimiento de obligaciones legales en materia de PRL.\n\n6. Conservación: los datos se almacenan durante la vigencia del programa piloto y un período adicional de doce (12) meses posterior a su finalización, tras el cual serán suprimidos de forma irreversible.\n\n7. Destinatarios: personal autorizado de prevención de riesgos laborales y recursos humanos de la organización, exclusivamente en formato agregado y con garantías de K-anonimidad (grupos mínimos de cinco personas). No se cederán datos a terceros salvo obligación legal.\n\n8. Derechos: puede ejercer los derechos de acceso, rectificación, supresión, limitación del tratamiento, oposición y portabilidad mediante solicitud a la oficina de prevención de riesgos laborales de su organización. También tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD).\n\n9. Revocación: puede retirar el consentimiento en cualquier momento desde la aplicación o solicitando la supresión de sus datos. La revocación no afecta a la licitud del tratamiento efectuado con anterioridad.\n\nAl pulsar «Acepto y continúo», declara haber leído y comprendido la información anterior y consiente el tratamiento de los datos descritos exclusivamente para las finalidades indicadas.",
+    "code_label": "Código de acceso anónimo",
+    "code_placeholder": "Ej.: BCN-2026-A007",
+    "submit": "Acepto y continúo",
+    "language_label": "Idioma",
+    "right_to_delete": "Derecho de supresión (RGPD)",
+    "delete_confirm": "¿Seguro que quieres eliminar todos tus datos? Esta acción es irreversible."
+  },
+  "home": {
+    "title": "Tu estado de hoy",
+    "test_pending": "Tienes un test pendiente para hoy",
+    "test_done": "Has completado el test de hoy",
+    "start_test": "Empezar test",
+    "cbi_pending": "Tienes el cuestionario semanal pendiente",
+    "continue_weekly": "Continuar test semanal",
+    "risk_low": "Riesgo bajo",
+    "risk_medium": "Riesgo moderado",
+    "risk_high": "Riesgo alto",
+    "daily_reminder": "Completa tu check-in diario",
+    "cbi_reminder": "Completa el cuestionario semanal CBI"
+  },
+  "checkin": {
+    "sleep_label": "¿Cuántas horas has dormido la última noche?",
+    "stress_label": "¿Cómo valoras tu nivel de estrés hoy?",
+    "stimulants_label": "¿Has consumido estimulantes (cafeína, energéticas) en las últimas 6 horas?",
+    "continue": "Continuar",
+    "cbi_step": "Cuestionario CBI semanal"
+  },
+  "pvt": {
+    "instruction": "Cuando aparezca el círculo verde, toque la pantalla lo más rápido posible. No toque antes de que aparezca.",
+    "wait": "Espere…",
+    "tap": "¡Toque ahora!",
+    "progress": "{current} de {total}",
+    "false_start": "¡Demasiado pronto! Espere la señal verde.",
+    "done": "Test PVT completado"
+  },
+  "stroop": {
+    "instruction": "Seleccione el color de la tinta de la palabra, no el significado de la palabra.",
+    "progress": "{current} / {total}",
+    "done": "Test Stroop completado"
+  },
+  "cbi": {
+    "instruction": "Indique con qué frecuencia le ha ocurrido lo siguiente durante las últimas semanas.",
+    "progress": "{current} / {total}",
+    "done": "Cuestionario CBI completado",
+    "scale_always": "Siempre",
+    "scale_often": "A menudo",
+    "scale_sometimes": "A veces",
+    "scale_seldom": "Raramente",
+    "scale_never": "Nunca"
+  },
+  "results": {
+    "title": "Resultados de hoy",
+    "risk_index": "Índice de riesgo",
+    "breakdown": "Desglose"
+  },
+  "history": {
+    "title": "Historial",
+    "subtitle": "Tus últimos check-ins locales",
+    "empty_title": "Aún no hay registros",
+    "empty_body": "Los check-ins completados aparecerán aquí con la tendencia de tu índice de riesgo.",
+    "trend_title": "Tendencia del riesgo",
+    "summary_title": "Resumen",
+    "week_avg": "Media semanal",
+    "best_day": "Mejor día",
+    "worst_day": "Peor día",
+    "sessions_title": "Sesiones recientes",
+    "risk_label": "Riesgo"
+  },
+  "errors": {
+    "network": "Error de conexión. Compruebe la red e inténtelo de nuevo.",
+    "invalid_code": "Código de acceso no válido o ya utilizado.",
+    "generic": "Se ha producido un error inesperado. Inténtelo de nuevo más tarde."
+  },
+  "common": {
+    "loading": "Cargando…",
+    "close": "Cerrar",
+    "back": "Atrás"
+  }
+}

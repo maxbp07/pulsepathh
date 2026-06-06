@@ -1,0 +1,119 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# PulsePath — docker-compose PRODUCCIÓN
+# Piloto Ayuntamiento de Barcelona · Expediente 2026_OVT_694068
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Arquitectura de red:
+#   Internet → nginx (80/443) → backend:3000
+#                             → statics (employee-app + employer-dashboard)
+#   postgres y backend NO exponen puertos al exterior.
+#
+# Arrancar:
+#   cp .env.example .env && nano .env   # completar valores reales
+#   docker compose -f docker-compose.prod.yml up -d --build
+#
+# Primer despliegue (migración DB + seed):
+#   docker compose -f docker-compose.prod.yml exec backend \
+#     npx prisma migrate deploy
+#   docker compose -f docker-compose.prod.yml exec backend \
+#     node prisma/seed.js
+# ═══════════════════════════════════════════════════════════════════════════════
+
+services:
+
+  # ─── PostgreSQL 16 ─────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16
+    container_name: pulsepath-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - pulsepath-internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    # Puerto 5432 NO expuesto: solo accesible dentro de la red interna Docker.
+
+  # ─── Backend Node.js ────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: production          # Stage multi-stage definido en backend/Dockerfile
+    container_name: pulsepath-backend
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env                      # Carga todas las variables del archivo .env
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      # DATABASE_URL, JWT_SECRET, ENCRYPTION_KEY, ADMIN_SECRET → desde .env
+    networks:
+      - pulsepath-internal
+    # Puerto 3000 NO expuesto al exterior: nginx actúa como único punto de entrada.
+    # Puppeteer usa /usr/bin/chromium del sistema (configurado en el Dockerfile).
+
+  # ─── Nginx — reverse proxy + statics ───────────────────────────────────────
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile  # Copia los dist/ de las apps y el nginx.conf
+    container_name: pulsepath-nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # Certbot: ficheros de validación ACME (Let's Encrypt)
+      - certbot_www:/var/www/certbot:ro
+      # Certificados SSL gestionados por Certbot (montar tras obtenerlos)
+      - certbot_conf:/etc/letsencrypt:ro
+    depends_on:
+      - backend
+    networks:
+      - pulsepath-internal
+
+  # ─── Certbot (Let's Encrypt) ─────────────────────────────────────────────
+  # Descomenta este servicio cuando el dominio esté apuntando al servidor.
+  # Pasos SSL:
+  #   1. Asegúrate de que el bloque HTTP (puerto 80) de nginx.conf está activo
+  #      con la location /.well-known/acme-challenge/ habilitada.
+  #   2. docker compose -f docker-compose.prod.yml run --rm certbot certonly \
+  #        --webroot -w /var/www/certbot \
+  #        -d pulsepath.app -d www.pulsepath.app \
+  #        --email ${CERTBOT_EMAIL} --agree-tos --no-eff-email
+  #   3. Descomenta el bloque HTTPS en nginx/nginx.conf y reinicia nginx.
+  #   4. El servicio certbot renova automáticamente cada 12h.
+  #
+  # certbot:
+  #   image: certbot/certbot:latest
+  #   container_name: pulsepath-certbot
+  #   volumes:
+  #     - certbot_www:/var/www/certbot
+  #     - certbot_conf:/etc/letsencrypt
+  #   entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done"
+
+# ─── Volúmenes persistentes ────────────────────────────────────────────────────
+volumes:
+  postgres_data:
+    driver: local
+  certbot_www:
+    driver: local
+  certbot_conf:
+    driver: local
+
+# ─── Red interna ──────────────────────────────────────────────────────────────
+networks:
+  pulsepath-internal:
+    driver: bridge

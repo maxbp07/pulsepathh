@@ -1,0 +1,684 @@
+/* PulsePath — Estilos del Informe de Impacto PDF
+ * Optimizado para impresión A4 con Puppeteer + printBackground: true
+ * Sigue la paleta de semáforo CoPsoQ-istas21 (verde/amarillo/rojo)
+ */
+
+/* ── Configuración de página ─────────────────────────────────────── */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10pt;
+}
+
+body {
+  font-family: -apple-system, 'Segoe UI', Arial, Helvetica, sans-serif;
+  color: #1a1a2e;
+  background: #fff;
+  line-height: 1.5;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ── Saltos de página ─────────────────────────────────────────────── */
+
+.page-break-before { page-break-before: always; break-before: page; }
+.page-break-after  { page-break-after:  always; break-after:  page; }
+.avoid-break       { page-break-inside: avoid; break-inside: avoid; }
+
+/* ── PORTADA ─────────────────────────────────────────────────────── */
+
+.cover {
+  width: 210mm;
+  height: 297mm;
+  background: linear-gradient(160deg, #0f172a 0%, #1e293b 55%, #0f4c81 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 50mm 20mm 20mm 20mm;
+}
+
+.cover-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cover-logo {
+  font-size: 24pt;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: #38bdf8;
+}
+
+.cover-logo-sub {
+  font-size: 9pt;
+  color: #94a3b8;
+  display: block;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.cover-title {
+  margin-top: 40mm;
+}
+
+.cover-title h1 {
+  font-size: 28pt;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #f8fafc;
+}
+
+.cover-title h2 {
+  font-size: 15pt;
+  font-weight: 400;
+  color: #94a3b8;
+  margin-top: 8px;
+}
+
+.cover-org {
+  font-size: 12pt;
+  font-weight: 600;
+  color: #38bdf8;
+  margin-top: 16px;
+}
+
+.cover-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 24px;
+}
+
+.cover-meta-row {
+  font-size: 9pt;
+  color: #cbd5e1;
+  display: flex;
+  gap: 8px;
+}
+
+.cover-meta-row strong {
+  color: #e2e8f0;
+}
+
+.cover-badges {
+  display: flex;
+  gap: 10px;
+  margin-top: 30mm;
+  flex-wrap: wrap;
+}
+
+.cover-badge {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 8pt;
+  color: #e2e8f0;
+}
+
+.cover-badge--kanon {
+  background: rgba(56,189,248,0.15);
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+/* ── CABECERA DE SECCIÓN ─────────────────────────────────────────── */
+
+.report-section {
+  padding: 15mm 15mm 10mm;
+}
+
+.section-header {
+  border-bottom: 3px solid #0f4c81;
+  padding-bottom: 6px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.section-number {
+  font-size: 18pt;
+  font-weight: 900;
+  color: #0f4c81;
+  line-height: 1;
+}
+
+.section-title {
+  font-size: 13pt;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.section-subtitle {
+  font-size: 9pt;
+  color: #64748b;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+/* ── RESUMEN EJECUTIVO (Sección 1) ───────────────────────────────── */
+
+.exec-headline {
+  font-size: 14pt;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  background: #f1f5f9;
+  border-left: 5px solid #0f4c81;
+  border-radius: 0 6px 6px 0;
+}
+
+.exec-para {
+  font-size: 10pt;
+  color: #374151;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+/* KPI cards del resumen ejecutivo */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.kpi-card {
+  border-radius: 10px;
+  padding: 16px 14px;
+  text-align: center;
+  border: 2px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.kpi-card--green { border-color: #22c55e; background: #f0fdf4; }
+.kpi-card--yellow { border-color: #eab308; background: #fefce8; }
+.kpi-card--red    { border-color: #ef4444; background: #fef2f2; }
+
+.kpi-label {
+  font-size: 8pt;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.kpi-value {
+  font-size: 26pt;
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 6px 0 2px;
+}
+
+.kpi-card--green  .kpi-value { color: #16a34a; }
+.kpi-card--yellow .kpi-value { color: #ca8a04; }
+.kpi-card--red    .kpi-value { color: #dc2626; }
+.kpi-card:not([class*='--']) .kpi-value { color: #0f4c81; }
+
+.kpi-unit {
+  font-size: 8pt;
+  color: #94a3b8;
+}
+
+/* ── SEMÁFORO GLOBAL (Sección 3) ─────────────────────────────────── */
+
+.semaphore-block {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  margin-bottom: 20px;
+}
+
+.semaphore-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+
+.semaphore-circle--green  { background: #22c55e; box-shadow: 0 0 0 8px #dcfce7; }
+.semaphore-circle--yellow { background: #eab308; box-shadow: 0 0 0 8px #fef9c3; }
+.semaphore-circle--red    { background: #ef4444; box-shadow: 0 0 0 8px #fee2e2; }
+
+.semaphore-number {
+  font-size: 26pt;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+
+.semaphore-unit {
+  font-size: 8pt;
+  color: rgba(255,255,255,0.8);
+  font-weight: 600;
+}
+
+.semaphore-info h3 {
+  font-size: 14pt;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.semaphore-info p {
+  font-size: 9pt;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.semaphore-info .methodology-note {
+  font-size: 8pt;
+  color: #94a3b8;
+  margin-top: 6px;
+}
+
+/* ── TABLA DE DEPARTAMENTOS (Sección 4) ──────────────────────────── */
+
+.dept-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9pt;
+  margin-top: 8px;
+}
+
+.dept-table th {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 8pt;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dept-table th:not(:first-child) { text-align: center; }
+
+.dept-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+.dept-table tr:nth-child(even) td { background: #f8fafc; }
+.dept-table tr:hover td { background: #f1f5f9; }
+
+.dept-table .dept-name { font-weight: 600; }
+.dept-table .text-center { text-align: center; }
+
+.risk-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 9pt;
+  min-width: 40px;
+  text-align: center;
+}
+
+.risk-pill--green  { background: #dcfce7; color: #15803d; }
+.risk-pill--yellow { background: #fef9c3; color: #a16207; }
+.risk-pill--red    { background: #fee2e2; color: #b91c1c; }
+
+.badge-kanon {
+  background: #f1f5f9;
+  color: #64748b;
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 8pt;
+  font-style: italic;
+}
+
+.kanon-row td { color: #94a3b8; }
+
+.trend-up    { color: #dc2626; font-weight: 600; }
+.trend-down  { color: #16a34a; font-weight: 600; }
+.trend-stable{ color: #64748b; }
+
+/* ── DRIVERS (Sección 5) ─────────────────────────────────────────── */
+
+.drivers-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.driver-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.driver-row--dominant {
+  background: #fff7ed;
+  border-color: #f59e0b;
+}
+
+.driver-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.driver-label strong { font-size: 10pt; color: #1a1a2e; }
+.driver-label small  { font-size: 8pt;  color: #64748b; flex-basis: 100%; }
+
+.dominant-badge {
+  background: #f59e0b;
+  color: #fff;
+  font-size: 7pt;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.driver-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 20px;
+}
+
+.driver-bar {
+  height: 16px;
+  border-radius: 4px;
+  min-width: 4px;
+  flex-shrink: 0;
+}
+
+.driver-pct {
+  font-size: 9pt;
+  font-weight: 700;
+  color: #374151;
+  white-space: nowrap;
+}
+
+/* ── PATRONES TEMPORALES (Sección 6) ─────────────────────────────── */
+
+.temporal-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.trend-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.trend-dept {
+  font-weight: 600;
+  font-size: 9pt;
+  min-width: 120px;
+  color: #374151;
+}
+
+.trend-points {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.trend-point {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 24px;
+  border-radius: 4px;
+  font-size: 8pt;
+  font-weight: 700;
+  color: #fff;
+}
+
+.trend-arrow {
+  color: #94a3b8;
+  font-size: 8pt;
+}
+
+/* ── CONCLUSIONES (Sección 7) ────────────────────────────────────── */
+
+.conclusions-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+}
+
+.conclusion-item {
+  padding: 10px 14px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border-left: 4px solid #0f4c81;
+  font-size: 10pt;
+  line-height: 1.5;
+  color: #374151;
+  page-break-inside: avoid;
+}
+
+/* ── RECOMENDACIONES (Sección 8) ─────────────────────────────────── */
+
+.recommendations-list {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recommendations-list li {
+  padding: 8px 12px;
+  background: #f0fdf4;
+  border-radius: 6px;
+  border-left: 4px solid #22c55e;
+  font-size: 10pt;
+  line-height: 1.5;
+  color: #374151;
+  page-break-inside: avoid;
+}
+
+.disclaimer-box {
+  margin-top: 20px;
+  padding: 12px 16px;
+  background: #fffbeb;
+  border: 1px solid #fbbf24;
+  border-radius: 6px;
+  font-size: 8.5pt;
+  color: #92400e;
+  line-height: 1.5;
+  page-break-inside: avoid;
+}
+
+/* ── PRIVACIDAD (Sección 2) ──────────────────────────────────────── */
+
+.privacy-block {
+  background: #f0f9ff;
+  border: 1px solid #0ea5e9;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  page-break-inside: avoid;
+}
+
+.privacy-block h4 {
+  font-size: 10pt;
+  font-weight: 700;
+  color: #0c4a6e;
+  margin-bottom: 6px;
+}
+
+.privacy-block ul {
+  padding-left: 16px;
+}
+
+.privacy-block li {
+  font-size: 9pt;
+  color: #0c4a6e;
+  line-height: 1.6;
+}
+
+.methodology-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.methodology-item {
+  background: #f8fafc;
+  border-radius: 6px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.methodology-item h5 {
+  font-size: 9pt;
+  font-weight: 700;
+  color: #0f4c81;
+  margin-bottom: 4px;
+}
+
+.methodology-item p {
+  font-size: 8.5pt;
+  color: #374151;
+  line-height: 1.5;
+}
+
+/* ── ANEXO (Sección 9) ───────────────────────────────────────────── */
+
+.annex-block {
+  margin-bottom: 16px;
+  page-break-inside: avoid;
+}
+
+.annex-block h4 {
+  font-size: 10pt;
+  font-weight: 700;
+  color: #1e293b;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+.annex-block p,
+.annex-block li {
+  font-size: 8.5pt;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.annex-block ul {
+  padding-left: 16px;
+}
+
+.glossary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8.5pt;
+}
+
+.glossary-table td {
+  padding: 5px 8px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: top;
+}
+
+.glossary-table td:first-child {
+  font-weight: 700;
+  color: #0f4c81;
+  width: 25%;
+  white-space: nowrap;
+}
+
+/* ── PIE DE PÁGINA ───────────────────────────────────────────────── */
+
+.page-footer {
+  text-align: center;
+  font-size: 7.5pt;
+  color: #94a3b8;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 8px;
+  margin-top: 20px;
+}
+
+/* ── UTILIDADES ──────────────────────────────────────────────────── */
+
+.no-data {
+  font-style: italic;
+  color: #94a3b8;
+  font-size: 9pt;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px dashed #cbd5e1;
+}
+
+.text-muted { color: #64748b; }
+.text-sm    { font-size: 8.5pt; }
+.mt-8       { margin-top: 8px; }
+.mt-12      { margin-top: 12px; }
+.mt-16      { margin-top: 16px; }
+
+.info-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 9pt;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.info-row strong { color: #374151; }
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.legal-note {
+  margin-top: 16px;
+  padding: 10px 14px;
+  background: #fefce8;
+  border-left: 4px solid #eab308;
+  border-radius: 0 6px 6px 0;
+  font-size: 8.5pt;
+  color: #713f12;
+  line-height: 1.5;
+}
