@@ -78,8 +78,14 @@ export function encryptString(value) {
  * @throws {Error} If the buffer is malformed or authentication fails.
  */
 export function decryptString(buffer) {
+  // Prisma 6 returns Bytes columns as Uint8Array (not Buffer). Accept any
+  // Uint8Array-like value and normalise it to a Buffer without copying data.
   if (!Buffer.isBuffer(buffer)) {
-    throw new TypeError('decryptString: argument must be a Buffer.');
+    if (buffer instanceof Uint8Array) {
+      buffer = Buffer.from(buffer.buffer, buffer.byteOffset, buffer.byteLength);
+    } else {
+      throw new TypeError('decryptString: argument must be a Buffer or Uint8Array.');
+    }
   }
 
   if (buffer.length < IV_LENGTH + AUTH_TAG_LENGTH) {
