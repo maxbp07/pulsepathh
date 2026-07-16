@@ -1,7 +1,8 @@
 # Secrets / entorno
 .env
-.env.*
-!.env.example
+.env.local
+.env.infra
+**/.env
 !**/.env.example
 .env.infra
 
