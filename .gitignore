@@ -1,0 +1,35 @@
+# Secrets / entorno
+.env
+.env.*
+!.env.example
+!**/.env.example
+.env.infra
+
+# Scripts sonda temporales (pueden contener credenciales)
+scripts/_vps_*.py
+scripts/matforge3d/_vps_*.py
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Leadgen runtime
+leadgen/bin/google-maps-scraper
+leadgen/bin/*.exe
+leadgen/data/gosom_output/
+leadgen/data/*.csv
+!leadgen/data/suppression.csv
+outbound_email/texts/*.json
+outbound_email/composer_batches/*.md
+
+# Node
+node_modules/
+
+# Logs / temp
+*.log
+cleanup-log-*.txt
+recovery-log-*.txt
+aesthetic-cleanup-log.txt
