@@ -57,7 +57,10 @@ Se necesita un **entorno laboral municipal real**, no una instalación física e
 
 - El artículo 2.c define Recurso Urbano de Sandbox como espacios, infraestructuras **y/o eventos** de la ciudad. Las Fallas son un evento urbano con impacto directo y previsible sobre la carga de determinados servicios municipales.
 - El artículo 4 incluye expresamente proyectos de carácter sanitario (salud y cuidado de las personas), digitalización y modernización del sector público.
-- Existe precedente en el propio Sandbox: **VITALWISE** (Instituto de Biomecánica de València — IBV), admitido y ejecutado en el Sandbox Urbano de València, orientado a la detección de fatiga y estrés (en su caso, de conductores, mediante constantes vitales). Este precedente confirma que un proyecto de salud digital / fatiga encaja en el instrumento aunque el recurso no se limite a una calle o a una infraestructura estática. Fuentes: ficha del proyecto en Valencia Innovation Capital ([vitalwise](https://valenciainnovationcapital.com/proyecto/vitalwise/)); comunicación del Ayuntamiento / Europa Press (6 de julio de 2026); nota del IBV sobre la presentación de VITALWISE en el Sandbox.
+- Existe precedente en el propio Sandbox: **VITALWISE** (Instituto de Biomecánica de València — IBV), ejecutado en el Sandbox Urbano de València, orientado a la detección de fatiga y estrés (en su caso, de conductores, mediante constantes vitales). Los ensayos en el Sandbox se llevaron a cabo del **1 de abril al 31 de julio de 2025** (60 participantes).[^vitalwise-ibv] La fecha del **6 de julio de 2026** corresponde a la comunicación institucional / noticia del Ayuntamiento y de Valencia Innovation Capital sobre el piloto ya ejecutado, no a la admisión ni al periodo de ensayos.[^vitalwise-noticia] Este precedente confirma que un proyecto de salud digital / fatiga encaja en el instrumento aunque el recurso no se limite a una calle o a una infraestructura estática. Ficha del proyecto: [Valencia Innovation Capital — VITALWISE](https://valenciainnovationcapital.com/proyecto/vitalwise/).
+
+[^vitalwise-ibv]: IBV, «IBV presenta su tecnología VITALWISE en el Sandbox Urbano de València», 26 nov. 2025: https://www.ibv.org/actualidad/ibv-presenta-su-tecnologia-vitalwise-en-el-sandbox-urbano-de-valencia/
+[^vitalwise-noticia]: Ayuntamiento de València / Europa Press, 6 jul. 2026: https://www.europapress.es/comunitat-valenciana/innova-00214/noticia-valencia-prueba-sandbox-urbano-sistema-registrar-constantes-vitales-conductores-20260706184246.html — espejo VIC: https://valenciainnovationcapital.com/valencia-prueba-en-el-sandbox-urbano-un-sistema-para-registrar-las-constantes-vitales-de-los-conductores/ — espejo ayuntamiento: https://www.valencia.es/cas/actualidad/-/content/sistema-de-registro-constantes-vitales-conductores-val%C3%A8ncia
 
 PulsePath no ocupa vía pública, no instala mobiliario urbano, no interviene en infraestructuras municipales y no altera el espacio físico de los centros de trabajo más allá del uso voluntario de un dispositivo móvil personal o corporativo ya existente.
 
@@ -158,7 +161,7 @@ Se deja constancia de que, en todo caso, deberá hacerse partícipe a la persona
 
 | Marcador | Significado |
 |----------|-------------|
-| `{{N_PARTICIPANTES_PREFLIGHT}}` | Número de voluntarios del preflight (10–20 previstos) |
+| `{{N_PARTICIPANTES_PREFLIGHT}}` | Número de voluntarios del preflight (objetivo **30** externos; duración 7–14 días) |
 | `{{ADHERENCIA_DIARIA}}` | Adherencia diaria observada en el preflight |
 | `{{TASA_ABANDONO}}` | Tasa de abandono observada en el preflight |
 | `{{URL_DEMO}}` | URL pública de la demo funcional |

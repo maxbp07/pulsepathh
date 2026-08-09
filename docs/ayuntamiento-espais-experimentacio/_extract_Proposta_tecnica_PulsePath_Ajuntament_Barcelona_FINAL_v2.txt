@@ -31,7 +31,7 @@ Antecedents
 • S'ha mantingut una conversa sobre el concepte amb el Dr. Mathias Basner (University of Pennsylvania), investigador de referència del PVT. No va consistir en una auditoria de la implementació i no constitueix un aval formal.
 • Existeix un prototip funcional integrat: aplicació web progressiva per a participants, backend de sincronització xifrada, base de dades, exportació per a anàlisi i quadre de comandament agregat.
 • S'han completat proves end-to-end en entorn controlat i un preflight amb dades sintètiques. Encara no hi ha clients, ingressos ni una validació operativa amb persones usuàries reals. Aquesta seria la primera prova en un entorn laboral real.
-Abans d'activar cap participant municipal, PulsePath completarà una prova tècnica prèvia controlada de 7 a 14 dies amb entre 10 i 20 persones voluntàries adultes externes, procedents de xarxes personals i professionals. Aquesta prova encara no s'ha realitzat en la data de presentació i no es presenta com una validació científica ni laboral. Servirà per verificar usabilitat, compatibilitat entre dispositius, sincronització, suport, exercici del dret de supressió i supressió K ≥ 5. No s'hi recolliran respostes reals de DASS-21, GAD-7 o CBI: aquests recorreguts es provaran amb perfils de prova. Les dades tècniques mínimes s'eliminaran en acabar el preflight i cap resultat s'utilitzarà per entrenar models.
+Abans d'activar cap participant municipal, PulsePath completarà una prova tècnica prèvia controlada de 7 a 14 dies amb **30** persones voluntàries adultes externes, procedents de xarxes personals i professionals. Aquesta prova encara no s'ha realitzat en la data de presentació i no es presenta com una validació científica ni laboral. Servirà per verificar usabilitat, compatibilitat entre dispositius, sincronització, suport, exercici del dret de supressió i supressió K ≥ 5. No s'hi recolliran respostes reals de DASS-21, GAD-7 o CBI: aquests recorreguts es provaran amb perfils de prova. Les dades tècniques mínimes s'eliminaran en acabar el preflight i cap resultat s'utilitzarà per entrenar models.
 2. Requisits per participar (elegibilitat)
 Nivell de maduresa tecnològica
 El projecte es considera en un TRL 5 tècnic, amb una limitació explícita: encara no ha estat validat operativament amb una plantilla real.
@@ -130,7 +130,7 @@ Preparació prèvia (2-4 setmanes després del conveni)
 • selecció d'equips i comunicació interna;
 • revisió jurídica, protecció de dades i seguretat;
 • configuració de l'entorn, codis, idioma i segments;
-• preflight de 7 a 14 dies amb 10-20 persones voluntàries adultes externes, informació específica, dades mínimes i eliminació en finalitzar;
+• preflight de 7 a 14 dies amb **30** persones voluntàries adultes externes, informació específica, dades mínimes i eliminació en finalitzar;
 • verificació de compatibilitat, sincronització, supressió, K ≥ 5, còpia/restauració i protocol d'incidències;
 • gate de sortida: cap incident crític obert i correcció de qualsevol problema bloquejant abans d'activar personal municipal;
 • formació i protocol d'incidències.

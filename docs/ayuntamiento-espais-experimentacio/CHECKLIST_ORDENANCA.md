@@ -32,7 +32,7 @@ Llegenda d'estat:
 | A11 | **10.3.b.4** Declaració responsable — seguretat de persones, infraestructures i entorn urbà | Cobert | `declaracions/04-seguretat-persones-infraestructures.md` |
 | A12 | **10.3.b.5** Declaració responsable — condicions de l'ordenança | Cobert | `declaracions/05-condicions-ordenanca.md` |
 | A13 | **10.3.b.6** Declaració responsable — Protocol de sistemes algorítmics | Cobert | `declaracions/06-protocol-sistemes-algoritmics.md` + `proposta-pulsepath-contingut.md` → §2 Compliment algorítmic |
-| A14 | **10.3 in fine** Ajustament de les declaracions als models aprovats per decret | Pendent extern | Comentari inicial a cada fitxer de `declaracions/`. Cal verificar si ja existeix model oficial i, si existeix, migrar-hi el contingut |
+| A14 | **10.3 in fine** Ajustament de les declaracions als models aprovats per decret | Pendent extern | Verificat 2026-08-09: **no hi ha models oficials publicats** (vegeu `MODELOS_DECLARACION.md`). Les 6 declaracions de `declaracions/` es mantenen com a redacció substancial provisional; cal migrar si es publica el decret |
 | A15 | **10.3.c** Acreditació de la personalitat jurídica de l'entitat sol·licitant | Parcial | Promotor = persona física. Cal adjuntar còpia de DNI/NIE o document identificatiu al tràmit electrònic (no és un markdown de contingut tècnic). No hi ha societat mercantil |
 
 ---
@@ -71,7 +71,7 @@ Llegenda d'estat:
 ## D. Accions obligatòries abans de tornar a presentar
 
 1. Emplenar tots els marcadors `{{...}}` de l'Annex B de la proposta i de les declaracions (dades personals del declarant + resultats del preflight + demo + tope econòmic).
-2. Verificar si la Comissió de Govern ha aprovat models oficials de declaració responsable; si existeixen, substituir els markdowns de `declaracions/` pel model oficial emplenat.
+2. Verificar si la Comissió de Govern ha aprovat models oficials de declaració responsable (estat actual: **no localitzats**; vegeu `MODELOS_DECLARACION.md`); si existeixen, substituir els markdowns de `declaracions/` pel model oficial emplenat.
 3. Adjuntar acreditació d'identitat del promotor persona física (art. 10.3.c).
 4. Confirmar amb l'entitat gestora (BIT Habitat / finestreta única) el canal per formalitzar el consentiment de les entitats titulars (art. 3.3): no cal que estigui signat abans de l'avaluació preliminar, però sí que la proposta l'identifiqui i el sol·liciti.
 5. No inventar xifres del preflight: si el preflight encara no s'ha tancat, mantenir TRL amb evidència real disponible o ajornar la presentació fins a tenir les mètriques.

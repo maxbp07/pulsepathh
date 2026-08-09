@@ -39,7 +39,10 @@ Impacto positivo potencial en salud y cuidado de las personas trabajadoras, digi
 
 ### 1.5. Precedente de encaje
 
-**VITALWISE** (Instituto de Biomecánica de València), proyecto admitido en el Sandbox Urbano de València para detección de fatiga y estrés (constantes vitales de conductores). Fuentes: [Valencia Innovation Capital — VITALWISE](https://valenciainnovationcapital.com/proyecto/vitalwise/); comunicación institucional / Europa Press, 6 de julio de 2026; IBV. Sirve de referencia de que la salud digital orientada a fatiga encaja en el instrumento.
+**VITALWISE** (Instituto de Biomecánica de València), proyecto ejecutado en el Sandbox Urbano de València para detección de fatiga y estrés (constantes vitales de conductores). Ensayos: **1 de abril – 31 de julio de 2025** (fuente IBV).[^vitalwise-ibv] La comunicación institucional del **6 de julio de 2026** es la noticia posterior sobre el piloto ya realizado, no la fecha de admisión ni de ensayos.[^vitalwise-noticia] Ficha: [Valencia Innovation Capital — VITALWISE](https://valenciainnovationcapital.com/proyecto/vitalwise/). Sirve de referencia de que la salud digital orientada a fatiga encaja en el instrumento.
+
+[^vitalwise-ibv]: https://www.ibv.org/actualidad/ibv-presenta-su-tecnologia-vitalwise-en-el-sandbox-urbano-de-valencia/
+[^vitalwise-noticia]: https://www.europapress.es/comunitat-valenciana/innova-00214/noticia-valencia-prueba-sandbox-urbano-sistema-registrar-constantes-vitales-conductores-20260706184246.html ; https://valenciainnovationcapital.com/valencia-prueba-en-el-sandbox-urbano-un-sistema-para-registrar-las-constantes-vitales-de-los-conductores/
 
 ### 1.6. Procedimiento simplificado
 

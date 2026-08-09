@@ -554,7 +554,7 @@ Les sis declaracions responsables exigides per l'article 10.3.b es presenten com
 | Marcador | Contingut esperat |
 |---|---|
 | `{{DATA_DOCUMENT}}` | Data de presentació (agost o setembre de 2026) |
-| `{{N_PARTICIPANTS_PREFLIGHT}}` | Nombre real de voluntaris del preflight (objectiu 10-20) |
+| `{{N_PARTICIPANTS_PREFLIGHT}}` | Nombre real de voluntaris del preflight (objectiu **30** externs; durada 7–14 dies) |
 | `{{DIES_PREFLIGHT}}` | Dies reals de durada (objectiu 7-14) |
 | `{{ADHERENCIA_DIARIA}}` | Percentatge o ràtio d'adherència diària observada |
 | `{{TASA_ABANDONO}}` | Taxa d'abandonament del preflight |
