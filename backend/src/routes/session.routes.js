@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { requireAnonymousAuth } from '../middleware/auth.js';
+import { requireAnonymousAuth, requireConsentedParticipant } from '../middleware/auth.js';
 import { createSession } from '../controllers/session.controller.js';
 
 const router = Router();
 
-router.post('/', requireAnonymousAuth, createSession);
+router.post('/', requireAnonymousAuth, requireConsentedParticipant, createSession);
 
 export default router;
