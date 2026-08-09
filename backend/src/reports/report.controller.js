@@ -11,7 +11,8 @@
 //   5. Lanza Puppeteer: page.setContent(html) → page.pdf({ format: 'A4' }).
 //   6. Responde con Content-Type application/pdf, Content-Disposition attachment.
 
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma.js';
+import { config } from '../config/env.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { readFileSync } from 'fs';
@@ -19,7 +20,6 @@ import { decryptNumber } from '../lib/crypto.js';
 import { buildGroupsFromSessions, buildOrgTotal } from '../lib/kanon.js';
 import { generateInsights } from './insights.js';
 
-const prisma = new PrismaClient();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -330,6 +330,14 @@ function buildHtml(template, css, ctx) {
 // ---------------------------------------------------------------------------
 
 export async function generateReport(req, res) {
+  if (config.disablePdf) {
+    return res.status(501).json({
+      error:
+        'Generación PDF temporalmente desactivada en el runtime serverless. Usa el dashboard JSON o el despliegue Contabo.',
+      code: 'PDF_DISABLED_SERVERLESS',
+    });
+  }
+
   const { orgId } = req.params;
 
   if (req.employer.orgId !== orgId) {

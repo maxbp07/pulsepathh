@@ -1,9 +1,8 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma.js';
 import { config } from '../config/env.js';
 
-const prisma = new PrismaClient();
 
 export async function loginEmployer(req, res) {
   const { email, password } = req.body;

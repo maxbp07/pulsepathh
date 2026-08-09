@@ -19,7 +19,13 @@ export const config = {
   jwtSecret,
   encryptionKey,
   adminSecret: process.env.ADMIN_SECRET,
+  cronSecret: process.env.CRON_SECRET ?? null,
   nodeEnv: process.env.NODE_ENV || 'development',
+  isServerless: Boolean(process.env.VERCEL),
+  disablePdf:
+    process.env.DISABLE_PDF === '1' ||
+    process.env.DISABLE_PDF === 'true' ||
+    Boolean(process.env.VERCEL),
   corsOrigins: (process.env.CORS_ORIGINS ?? 'http://localhost:5173,http://localhost:5174')
     .split(',')
     .map((s) => s.trim())

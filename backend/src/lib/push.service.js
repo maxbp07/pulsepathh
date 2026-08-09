@@ -2,10 +2,9 @@
  * Web Push (VAPID) — envío y limpieza de suscripciones expiradas.
  */
 import webpush from 'web-push';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from './prisma.js';
 import { config } from '../config/env.js';
 
-const prisma = new PrismaClient();
 
 let configured = false;
 

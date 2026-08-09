@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma.js';
 import { encryptNumber } from '../lib/crypto.js';
 
-const prisma = new PrismaClient();
 
 const ALLOWED_FIELDS = new Set([
   'timestamp',

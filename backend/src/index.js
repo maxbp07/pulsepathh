@@ -1,7 +1,7 @@
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from './lib/prisma.js';
 import { config } from './config/env.js';
 import { logger, requestIdMiddleware } from './lib/logger.js';
 import { sendAlert } from './lib/alerts.js';
@@ -15,10 +15,10 @@ import pushRoutes from './routes/push.routes.js';
 import opsRoutes from './routes/ops.routes.js';
 import pushPublicRoutes from './routes/push-public.routes.js';
 import adminRoutes from './routes/admin.routes.js';
+import cronRoutes from './routes/cron.routes.js';
 import { authLimiter, sessionLimiter, generalLimiter } from './middleware/rateLimit.js';
 
 const app = express();
-const prisma = new PrismaClient();
 
 app.use(helmet());
 app.use(
@@ -34,7 +34,7 @@ app.use(
   }),
 );
 app.use(requestIdMiddleware);
-app.use(express.json());
+app.use(express.json({ limit: '1mb' }));
 
 app.get('/', (_req, res) => {
   res.json({
@@ -67,6 +67,8 @@ app.get('/health', async (_req, res) => {
     gitSha: config.gitSha,
     pushConfigured: Boolean(config.vapidPublicKey && config.vapidPrivateKey),
     uptimeSec: Math.floor(process.uptime()),
+    runtime: config.isServerless ? 'serverless' : 'node',
+    pdfEnabled: !config.disablePdf,
   });
 });
 
@@ -80,6 +82,7 @@ app.use('/api/v1/checkins/questionnaire', sessionLimiter, questionnaireRoutes);
 app.use('/api/v1/ops', generalLimiter, opsRoutes);
 app.use('/api/v1/push', generalLimiter, pushPublicRoutes);
 app.use('/api/v1/admin', generalLimiter, adminRoutes);
+app.use('/api/v1/cron', cronRoutes);
 
 app.use((err, req, res, _next) => {
   const status = err.status || err.statusCode || 500;
@@ -90,6 +93,13 @@ app.use((err, req, res, _next) => {
   res.status(status).json({ message: err.message || 'Internal server error' });
 });
 
-app.listen(config.port, () => {
-  console.log(`PulsePath API listening on port ${config.port} (${config.nodeEnv})`);
-});
+export { app };
+
+const shouldListen = !process.env.VERCEL && process.env.NODE_ENV !== 'test';
+if (shouldListen) {
+  app.listen(config.port, () => {
+    console.log(`PulsePath API listening on port ${config.port} (${config.nodeEnv})`);
+  });
+}
+
+export default app;

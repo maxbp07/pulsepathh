@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from './prisma.js';
 
-const prisma = new PrismaClient();
 
 export async function logIngest({ orgId, codeHash, route, status, clientId }) {
   try {

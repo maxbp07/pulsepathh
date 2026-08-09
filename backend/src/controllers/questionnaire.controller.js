@@ -1,9 +1,8 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma.js';
 import { encryptJson, hashCanonicalJson } from '../lib/crypto.js';
 import { validateQuestionnairePayload, validateTimepointEligibility } from '../lib/validators/studyValidators.js';
 import { logIngest, touchAccessCode } from '../lib/ingest.js';
 
-const prisma = new PrismaClient();
 
 export async function createQuestionnaire(req, res) {
   const validation = validateQuestionnairePayload(req.body);

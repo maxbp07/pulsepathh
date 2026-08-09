@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma.js';
 import { decryptNumber } from '../lib/crypto.js';
 import {
   buildGroupsFromSessions,
@@ -29,7 +29,6 @@ function toCsv(rows, columns) {
   return `${header}\r\n${body}`;
 }
 
-const prisma = new PrismaClient();
 
 /**
  * GET /api/v1/dashboard/:orgId

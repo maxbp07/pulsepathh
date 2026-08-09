@@ -1,7 +1,6 @@
 import { createHash, randomUUID } from 'node:crypto';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma.js';
 
-const prisma = new PrismaClient();
 
 function hashCode(code) {
   return createHash('sha256').update(code.trim().toUpperCase(), 'utf8').digest('hex');

@@ -2,9 +2,12 @@
 .env
 .env.local
 .env.infra
+.env.vercel
 **/.env
 !**/.env.example
 .env.infra
+backend/.secrets_rotated
+.ssh_auth_success
 
 # Scripts sonda temporales (pueden contener credenciales)
 scripts/_vps_*.py

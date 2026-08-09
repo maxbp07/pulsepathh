@@ -1,8 +1,7 @@
 import jwt from 'jsonwebtoken';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma.js';
 import { config } from '../config/env.js';
 
-const prisma = new PrismaClient();
 
 export function requireEmployerAuth(req, res, next) {
   const authHeader = req.headers['authorization'];

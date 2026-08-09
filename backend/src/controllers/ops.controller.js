@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma.js';
 
-const prisma = new PrismaClient();
 const TIMEPOINTS = ['D0', 'D7', 'D14'];
 /** Sin check-in en este umbral (días) → abandono operativo. */
 const ABANDON_IDLE_DAYS = 3;

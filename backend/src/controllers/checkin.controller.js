@@ -1,9 +1,8 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma.js';
 import { encryptJson, hashCanonicalJson } from '../lib/crypto.js';
 import { validateDailyPayload } from '../lib/validators/studyValidators.js';
 import { logIngest, touchAccessCode } from '../lib/ingest.js';
 
-const prisma = new PrismaClient();
 
 function isUniqueViolation(err) {
   return err?.code === 'P2002';

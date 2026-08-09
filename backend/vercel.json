@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "name": "pulsepath-api",
+  "builds": [
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "src/**",
+          "prisma/**",
+          "package.json"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "api/index.js" }
+  ],
+  "crons": [
+    {
+      "path": "/api/v1/cron/push-reminders?orgSlug=study_mixed_2026",
+      "schedule": "0 8 * * *"
+    }
+  ]
+}
