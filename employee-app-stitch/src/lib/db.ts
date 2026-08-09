@@ -43,7 +43,22 @@ export async function initDb(): Promise<void> {
 
 // ─── Sesiones diarias ────────────────────────────────────────────────────────
 
-export async function saveSession(s: Omit<DailySession, 'id' | 'appVersion'>): Promise<DailySession> {
+/** Sesión ya guardada para un dateLocal (YYYY-MM-DD civil del dispositivo). */
+export async function getSessionByDateLocal(dateLocal: string): Promise<DailySession | undefined> {
+  return db.sessions.where('dateLocal').equals(dateLocal).first();
+}
+
+/**
+ * Guarda una sesión diaria. Deduplica por dateLocal: si ya hay una para ese día,
+ * no crea otra (evita doble envío / reintento de outbox con otro client_record_id).
+ * Devuelve null si el día ya estaba registrado.
+ */
+export async function saveSession(
+  s: Omit<DailySession, 'id' | 'appVersion'>,
+): Promise<DailySession | null> {
+  const existing = await getSessionByDateLocal(s.dateLocal);
+  if (existing) return null;
+
   const record: DailySession = {
     ...s,
     id: cryptoRandomId(),

@@ -5,6 +5,15 @@ import { logIngest, touchAccessCode } from '../lib/ingest.js';
 
 const prisma = new PrismaClient();
 
+function isUniqueViolation(err) {
+  return err?.code === 'P2002';
+}
+
+async function respondDuplicate(res, { orgId, codeHash, clientRecordId, record }) {
+  await logIngest({ orgId, codeHash, route: 'checkins/daily', status: 200, clientId: clientRecordId });
+  return res.status(200).json({ status: 'duplicate', id: record.id });
+}
+
 export async function createDailyCheckin(req, res) {
   const validation = validateDailyPayload(req.body);
   if (!validation.ok) {
@@ -14,6 +23,7 @@ export async function createDailyCheckin(req, res) {
   const { codeHash, orgId } = req.anonymous;
   const { clientRecordId, dateLocal, tz, takenAt, appVersion, payload } = validation.value;
   const payloadSha256 = hashCanonicalJson(payload);
+  // date_local es fecha civil del participante (YYYY-MM-DD); se almacena como DATE sin shift UTC.
   const dateLocalDate = new Date(dateLocal + 'T00:00:00.000Z');
 
   try {
@@ -23,8 +33,7 @@ export async function createDailyCheckin(req, res) {
 
     if (existingByDate) {
       if (existingByDate.payloadSha256 === payloadSha256) {
-        await logIngest({ orgId, codeHash, route: 'checkins/daily', status: 200, clientId: clientRecordId });
-        return res.status(200).json({ status: 'duplicate', id: existingByDate.id });
+        return respondDuplicate(res, { orgId, codeHash, clientRecordId, record: existingByDate });
       }
       await logIngest({ orgId, codeHash, route: 'checkins/daily', status: 409, clientId: clientRecordId });
       return res.status(409).json({ error: 'payload_conflict' });
@@ -36,8 +45,7 @@ export async function createDailyCheckin(req, res) {
 
     if (existingByClient) {
       if (existingByClient.payloadSha256 === payloadSha256) {
-        await logIngest({ orgId, codeHash, route: 'checkins/daily', status: 200, clientId: clientRecordId });
-        return res.status(200).json({ status: 'duplicate', id: existingByClient.id });
+        return respondDuplicate(res, { orgId, codeHash, clientRecordId, record: existingByClient });
       }
       await logIngest({ orgId, codeHash, route: 'checkins/daily', status: 409, clientId: clientRecordId });
       return res.status(409).json({ error: 'payload_conflict' });
@@ -63,7 +71,26 @@ export async function createDailyCheckin(req, res) {
 
     await logIngest({ orgId, codeHash, route: 'checkins/daily', status: 201, clientId: clientRecordId });
     return res.status(201).json({ status: 'stored', id: record.id });
-  } catch {
+  } catch (err) {
+    // Carrera concurrente: unique (code_hash, date_local) o (code_hash, client_record_id).
+    if (isUniqueViolation(err)) {
+      const raced =
+        (await prisma.dailyCheckin.findUnique({
+          where: { codeHash_dateLocal: { codeHash, dateLocal: dateLocalDate } },
+        })) ||
+        (await prisma.dailyCheckin.findUnique({
+          where: { codeHash_clientRecordId: { codeHash, clientRecordId } },
+        }));
+
+      if (raced) {
+        if (raced.payloadSha256 === payloadSha256) {
+          return respondDuplicate(res, { orgId, codeHash, clientRecordId, record: raced });
+        }
+        await logIngest({ orgId, codeHash, route: 'checkins/daily', status: 409, clientId: clientRecordId });
+        return res.status(409).json({ error: 'payload_conflict' });
+      }
+    }
+
     await logIngest({ orgId, codeHash, route: 'checkins/daily', status: 500, clientId: clientRecordId });
     return res.status(500).json({ error: 'Failed to store daily checkin.' });
   }

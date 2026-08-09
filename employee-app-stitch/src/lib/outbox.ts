@@ -40,8 +40,19 @@ function backoffMs(attempts: number): number {
 
 export async function enqueueDaily(payload: DailyCheckinPayload): Promise<void> {
   if (!hasConsent()) return;
-  const existing = await findPendingQueueEntry('daily', payload.client_record_id);
-  if (!existing) {
+  const existingByClient = await findPendingQueueEntry('daily', payload.client_record_id);
+  if (existingByClient) {
+    await flushOutbox();
+    return;
+  }
+  // Dedup por date_local: un solo check-in diario en cola (reintentos / doble envío).
+  const pending = await getPendingSyncEntries();
+  const sameDay = pending.find((e) => {
+    if (e.kind !== 'daily') return false;
+    const p = e.payload as DailyCheckinPayload;
+    return p.date_local === payload.date_local;
+  });
+  if (!sameDay) {
     await addSyncQueueEntry({
       kind: 'daily',
       clientRecordId: payload.client_record_id,
