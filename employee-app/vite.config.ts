@@ -1,0 +1,63 @@
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { VitePWA } from 'vite-plugin-pwa';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const manifest = JSON.parse(
+  readFileSync(resolve(__dirname, 'manifest.webmanifest'), 'utf-8'),
+);
+
+export default defineConfig({
+  plugins: [
+    react(),
+    {
+      name: 'pulsepath-serve-manifest',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.url !== '/manifest.webmanifest') {
+            next();
+            return;
+          }
+          res.setHeader('Content-Type', 'application/manifest+json');
+          res.end(readFileSync(resolve(__dirname, 'manifest.webmanifest')));
+        });
+      },
+    },
+    VitePWA({
+      registerType: 'autoUpdate',
+      includeAssets: ['manifest.webmanifest'],
+      manifest,
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
+        navigateFallback: '/index.html',
+        // Never hijack the employer dashboard — it lives under /dashboard/.
+        navigateFallbackDenylist: [/^\/dashboard/],
+      },
+      devOptions: {
+        enabled: true,
+      },
+    }),
+  ],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+    },
+  },
+  server: {
+    port: 5173,
+    strictPort: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
+    },
+  },
+  preview: {
+    port: 5173,
+  },
+});
