@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   PulsePath — Design System (modo oscuro premium)
+   Paleta: azul-noche (institucional) + teal (bienestar) + índigo (tech).
+   Semáforo de riesgo CoPsoQ/istas21: verde <35 · amarillo 35-49 · rojo ≥50.
+   ========================================================================== */
+
+@layer base {
+  :root {
+    --background: 226 45% 7%; /* #0A0E1A */
+    --foreground: 228 33% 93%; /* #E5E9F5 */
+
+    --card: 226 41% 11%; /* #131A2E */
+    --card-foreground: 228 33% 93%;
+
+    --popover: 226 43% 9%;
+    --popover-foreground: 228 33% 93%;
+
+    --primary: 173 68% 48%; /* teal PulsePath */
+    --primary-foreground: 226 50% 8%;
+
+    --secondary: 225 41% 16%; /* #1A2340 */
+    --secondary-foreground: 228 33% 93%;
+
+    --muted: 225 35% 15%;
+    --muted-foreground: 220 14% 64%; /* #94A3B8 */
+
+    --accent: 239 84% 67%; /* índigo */
+    --accent-foreground: 228 33% 98%;
+
+    --destructive: 349 89% 60%;
+    --destructive-foreground: 228 33% 98%;
+
+    --border: 225 30% 19%;
+    --input: 225 30% 22%;
+    --ring: 173 68% 48%;
+
+    --radius: 0.85rem;
+
+    /* Semáforo de riesgo */
+    --risk-green: 152 69% 56%; /* #34D399 */
+    --risk-yellow: 43 96% 58%; /* #FBBF24 */
+    --risk-red: 349 89% 60%; /* #F43F5E */
+
+    /* Acentos de marca para gráficos y degradados */
+    --brand-teal: 173 68% 48%;
+    --brand-indigo: 239 84% 67%;
+    --brand-violet: 258 90% 66%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(225 30% 26%);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(225 30% 34%);
+    background-clip: content-box;
+  }
+}
+
+@layer utilities {
+  /* Fondo con malla radial sutil para el shell del dashboard */
+  .grid-bg {
+    background-image:
+      radial-gradient(60rem 60rem at 85% -10%, hsl(173 68% 48% / 0.08), transparent 60%),
+      radial-gradient(50rem 50rem at -10% 110%, hsl(239 84% 67% / 0.08), transparent 60%);
+  }
+
+  .glass {
+    background: hsl(226 41% 11% / 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      hsl(173 68% 52%),
+      hsl(239 84% 70%) 60%,
+      hsl(258 90% 70%)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Skeleton shimmer */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(0 0% 100% / 0.06),
+      transparent
+    );
+    animation: shimmer 1.6s infinite;
+  }
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
