@@ -50,8 +50,8 @@ La prova no té com a objectiu demostrar una reducció clínica del burnout ni a
 - Max Borra Palau estudia Digital Business a ESIC i compta amb la seva xarxa acadèmica i d'emprenedoria com a entorn de suport.
 - S'ha mantingut una conversa sobre el concepte amb el Dr. Mathias Basner (University of Pennsylvania), investigador de referència del PVT. No va consistir en una auditoria de la implementació i no constitueix un aval formal.
 - Existeix també una **sol·licitud en curs** davant l'Ajuntament de València, en el marc del seu Sandbox Urbà. Es tracta d'una sol·licitud presentada, no d'una aprovació ni d'una autorització atorgada. Es menciona només com a senyal d'interès institucional concurrent.
-- El sistema està desplegat i operativa amb l'inventari de funcionalitats descrit a l'apartat de maduresa tecnològica. Encara no hi ha clients ni ingressos. Aquesta seria la primera prova en un entorn laboral públic real.
-- Abans de presentar aquesta versió s'ha executat un preflight amb voluntariat extern (vegeu maduresa tecnològica i marcadors `{{...}}`).
+- El sistema està **desenvolupat i plenament operatiu en entorn de proves**, amb l'inventari de funcionalitats descrit a l'apartat de maduresa tecnològica. El **desplegament públic amb HTTPS està en curs** i s'habilitarà abans de l'avaluació de l'expedient. Encara no hi ha clients ni ingressos. Aquesta seria la primera prova en un entorn laboral públic real.
+- **Abans de presentar l'expedient s'executarà un preflight amb voluntariat adult extern**, els resultats del qual s'incorporaran als marcadors `{{...}}` de l'apartat de maduresa tecnològica.
 
 ---
 
@@ -63,26 +63,27 @@ El projecte es declara en **TRL 6** (tecnologia demostrada en entorn rellevant),
 
 **Evidència del producte desplegat (inventari precís)**
 
-El sistema no es presenta com a simple esborrany conceptual. Existeix i està desplegat el conjunt següent:
+El sistema no es presenta com a simple esborrany conceptual. Està desenvolupat, provat i operatiu en entorn de proves el conjunt següent (el desplegament públic amb HTTPS es completarà abans de l'avaluació):
 
-1. **Aplicació de participant (PWA):** onboarding, consentiment informat versionat, check-in diari amb context, KSS i PVT-BA, resultat individual privat, historial i analítica personal.
+1. **Aplicació de participant (PWA):** onboarding, consentiment informat versionat, check-in diari amb context, KSS i PVT-BA, resultat individual privat, historial i analítica personal. El context recollit es limita a tres camps: hores de son (0-12), qualitat del descans (1-5) i consum de cafeïna (sí/no); el servidor rebutja qualsevol camp addicional no previst.
 2. **Qüestionaris planificats:** DASS-21, GAD-7 i Copenhagen Burnout Inventory, amb finestres temporals (inici, setmana 4 i setmana 8).
 3. **Sincronització tolerant a desconnexió:** cua de reintents per a l'enviament de sessions quan no hi ha xarxa.
 4. **Notificacions push** per a recordatoris operatius (sense contingut de resultats individuals dirigits a l'organització).
 5. **Backend:** ingesta de payload íntegre, gestió de qüestionaris, panell d'administració i endpoints d'operació.
-6. **Panell agregat per a l'organització** amb supressió automàtica K ≥ 5.
+6. **Panell agregat per a l'organització** amb supressió automàtica K ≥ 5, comptant **persones úniques** (no sessions) i aplicada també cel·la a cel·la en les vistes creuades.
 7. **Exportació estructurada** per a anàlisi.
-8. **Còpia de seguretat amb restauració provada.**
-9. **Suite de tests automatitzats** del producte.
+8. **Scripts de còpia de seguretat i de restauració** amb procediment documentat i verificació d'integritat executada. La restauració completa contra una base de dades d'un sol ús es validarà durant la preparació prèvia.
+9. **Suite de tests automatitzats** del producte i integració contínua.
 
 **Demo per a l'avaluació**
 
 - URL de demostració pública: `{{URL_DEMO}}` (prevista: `https://app.getpulsepath.com`).
 - Credencials per a la persona avaluadora: `{{CREDENCIALS_AVALUADOR}}`.
+- El desplegament públic amb HTTPS es completarà abans de l'avaluació de l'expedient. Fins llavors, les captures adjuntes corresponen a l'entorn de proves i s'identifiquen com a tals.
 
 **Preflight amb voluntariat extern (base del TRL 6)**
 
-Abans de la presentació s'ha executat un preflight real amb voluntariat adult extern, no municipal:
+Abans de la presentació s'executarà un preflight real amb voluntariat adult extern, no municipal:
 
 | Indicador | Valor |
 |---|---|
@@ -93,7 +94,7 @@ Abans de la presentació s'ha executat un preflight real amb voluntariat adult e
 | Incidents crítics oberts en tancar el preflight | `{{INCIDENTS_CRITICS_PREFLIGHT}}` |
 | Data d'inici / fi del preflight | `{{DATA_INICI_PREFLIGHT}}` / `{{DATA_FI_PREFLIGHT}}` |
 
-El preflight ha servit per verificar usabilitat, compatibilitat entre dispositius, sincronització, suport, exercici del dret de supressió i aplicació de K ≥ 5. No constitueix una validació científica ni una avaluació laboral municipal. Les dades tècniques mínimes del preflight s'eliminaran o ja s'han eliminat segons el protocol acordat; cap resultat del preflight s'utilitza per entrenar models destinats a la prova municipal sense consentiment específic.
+El preflight servirà per verificar usabilitat, compatibilitat entre dispositius, sincronització, suport, exercici del dret de supressió i aplicació de K ≥ 5. No constituirà una validació científica ni una avaluació laboral municipal. Les dades tècniques mínimes del preflight s'eliminaran segons el protocol acordat; cap resultat del preflight s'utilitzarà per entrenar models destinats a la prova municipal sense consentiment específic.
 
 **Nota sobre marcadors pendents.** Els valors `{{...}}` d'aquest apartat s'han d'emplenar amb les xifres reals del preflight abans de presentar l'expedient. No s'han d'inventar.
 
@@ -101,44 +102,85 @@ El preflight ha servit per verificar usabilitat, compatibilitat entre dispositiu
 
 Aquest apartat respon a l'article 10.3.b.6 i al criteri d'elegibilitat de l'article 12.2.a de l'Ordenança, així com al Protocol municipal «Definició de metodologies de treball i protocols per a la implementació de sistemes algorítmics» (aprovat per la Comissió de Govern el 15 de desembre de 2022; referència ordinamental de l'Ajuntament de 2 de gener de 2023, o protocol que el substitueixi). El Protocol remarca la taxonomia de riscos del Reglament (UE) 2024/1689 (Reglament europeu d'intel·ligència artificial, «AI Act») i estableix que els sistemes de **risc inacceptable** seran rebutjats automàticament.
 
-#### Marc aplicable i prudència metodològica
+#### Marc normatiu vigent i calendari d'aplicació
 
-PulsePath no es presenta com un sistema d'IA generativa ni com un model opaco de predicció clínica. Durant la prova, el motor de càlcul és una **heurística determinista i documentada** (ponderació explícita de mètriques de sessió), no un model entrenat opaca. Això no elimina, però, l'obligació d'analitzar l'encaix amb el Protocol municipal i amb l'AI Act, perquè el projecte tracta dades de benestar laboral i pot evolucionar, amb consentiment separat, cap a usos d'investigació o d'aprenentatge automàtic.
+L'anàlisi es fa sobre el Reglament (UE) 2024/1689 en la redacció resultant del **Reglament (UE) 2026/1744** («Digital Omnibus» sobre intel·ligència artificial, DOUE de 24 de juliol de 2026, en vigor des del 27 de juliol de 2026). Aquesta modificació és rellevant per a l'encaix temporal de la prova:
 
-L'anàlisi següent és argumentativa i verificable: descriu què fa el sistema, què no fa i quines garanties operatives impedeixen el seu ús com a eina de control laboral o d'inferència emocional prohibida.
+- Les **prohibicions de l'article 5** s'apliquen des del **2 de febrer de 2025** i **no han estat ajornades**. La modificació que el Reglament 2026/1744 introdueix a l'article 5 afecta les noves lletres (ba) i (bb) —material íntim no consentit i material d'abús sexual infantil—; la **lletra (f) roman inalterada**. L'anàlisi de l'article 5(1)(f) és, per tant, la que resulta exigible avui.
+- Les obligacions del **capítol III per als sistemes d'alt risc de l'annex III** s'han ajornat del 2 d'agost de 2026 al **2 de desembre de 2027**. Una prova de vuit setmanes executada la tardor de 2026 finalitzaria més d'un any abans d'aquesta data, fins i tot en la lectura més desfavorable de l'annex III.
+- L'**article 4 (alfabetització en matèria d'IA)** i les obligacions de transparència de l'**article 50** conserven el seu calendari i no s'han ajornat.
+
+Aquesta precisió no s'utilitza com a argument per rebaixar el nivell d'exigència: el projecte assumeix les garanties descrites més avall amb independència del calendari.
+
+#### Prudència metodològica i posició subsidiària
+
+PulsePath no es presenta com un sistema d'IA generativa ni com un model opac de predicció clínica. Durant la prova, el motor de càlcul és una **heurística determinista i documentada** (ponderació explícita de mètriques de sessió), no un model entrenat.
+
+Podria discutir-se si un motor d'aquestes característiques constitueix pròpiament un «sistema d'IA» en el sentit de l'article 3(1) i del considerant 12 de l'AI Act, que exclou del concepte els sistemes basats en regles definides exclusivament per persones físiques per executar operacions automàticament. **El promotor no basa la seva posició en aquesta exclusió.** L'anàlisi que segueix es fa *com si* el sistema quedés plenament dins de l'àmbit del Reglament, perquè el projecte tracta dades de benestar laboral i pot evolucionar, amb consentiment separat, cap a usos d'investigació o d'aprenentatge automàtic.
+
+L'anàlisi és argumentativa i verificable: descriu què fa el sistema, què no fa i quines garanties operatives —algunes comprovables en el codi— impedeixen el seu ús com a eina de control laboral o d'inferència emocional prohibida.
 
 #### Per què PulsePath no cau en el risc inacceptable de l'article 5(1)(f) de l'AI Act
 
-L'article 5(1)(f) de l'AI Act prohibeix la comercialització, la posada en servei o l'ús de sistemes d'IA destinats a **inferir emocions d'una persona física en llocs de treball** (amb excepcions limitades no aplicables aquí). El considerant corresponent vincula aquesta prohibició, de manera especial, a sistemes que inferen estats emocionals a partir de dades biomètriques o senyals fisiològiques.
+L'article 5(1)(f) prohibeix la comercialització, la posada en servei o l'ús de sistemes d'IA destinats a **inferir emocions d'una persona física en l'àmbit del lloc de treball**. L'argumentació de PulsePath es construeix en tres nivells acumulatius, del més fort al més accessori.
 
-PulsePath **no és un sistema de reconeixement o inferència d'emocions** en el sentit de l'article 5(1)(f), pels motius següents:
+**Primer nivell — exclusió per definició: no es tracten dades biomètriques.**
 
-1. **No hi ha biometria ni senyals fisiològiques.** El sistema no captura imatge facial, veu, expressió, to muscular, ritme cardíac, conductància de la pell ni cap altra dada biomètrica. No hi ha càmera, micròfon ni sensors fisiològics.
-2. **La mesura objectiva és una latència de reacció en una tasca psicomotora.** El PVT-BA registra temps de resposta a estímuls visuals en una prova voluntària i acotada. És una mesura de vigilància psicomotora / fatiga conductual, no una inferència d'estat emocional a partir de trets biomètrics.
-3. **Els qüestionaris són autoinforme voluntari.** KSS, DASS-21, GAD-7 i CBI són instruments que la pròpia persona completa conscientment. El sistema no «dedueix» emocions amagades: recull respostes explícites que la persona decideix enviar.
-4. **No hi ha classificació emocional contínua ni ocultació de la finalitat.** La persona sap què s'està mesurant, accepta un consentiment informat i pot abandonar en qualsevol moment.
+La prohibició no és autònoma: descansa en la definició de l'**article 3(39)**, segons la qual un sistema de reconeixement d'emocions és aquell destinat a identificar o inferir emocions o intencions **a partir de les dades biomètriques** de la persona. Al seu torn, l'**article 3(34)** defineix les dades biomètriques com les obtingudes d'un tractament tècnic específic relatiu a característiques físiques, fisiològiques o conductuals que permeten o confirmen la **identificació única** d'una persona.
 
-Aquesta distinció és substancial: un sistema que llegeix la cara o la veu per etiquetar «enuig» o «tristesa» sense que la persona ho articuli no és equivalent a un sistema que demana a la persona, amb consentiment, com se sent i mesura el seu temps de reacció en una tasca explícita.
+PulsePath no tracta dades biomètriques en aquest sentit tècnic: no captura imatge facial, veu, expressió, to muscular, ritme cardíac, conductància de la pell ni cap senyal fisiològica; no hi ha càmera, micròfon ni sensors. La latència de reacció del PVT-BA és una dada conductual, però **no es tracta amb la finalitat d'identificar de manera única cap persona**: es registra sota un codi pseudònim per mesurar vigilància psicomotora.
+
+L'exclusió opera, doncs, **en el pla de la definició**, sense necessitat d'acudir a cap excepció. Aquest primer nivell cobreix la totalitat del sistema, inclosos els qüestionaris psicomètrics.
+
+**Segon nivell — no hi ha inferència: hi ha declaració voluntària.**
+
+L'article 5(1)(f) prohibeix **inferir**. La KSS, el DASS-21, el GAD-7 i el CBI són instruments que la pròpia persona completa conscientment i decideix enviar. El sistema no dedueix estats amagats a partir de senyals no articulades: recull respostes explícites. Un sistema que llegeix la cara o la veu per etiquetar «enuig» o «tristesa» sense que la persona ho manifesti no és equivalent a un sistema que pregunta, amb consentiment informat, com se sent.
+
+**Tercer nivell — la fatiga està expressament exclosa pel considerant 18.**
+
+El considerant 18 de l'AI Act delimita la noció d'emoció o intenció (felicitat, tristesa, enuig, sorpresa, fàstic, vergonya, entusiasme, menyspreu, satisfacció, diversió) i precisa que **no inclou els estats físics com el dolor o la fatiga**, i esmenta com a exemple admissible els sistemes destinats a **detectar l'estat de fatiga de pilots o conductors professionals amb finalitat de prevenció d'accidents**.
+
+L'objecte central de mesura de PulsePath —somnolència (KSS) i fatiga conductual (PVT-BA), amb finalitat preventiva— encaixa directament en aquesta exclusió expressa del legislador europeu.
+
+**Precisió honesta.** El projecte no sosté que tot el que mesura sigui «fatiga física». El DASS-21 i el GAD-7 recullen ansietat i estrès, que pertanyen a un terreny psicoemocional. Precisament per això l'argument principal és el primer nivell (absència de dades biomètriques), que cobreix tot el sistema, i no el tercer, que reforça específicament la mesura objectiva.
+
+**Excepció no invocada.** L'article 5(1)(f) preveu una excepció per raons mèdiques o de seguretat. El promotor **no la invoca**, perquè fer-ho seria incompatible amb el caràcter expressament no clínic de PulsePath, mantingut de manera coherent en tot l'expedient.
 
 #### Per què no es classifica com a sistema d'alt risc de l'annex III
 
-L'annex III de l'AI Act inclou, en l'àmbit de l'ocupació, sistemes destinats a la selecció de persones candidates, a l'avaluació del rendiment, a la promoció, a la retribució, a l'assignació de tasques o a decisions que afectin la relació laboral. PulsePath **no s'utilitza** per a cap d'aquestes finalitats:
+**Annex III, punt 4 (ocupació).** El punt 4(b) inclou els sistemes destinats a adoptar decisions que afectin les condicions de la relació laboral, la promoció o l'extinció, a assignar tasques en funció del comportament individual o de trets personals, **o a supervisar i avaluar el rendiment i el comportament** de les persones en aquestes relacions. Aquest darrer incís es transcriu de manera literal i deliberada, perquè és el que podria suscitar dubtes: PulsePath registra, en efecte, conducta de persones treballadores dins de la jornada.
 
-- no selecciona candidates ni candidates;
-- no avalua el rendiment laboral;
-- no decideix sobre promoció, retribució, assignació de tasques ni extinció de la relació laboral;
-- no genera alertes nominatives a comandaments;
-- no produeix puntuacions individuals visibles per a l'organització.
+La resposta és de **finalitat prevista**, que és el criteri que fixa l'article 6(2):
 
-El disseny operatiu reforça aquesta frontera: el resultat individual només el veu la persona; l'organització només veu agregats amb K ≥ 5; i el protocol prohibeix l'ús dels resultats com a eina disciplinària o d'aptitud.
+- el binomi del punt 4(b) és «supervisar **i** avaluar» en el context de la gestió de la relació laboral; aquí **no hi ha avaluació de la persona per part de l'ocupador**, perquè l'ocupador no rep cap resultat individual;
+- no hi ha destinatari organitzatiu de la dada individual: el resultat individual només el veu la persona participant;
+- l'organització només accedeix a agregats amb supressió K ≥ 5, aplicada comptant **persones úniques** i també cel·la a cel·la en les vistes creuades;
+- no se seleccionen candidatures, no s'avalua el rendiment laboral, no es decideix sobre promoció, retribució, assignació de tasques ni extinció, i no s'emeten alertes nominatives a comandaments;
+- el conveni inclourà la **prohibició contractual** d'utilitzar els resultats amb finalitats d'avaluació de rendiment, aptitud, disciplina o selecció.
 
-#### Classificació proposta durant la prova: risc limitat, amb mesures de transparència
+**Annex III, punt 1(c) (reconeixement d'emocions).** Tampoc resulta aplicable: aquest punt cobreix els sistemes de reconeixement d'emocions no prohibits, i PulsePath no ho és per les raons de definició exposades a l'apartat anterior.
 
-D'acord amb l'anàlisi anterior, la classificació proposada per a la prova és la de **risc limitat**, amb obligacions de transparència i informació a les persones participants. Aquesta classificació:
+**No s'invoca la derogació de l'article 6(3).** El promotor deixa constància expressa que **no** fonamenta la seva posició en l'article 6(3) —que permet no considerar d'alt risc determinats sistemes de l'annex III—, atès que el darrer paràgraf d'aquest article estableix que un sistema de l'annex III es considerarà sempre d'alt risc quan efectuï **elaboració de perfils** de persones físiques. La posició del projecte és que el sistema **no entra** en l'annex III per raó de finalitat, no que hi entri i se'n salvi per una derogació.
 
-- **no pretén eludir** el Protocol municipal ni l'AI Act;
-- **reconeix** que qualsevol canvi de finalitat (per exemple, passar a avaluar aptitud, rendiment o inferir emocions a partir de biometria) exigiria una reavaluació i, si escau, comportaria el rebuig automàtic;
-- **assumeix** que, si en el futur s'entrenés un model d'aprenentatge automàtic, caldria un consentiment separat, una nova anàlisi de risc i, si correspongués, el compliment del règim d'alt risc o d'altres obligacions aplicables.
+#### Classificació proposada durant la prova
+
+L'AI Act no configura una categoria jurídica autònoma anomenada «risc limitat»: es tracta de terminologia divulgativa, recollida també en la taxonomia del Protocol municipal, per referir-se als sistemes subjectes únicament a obligacions de transparència. Per precisió, la posició del promotor s'enuncia així:
+
+1. El sistema queda **fora de l'àmbit de les pràctiques prohibides de l'article 5**.
+2. El sistema **no és d'alt risc** en el sentit de l'article 6(2) i de l'annex III.
+3. Encara que no li resultin directament exigibles les obligacions de transparència de l'article 50, el promotor **s'hi sotmet voluntàriament** i aplica mesures de transparència equivalents durant tota la prova.
+
+Aquesta posició **no pretén eludir** el Protocol municipal ni l'AI Act; **reconeix** que qualsevol canvi de finalitat —passar a avaluar aptitud o rendiment, o inferir emocions a partir de biometria— exigiria una reavaluació i, si escau, comportaria el rebuig automàtic; i **assumeix** que l'entrenament futur d'un model d'aprenentatge automàtic requeriria consentiment separat, una nova anàlisi de risc i, si correspongués, el compliment del règim d'alt risc.
+
+#### Declaració proactiva sobre el càlcul individual
+
+Per transparència, i abans que l'Ajuntament ho detecti en la documentació tècnica que el promotor es compromet a lliurar, es fa constar de manera expressa:
+
+- El sistema **calcula un índex de benestar/risc individual per sessió**, mitjançant una heurística determinista de pesos explícits sobre les mètriques de la sessió.
+- Aquest índex **s'emmagatzema xifrat** i només és visible **per a la pròpia persona participant**, com a part del seu retorn privat.
+- **Mai** s'exposa a l'organització, ni de manera nominativa ni pseudonimitzada: el panell organitzatiu només rep agregats que han superat la supressió K ≥ 5, i el codi pseudònim no s'inclou en cap sortida.
+- **No s'utilitza** per a cap finalitat d'avaluació, aptitud, disciplina o comparació entre persones.
+- Els pesos i el procediment de càlcul es documentaran i es posaran a disposició de l'Ajuntament en el marc del conveni.
 
 #### Mesures de transparència i governança algorítmica durant la prova
 
@@ -149,8 +191,11 @@ D'acord amb l'anàlisi anterior, la classificació proposada per a la prova és 
 5. Revisió humana de qualsevol interpretació organitzativa dels agregats.
 6. Prohibició contractual d'ús dels resultats per a avaluació de rendiment, aptitud, disciplina o selecció.
 7. Qualsevol ús posterior per a investigació o entrenament de models requereix consentiment separat i no condiciona la participació.
+8. **Alfabetització en matèria d'IA (article 4).** El promotor facilitarà una acció formativa breu sobre el funcionament, els límits i les finalitats excloses del sistema a la persona coordinadora municipal i als interlocutors implicats, en compliment de l'article 4, exigible amb independència de la classificació de risc.
+9. **Informació a la representació de les persones treballadores.** Encara que l'obligació de l'article 26(7) es refereix als sistemes d'alt risc, el promotor assumeix el seu contingut de manera voluntària: informació al Comitè de Seguretat i Salut Laboral i a la representació sindical abans de l'inici, i informació individual a cada persona participant.
+10. **Avaluació d'impacte relativa a la protecció de dades.** Es realitzarà una AIPD conforme a l'article 35 del RGPD amb caràcter previ a qualsevol recollida de dades. No es tracta d'una previsió condicional: el tractament sistemàtic de dades de salut de persones treballadores mitjançant una tecnologia nova la fa exigible.
 
-La declaració responsable corresponent figura a `declaracions/06-protocol-sistemes-algoritmics.md`.
+La declaració responsable corresponent figura a `declaracions/06-protocol-sistemes-algoritmics.md`. L'anàlisi jurídica detallada que sustenta aquest apartat, incloent-hi les objeccions considerades i descartades, consta a `REVISION_AI_ACT.md`.
 
 ### El valor de provar en un entorn real
 
@@ -259,12 +304,12 @@ La persona rep un avís privat, una explicació que el resultat no és un diagn�
 
 - El codi és un pseudònim; no s'afirmarà que les dades crues són anònimes.
 - PulsePath no rep nom, correu ni identificador laboral.
-- Les dades viatgen xifrades i es guarden xifrades en una infraestructura acordada.
+- Les dades viatgen xifrades (HTTPS) i es guarden xifrades en repòs (AES-256-GCM) en una infraestructura acordada. **Per precisió tècnica: no es tracta d'un xifrat d'extrem a extrem.** PulsePath opera la infraestructura i, com a tal, té capacitat tècnica de desxifrar les dades per prestar el servei. No s'afirma en cap cas que les dades no surtin del dispositiu ni que el promotor no hi pugui accedir; el que es garanteix és el control d'accés, la minimització, la limitació de finalitat i la separació respecte de l'organització.
 - L'Ajuntament conserva la taula codi-persona només per a coordinació i recordatoris.
-- Els resultats organitzatius s'oculten si el segment té menys de cinc persones.
+- Els resultats organitzatius s'oculten si el segment té menys de cinc persones úniques, i es limitarà el nombre de dimensions que es poden creuar simultàniament per evitar la reidentificació per diferència entre consultes.
 - La reutilització per a recerca o millora de models requerirà un consentiment separat i no condicionarà la participació.
 - Les dades pseudonimitzades s'eliminaran com a màxim sis mesos després de la memòria final. Només es podran conservar resultats irreversiblement agregats.
-- Abans de començar es farà una revisió jurídica especialitzada, es definiran els rols RGPD, l'acord de tractament, l'anàlisi de riscos i, si correspon, una avaluació d'impacte.
+- Abans de començar es farà una revisió jurídica especialitzada, es definiran els rols RGPD, l'acord de tractament i l'anàlisi de riscos, i **es realitzarà una avaluació d'impacte relativa a la protecció de dades (art. 35 RGPD)**, que es considera exigible atès el tractament sistemàtic de dades de salut de persones treballadores amb una tecnologia nova.
 
 **Seguiment, control i memòria final (arts. 14.3 i 18)**
 
@@ -290,7 +335,8 @@ El promotor reconeix expressament i assumeix les obligacions següents:
 - informació i, si escau, consulta al Comitè de Seguretat i Salut Laboral i a la representació sindical;
 - revisió jurídica, protecció de dades i seguretat;
 - configuració de l'entorn, codis, idioma i segments;
-- verificació final de compatibilitat, sincronització, supressió, K ≥ 5, còpia/restauració i protocol d'incidències;
+- configuració i verificació del **calendari d'avaluacions** (inici, setmana 4 i setmana 8) a l'entorn de la prova;
+- verificació final de compatibilitat, sincronització, supressió, K ≥ 5, prova de restauració completa de còpia de seguretat i protocol d'incidències;
 - formació i protocol d'incidències.
 
 **Setmana 1**
@@ -429,7 +475,8 @@ Els informes no identificaran equips quan la combinació de filtres pugui reduir
 | Latència entre dispositius | prova prèvia, registre de context tècnic mínim i anàlisi de sensibilitat |
 | Interpretació clínica o causal | etiquetatge exploratori, documentació de limitacions i revisió humana |
 | Ús secundari no esperat | consentiment separat i dret a participar sense autoritzar ML |
-| Classificació errònia com a IA prohibida | absència de biometria/emocions inferides; finalitat no laboral decisòria; documentació algorítmica |
+| Classificació errònia com a IA prohibida | exclusió per definició (no es tracten dades biomètriques, art. 3(39) i 3(34)); autoinforme en lloc d'inferència; fatiga exclosa pel considerant 18; documentació algorítmica lliurada a l'Ajuntament |
+| Lectura adversa de l'annex III, punt 4(b) | criteri de finalitat prevista (art. 6(2)): l'ocupador no rep cap resultat individual; K ≥ 5 per persones úniques; prohibició contractual d'ús avaluatiu, disciplinari o d'aptitud |
 
 D'acord amb l'article 21, la responsabilitat directa pels danys o perjudicis derivats de l'execució de la prova correspon al promotor. L'Ajuntament queda indemne en els termes de l'Ordenança i del conveni, sens perjudici de les obligacions sectorials aplicables.
 
@@ -523,7 +570,9 @@ L'objectiu no és flexibilitzar obligacions, sinó provar un marc supervisat que
 
 - Ajuntament de Barcelona. *Ordenança dels espais d'experimentació de Barcelona* (aprovada el 27 de març de 2026).
 - Ajuntament de Barcelona. Protocol «Definició de metodologies de treball i protocols per a la implementació de sistemes algorítmics» (Comissió de Govern, 15 de desembre de 2022 / referència ordinamental 2 de gener de 2023).
-- Reglament (UE) 2024/1689 del Parlament Europeu i del Consell (AI Act), especialment art. 5(1)(f) i annex III.
+- Reglament (UE) 2024/1689 del Parlament Europeu i del Consell (AI Act), especialment art. 3(1), 3(34), 3(39), 4, 5(1)(f), 6(2), 6(3), 26(7), 50, considerants 12 i 18, i annex III, punts 1(c) i 4(b).
+- Reglament (UE) 2026/1744, pel qual es modifica el Reglament (UE) 2024/1689 («Digital Omnibus» sobre IA), DOUE de 24 de juliol de 2026, en vigor des del 27 de juliol de 2026.
+- Reglament (UE) 2016/679 (RGPD), especialment art. 9 i 35.
 - Ajuntament de Barcelona. *II Pla de Salut Mental de Barcelona 2023-2030*.
 - Ajuntament de Barcelona. *Acord de ciutat per cuidar la salut mental a la feina*.
 - Ajuntament de Barcelona. *Pla per a la reducció de l'absentisme del personal de l'Ajuntament de Barcelona i ens adherits a l'Acord de condicions* (2026).

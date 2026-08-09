@@ -35,13 +35,13 @@ El/la sotasignant, en la seva condició de persona promotora del projecte esment
 
 4. Que no s'utilitzaran càmeres, biometria, dades passives del dispositiu ni geolocalització; les dades tractades es limitaran a temps de reacció, respostes d'autoinforme voluntari i metadades tècniques mínimes necessàries per a l'operació i la seguretat.
 
-5. Que s'aplicaran mesures de seguretat adequades al risc (xifrat en trànsit i en repòs, control d'accés, minimització, retenció limitada, pla d'incidents) i que es facilitaran canals per a l'exercici dels drets de les persones afectades.
+5. Que s'aplicaran mesures de seguretat adequades al risc (xifrat en trànsit mitjançant HTTPS i xifrat en repòs amb AES-256-GCM, control d'accés, minimització, retenció limitada, pla d'incidents) i que es facilitaran canals per a l'exercici dels drets de les persones afectades. Que, per exactitud, es fa constar que **el xifrat no és d'extrem a extrem**: el promotor opera la infraestructura i té capacitat tècnica de desxifrar les dades per prestar el servei, sense que això autoritzi cap accés aliè a les finalitats declarades.
 
 6. Que els resultats individuals només seran visibles per a la pròpia persona participant, i que l'organització només rebrà agregats amb un mínim de cinc persones per segment (K ≥ 5).
 
 7. Que qualsevol reutilització de dades per a investigació o entrenament de models requerirà un consentiment separat i no condicionarà la participació en la prova.
 
-8. Que, abans de l'inici de la recollida amb personal municipal, es completarà la documentació jurídica necessària (inclosa, si escau, l'avaluació d'impacte relativa a la protecció de dades) i es sotmetrà a la revisió dels serveis municipals competents.
+8. Que, abans de l'inici de la recollida amb personal municipal, es completarà la documentació jurídica necessària i es sotmetrà a la revisió dels serveis municipals competents, **incloent-hi la realització d'una avaluació d'impacte relativa a la protecció de dades conforme a l'article 35 del RGPD**, que el promotor considera exigible atès el tractament sistemàtic de dades de salut de persones treballadores mitjançant una tecnologia nova.
 
 9. Que la informació continguda en aquesta declaració és certa i que es compromet a acreditar-ne la veracitat quan li sigui requerida en la fase de negociació del conveni (art. 11.1.d de l'Ordenança).
 
