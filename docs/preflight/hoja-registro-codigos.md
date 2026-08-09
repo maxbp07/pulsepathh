@@ -1,26 +1,42 @@
-# Hoja de registro de códigos — plantilla
+# Hoja de registro de códigos — preflight 30×14
 
-**Uso:** Excel / Google Sheet **cifrado** o con acceso restringido.
-**Nunca** subir esta hoja al servidor PulsePath ni al repositorio.
+App: *(URL Vercel pendiente de deploy)*  
+Org: `study_mixed_2026`  
+Formato: `PP-YYYY-NNN`
 
-Códigos plaintext salen una sola vez de `npm run provision:codes` / `seed:study`.
+| # | Código | Nombre / alias | WhatsApp | Activado | Notas |
+|---|--------|----------------|----------|----------|-------|
+| 1 | `PP-2026-001` |  |  |  |  |
+| 2 | `PP-2026-002` |  |  |  |  |
+| 3 | `PP-2026-003` |  |  |  |  |
+| 4 | `PP-2026-004` |  |  |  |  |
+| 5 | `PP-2026-005` |  |  |  |  |
+| 6 | `PP-2026-006` |  |  |  |  |
+| 7 | `PP-2026-007` |  |  |  |  |
+| 8 | `PP-2026-008` |  |  |  |  |
+| 9 | `PP-2026-009` |  |  |  |  |
+| 10 | `PP-2026-010` |  |  |  |  |
+| 11 | `PP-2026-011` |  |  |  |  |
+| 12 | `PP-2026-012` |  |  |  |  |
+| 13 | `PP-2026-013` |  |  |  |  |
+| 14 | `PP-2026-014` |  |  |  |  |
+| 15 | `PP-2026-015` |  |  |  |  |
+| 16 | `PP-2026-016` |  |  |  |  |
+| 17 | `PP-2026-017` |  |  |  |  |
+| 18 | `PP-2026-018` |  |  |  |  |
+| 19 | `PP-2026-019` |  |  |  |  |
+| 20 | `PP-2026-020` |  |  |  |  |
+| 21 | `PP-2026-021` |  |  |  |  |
+| 22 | `PP-2026-022` |  |  |  |  |
+| 23 | `PP-2026-023` |  |  |  |  |
+| 24 | `PP-2026-024` |  |  |  |  |
+| 25 | `PP-2026-025` |  |  |  |  |
+| 26 | `PP-2026-026` |  |  |  |  |
+| 27 | `PP-2026-027` |  |  |  |  |
+| 28 | `PP-2026-028` |  |  |  |  |
+| 29 | `PP-2026-029` |  |  |  |  |
+| 30 | `PP-2026-030` |  |  |  |  |
 
-## Columnas
+Reserva operativa: `PP-2026-031` … `PP-2026-120` (ya sembrados en Neon).
 
-| slot_label | plain_code | whatsapp_name | phone_hint | invited_at | activated_noted | last_nudge_at | notes |
-|------------|------------|---------------|------------|------------|-----------------|---------------|-------|
-| PP-001 | PP-2026-001 | Ana | (solo local) | 2026-08-10 | sí | | confirmó D0 |
-| PP-002 | PP-2026-002 | | | | | | |
-
-## Instrucciones
-
-1. Provisionar 30 códigos `PP-2026-001` … `PP-2026-030` (o el rango acordado).
-2. Pegar `plain_code` aquí **una vez**; no reenviar listados por canales inseguros.
-3. Cruzar `slot_label` con el panel ops (`docs/OPS_ADHERENCE.md`) para ver quién falta.
-4. No anotar scores ni respuestas de cuestionarios en esta hoja.
-5. Al cerrar el preflight: archivar cifrado o destruir según política del promotor.
-
-## Capacidad
-
-- Objetivo preflight: **30** filas activas.
-- Reservar 5–10 códigos extra por caídas / no activación.
+> No subir CSV de provision al git. Los códigos en esta hoja son para captación del preflight.
