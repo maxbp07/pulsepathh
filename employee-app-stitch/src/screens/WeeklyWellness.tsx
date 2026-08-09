@@ -4,12 +4,13 @@ import Header from '../components/Header';
 import { sibLevel, sibIndex } from '../lib/sib';
 import { saveWeekly } from '../lib/db';
 import { getOrCreateParticipantId } from '../lib/participant';
+import { localDateISO } from '../lib/studySchedule';
 
 function mondayISO(): string {
   const d = new Date();
   const day = (d.getDay() + 6) % 7;
   d.setDate(d.getDate() - day);
-  return d.toISOString().slice(0, 10);
+  return localDateISO(d);
 }
 
 export default function WeeklyWellness() {

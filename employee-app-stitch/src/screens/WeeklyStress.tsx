@@ -4,12 +4,13 @@ import Header from '../components/Header';
 import { scoreDassStress, dassStressIndex, dassStressSeverity } from '../lib/dass';
 import { saveWeekly } from '../lib/db';
 import { getOrCreateParticipantId } from '../lib/participant';
+import { localDateISO } from '../lib/studySchedule';
 
 function mondayISO(): string {
   const d = new Date();
   const day = (d.getDay() + 6) % 7; // 0 = lunes
   d.setDate(d.getDate() - day);
-  return d.toISOString().slice(0, 10);
+  return localDateISO(d);
 }
 
 export default function WeeklyStress() {

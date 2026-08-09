@@ -6,10 +6,11 @@ Neon **sí responde** con la `DATABASE_URL` actual de `backend/.env` (probe `SEL
 
 ## Checklist (10 minutos)
 
-### 1. Contabo — password root
+### 1. Contabo — password root **y abrir puerto 22**
 1. Entra en https://my.contabo.com (o el panel que uses).
 2. VPS `161.97.69.228` → Reset root password (o cópiala si la enviaron por email tras reinstalar).
-3. Guárdala en `C:\Users\maxbp\pulsepath-v2\.env.infra` así:
+3. **Firewall / Security:** el puerto **22 (SSH) está CERRADO** ahora mismo desde fuera (comprobado 2026-08-09). Ábrelo a tu IP o al menos a `0.0.0.0/0` temporalmente. El 80 sigue abierto.
+4. Guárdala en `C:\Users\maxbp\pulsepath-v2\.env.infra` así:
 
 ```
 VPS_HOST=161.97.69.228

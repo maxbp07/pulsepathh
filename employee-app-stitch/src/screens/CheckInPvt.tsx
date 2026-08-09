@@ -13,6 +13,7 @@ import {
 import { getOrCreateParticipantId } from '../lib/participant';
 import { saveSession } from '../lib/db';
 import { syncDailySession } from '../lib/sync';
+import { localDateISO } from '../lib/studySchedule';
 import { useCheckin } from '../store';
 
 type Phase = 'START' | 'WAIT' | 'STIMULUS' | 'FEEDBACK' | 'SAVING';
@@ -222,7 +223,8 @@ export default function CheckInPvt() {
     const saved = await saveSession({
       participantId: getOrCreateParticipantId(),
       takenAt: now.toISOString(),
-      dateLocal: now.toISOString().slice(0, 10),
+      // Fecha civil del dispositivo (no UTC): un check-in nocturno no debe saltar de día.
+      dateLocal: localDateISO(now),
       tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
       pvt: metrics,
       kss: kssValue,
@@ -230,7 +232,9 @@ export default function CheckInPvt() {
       fri,
     });
 
-    void syncDailySession(saved);
+    if (saved) {
+      void syncDailySession(saved);
+    }
 
     navigate('/checkin/result');
   }

@@ -4,13 +4,14 @@ import { useTranslation } from 'react-i18next';
 import VitalityRing from '../components/VitalityRing';
 import { getLatestSession, getSessions, getWeekly } from '../lib/db';
 import { bandMeta } from '../lib/fri';
+import { localDateISO } from '../lib/studySchedule';
 import type { DailySession, WeeklyEntry } from '../lib/types';
 
 function mondayISO(): string {
   const d = new Date();
   const day = (d.getDay() + 6) % 7; // 0 = lunes
   d.setDate(d.getDate() - day);
-  return d.toISOString().slice(0, 10);
+  return localDateISO(d);
 }
 
 export default function Dashboard() {
@@ -33,7 +34,7 @@ export default function Dashboard() {
       setStreak(computeStreak(sessions));
       setWeekly(week);
 
-      const today = new Date().toISOString().slice(0, 10);
+      const today = localDateISO();
       setDoneToday(!!sessions.find((s) => s.dateLocal === today));
 
       const last7 = sessions.slice(0, 7);
@@ -243,14 +244,14 @@ function WeeklyCard({
   );
 }
 
-/** Racha de días consecutivos (hacia atrás desde hoy) con sesión registrada. */
+/** Racha de días consecutivos (hacia atrás desde hoy local) con sesión registrada. */
 function computeStreak(sessions: DailySession[]): number {
   if (sessions.length === 0) return 0;
   const days = new Set(sessions.map((s) => s.dateLocal));
   let streak = 0;
   const cursor = new Date();
   for (let i = 0; i < 365; i++) {
-    const iso = cursor.toISOString().slice(0, 10);
+    const iso = localDateISO(cursor);
     if (days.has(iso)) {
       streak += 1;
     } else if (i > 0) {
