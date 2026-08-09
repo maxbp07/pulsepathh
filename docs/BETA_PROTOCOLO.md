@@ -1,46 +1,93 @@
-# Protocolo beta amigos/familia — PulsePath (2 semanas)
+# Protocolo beta — PulsePath (30 participantes × 14 días)
 
-> Ensayo del protocolo de piloto B2B antes de desplegar en empresa. **NO es entrenamiento de ML.**
+> Ensayo del protocolo de piloto B2B antes de desplegar en empresa.
+> **NO es entrenamiento de ML.** **NO es diagnóstico médico.**
 
-## Participantes
-- **N:** 20-30 personas (ESIC, gimnasio, fútbol, familia)
-- **Código:** cada uno recibe un código único formato `PP-2026-001` (registrar en hoja)
-- **App:** `https://app.getpulsepath.com` (o URL VPS mientras no haya HTTPS)
+## Objetivo
 
-## Calendario
+Validar usabilidad, sync, consentimiento y **adherencia** con voluntarios externos antes del piloto organizacional.
 
-### Día 0 — Baseline (pre)
-1. DASS-21 subescala estrés (7 ítems) — en app: Evaluación semanal → Estrés
-2. SIB burnout (1 ítem) — en app: Evaluación semanal → Burnout
-3. KSS basal — incluido en primer check-in diario
+## Cohorte
 
-### Días 1-14 — Uso diario
-- **Cada día:** check-in completo (contexto sueño + KSS + PVT-BA)
-- **1x/semana:** repetir DASS-21 estrés + SIB (día 7 y día 14)
+| Parámetro | Valor |
+|-----------|--------|
+| **N** | **30** participantes |
+| **Duración** | **14 días** calendario desde el día 0 de cada persona |
+| **Código** | Único `PP-2026-NNN` (hoja externa cifrada; ver `docs/preflight/hoja-registro-codigos.md`) |
+| **App** | `https://app.getpulsepath.com` (PWA `employee-app-stitch`) |
+| **Idioma** | ES / CA / EN según preferencia del dispositivo |
 
-### Día 14 — Post
-- Repetir los mismos 3 tests del día 0
-- Exportar JSON desde Ajustes (opcional, para análisis agregado)
+## Instrumentos reales (app)
 
-## Métricas a registrar (tú, en spreadsheet)
-| Métrica | Cómo medir |
-|---------|------------|
-| Adherencia D7 | % que hizo check-in ≥5 de 7 días |
-| Adherencia D14 | % que hizo check-in ≥10 de 14 días |
-| Duración media | Preguntar "¿cuánto tardó?" a 5 personas |
-| Bugs reportados | Canal WhatsApp dedicado |
-| NPS informal | "¿Lo seguirías usando?" 1-10 |
+Ventanas en `employee-app-stitch/src/lib/studySchedule.ts` (`D0` / `D7` / `D14`):
 
-## Mensaje de captación (WhatsApp)
-```
-Hola! Estoy probando PulsePath, una app de 2 min/día para medir fatiga/alerta con ciencia (test usado por NASA). Necesito 20 personas que la usen 2 semanas. Es anónima, gratis, y me ayudas muchísimo. ¿Te apuntas? Te mando un código.
-```
+| Timepoint | Cuándo | Instrumentos |
+|-----------|--------|--------------|
+| **D0** | Día de activación (study day ≥ 0) | **DASS-21 completo** (21 ítems) + **GAD-7** + **CBI** (19) |
+| **D7** | Study day ≥ 7 | Misma batería |
+| **D14** | Study day ≥ 14 | Misma batería |
+
+### Cada día (días 0–14)
+
+Check-in diario completo:
+
+1. Contexto de sueño
+2. KSS (1–9)
+3. PVT-BA (~3 min, o parada temprana por criterio BA)
+
+`dateLocal` = fecha civil del **dispositivo** (no UTC). Un solo check-in por `dateLocal` (dedupe cliente + servidor).
+
+## Captación (WhatsApp)
+
+1. Mensaje inicial: `docs/preflight/mensaje-whatsapp.md`
+2. Info participante: `docs/preflight/info-participante.md`
+3. Asignar código desde la hoja: `docs/preflight/hoja-registro-codigos.md`
+4. Recordatorios: `docs/WHATSAPP_RUNBOOK.md` (D0, +48 h sin sync, D6, D13)
+
+**La hoja código↔WhatsApp nunca se sube al servidor PulsePath.**
 
 ## Criterio de éxito
-- ≥60% adherencia D14 → protocolo listo para piloto empresa
-- <40% → revisar UX, recordatorios, duración del PVT
+
+- **Adherencia D14 ≥ 60%** → protocolo listo para piloto empresa  
+  (definición ops: % de participantes elegibles D14 con ≥14 check-ins diarios; ver `docs/OPS_ADHERENCE.md`)
+- **&lt; 40%** → revisar UX, recordatorios, duración del PVT; no escalar
+
+## Criterios de puerta (GO / NO-GO)
+
+Detalle en `docs/preflight/criterios-de-puerta.md`. Resumen:
+
+| Puerta | GO | NO-GO |
+|--------|----|-------|
+| Adherencia diaria D14 | ≥ 60% | &lt; 60% |
+| Abandono | `abandonment_pct` acotado y justificado | Abandono masivo sin causa UX |
+| Latencia PVT | Sin quejas sistemáticas de lentitud/crash | Fallos de PVT en ≥20% |
+| Sync | 0 pérdidas de datos; conflictos 409 investigados | Pérdida confirmada o cola terminal recurrente |
+| Consentimiento / privacidad | Flujo v1.0 estable | Regresiones de consentimiento |
+
+Monitorización: `GET /api/v1/ops/:orgId/adherence/summary` (`docs/OPS_ADHERENCE.md`).
 
 ## Qué NO decir
-- "Entrenamos un modelo de ML contigo"
-- "Diagnóstico médico"
-- "Basner valida PulsePath"
+
+- «Entrenamos un modelo de ML contigo» / «tus datos entrenan la IA»
+- «Esto es un diagnóstico médico» / «detectamos depresión/ansiedad clínica»
+- «Basner valida / avala PulsePath» (ni NASA como endorsement comercial)
+- Promesas de cura, certificación clínica o sustituto de evaluación profesional
+
+## Métricas operativas (spreadsheet + ops)
+
+| Métrica | Fuente |
+|---------|--------|
+| Adherencia D7 / D14 | Ops summary |
+| Check-ins por día | `checkins_by_day` |
+| Activos / abandonos | `active_participants`, `abandoned` |
+| Bugs / latencia PVT | Canal WhatsApp |
+| NPS informal | «¿Lo seguirías usando?» 1–10 (opcional) |
+
+## Materiales
+
+- `docs/preflight/mensaje-whatsapp.md`
+- `docs/preflight/hoja-registro-codigos.md`
+- `docs/preflight/info-participante.md`
+- `docs/preflight/criterios-de-puerta.md`
+- `docs/OPS_ADHERENCE.md`
+- `docs/RESTORE_TEST.md`
