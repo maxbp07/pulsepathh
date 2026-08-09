@@ -163,8 +163,8 @@ Los siguientes cambios se han aplicado ya sobre `proposta-pulsepath-contingut.md
 
 **Después de los cambios aplicados: LISTO para presentar en cuanto al apartado de cumplimiento algorítmico**, con tres condiciones que no dependen de esta revisión:
 
-1. **Rellenar los marcadores `{{...}}`** con cifras reales de preflight. El análisis de IA es sólido, pero se presenta dentro de un documento que hoy declara datos que aún no existen (véase `REVISION_COHERENCIA.md`). Un expediente con afirmaciones fácticas no verificables contamina la credibilidad de su parte jurídica.
-2. **Corregir las afirmaciones de estado de despliegue y de preflight** identificadas en la revisión de coherencia. Es el riesgo reputacional más alto del expediente ahora mismo, por encima del riesgo jurídico.
+1. **Actualizar la nota interna** si el estado del expediente cambia (véase `REVISION_COHERENCIA.md`). El análisis de IA es sólido; la coherencia factual del expediente se ha alineado con TRL 5 y sin cifras inventadas de preflight.
+2. **Las afirmaciones de estado de despliegue y de preflight** quedan alineadas con la realidad (TRL 5, sin demo pública, preflight como compromiso previo a la activación municipal). Revisar `REVISION_COHERENCIA.md` si el estado técnico cambia.
 3. **Validación por asesor jurídico especializado antes de recoger datos**, centrada no en el AI Act —donde la posición ya es firme— sino en la **base jurídica del RGPD para datos de salud en contexto laboral** (debilidad 2.6), que es el frente realmente abierto.
 
 Valoración del riesgo residual de que el Ayuntamiento clasifique PulsePath como riesgo inacceptable y lo rechace automáticamente: **bajo**. La exclusión por ausencia de datos biométricos es definitoria, no discrecional, y el considerando 18 excluye expresamente la finalidad principal del sistema. Riesgo de que se exija reforzar la gobernanza o documentación adicional antes de firmar el convenio: **moderado y esperable**, y la propuesta ya lo asume.

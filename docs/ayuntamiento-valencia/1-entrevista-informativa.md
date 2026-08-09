@@ -25,7 +25,7 @@ PulsePath — piloto de medición agregada de fatiga y bienestar laboral en pers
 **Etapa de desarrollo**  
 *Indicar el TRL (sólo se admiten proyectos con TRL 5 o superior)*
 
-TRL 6 (declaración condicionada a la finalización del preflight técnico con voluntariado externo). Evidencias previstas del preflight: n = {{N_PARTICIPANTES_PREFLIGHT}} participantes durante 7–14 días; adherencia diaria {{ADHERENCIA_DIARIA}}; tasa de abandono {{TASA_ABANDONO}}. Prototipo funcional integrado (PWA, backend, cuadro de mando agregado) ya desplegable; demo pública accesible en {{URL_DEMO}}.
+**TRL 5** (tecnología validada en entorno relevante), conforme al umbral mínimo de acceso (TRL 5 o superior). El sistema está **construido e integrado** (PWA, backend, cuadro de mando agregado), pero **aún no ha sido validado operativamente con una plantilla laboral real**; por eso se solicita esta prueba. Demostración disponible **bajo petición**; las capturas del sistema acreditan el estado actual del prototipo. Antes de activar a ninguna persona trabajadora municipal se ejecutará un preflight con voluntariado adulto externo (objetivo: 30 personas, 14 días), con criterios de puerta definidos, y sus resultados se entregarán al Ayuntamiento antes del inicio.
 
 **Fase comercial**  
 *Sí / No*  
@@ -119,8 +119,8 @@ Validar, en un entorno laboral municipal real, si PulsePath permite observar de 
 
 **¿Qué indicadores específicos se van a utilizar?**
 
-- Adherencia diaria al check-in (objetivo orientativo ≥70 % de jornadas activas; cifra definitiva tras preflight: {{ADHERENCIA_DIARIA}}).
-- Tasa de abandono (referencia tras preflight: {{TASA_ABANDONO}}).
+- Adherencia diaria al check-in (objetivo orientativo ≥70 % de jornadas activas; umbral operativo definitivo tras el preflight previo a la activación municipal).
+- Tasa de abandono (referencia operativa definitiva tras el preflight previo).
 - Variación agregada de latencias / lapse rate del PVT y de la KSS entre fase 1 y fase 2 (mismas personas).
 - Evolución agregada de DASS-21, GAD-7 y Copenhagen Burnout Inventory en tres momentos del piloto.
 - Porcentaje de segmentos del cuadro de mando que cumplen K≥5.
@@ -149,19 +149,8 @@ No se solicita personal técnico municipal para operar la plataforma ni cesión 
 
 Se solicita, de forma justificada, que la Comisión de Valoración valore la aplicación del **procedimiento simplificado de evaluación** previsto en el artículo 14.6, por concurrir:
 
-- grado de madurez tecnológica avanzado (TRL 6 tras preflight; en todo caso ≥ TRL 5, art. 12.a);
+- grado de madurez tecnológica (**TRL 5**; sistema construido e integrado; validación operativa municipal = objetivo del Sandbox);
 - **similitud temática con un proyecto ya aprobado** en el Sandbox (VITALWISE: detección de fatiga y estrés / salud digital);
 - especialización que no requiere, a priori, asistencia técnica compleja sobre obra civil, ocupación de vía pública o manipulación de infraestructura urbana (actividad 100 % software, sin instalación física).
 
 Se deja constancia de que, en todo caso, deberá hacerse partícipe a la persona facilitadora del recurso urbano correspondiente, conforme al propio artículo 14.6.
-
----
-
-## Marcadores pendientes de cumplimentar con datos reales
-
-| Marcador | Significado |
-|----------|-------------|
-| `{{N_PARTICIPANTES_PREFLIGHT}}` | Número de voluntarios del preflight (objetivo **30** externos; duración 7–14 días) |
-| `{{ADHERENCIA_DIARIA}}` | Adherencia diaria observada en el preflight |
-| `{{TASA_ABANDONO}}` | Tasa de abandono observada en el preflight |
-| `{{URL_DEMO}}` | URL pública de la demo funcional |

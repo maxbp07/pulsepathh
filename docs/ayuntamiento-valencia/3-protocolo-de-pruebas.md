@@ -31,7 +31,7 @@ Sin cámaras, sin biometría, sin datos pasivos, sin geolocalización. Feedback 
 
 ### 1.3. Madurez tecnológica
 
-TRL 6 tras preflight con {{N_PARTICIPANTES_PREFLIGHT}} voluntarios externos (7–14 días); métricas: adherencia {{ADHERENCIA_DIARIA}}, abandono {{TASA_ABANDONO}}. Demo: {{URL_DEMO}}. Objetivo del Sandbox: TRL 7 en entorno operacional municipal.
+TRL 5 (tecnología validada en entorno relevante): sistema construido e integrado, aún no validado operativamente con plantilla laboral real. Antes de activar a ninguna persona trabajadora municipal se ejecutará un preflight con voluntariado adulto externo (objetivo: 30 personas, 14 días) y se entregarán sus resultados al Ayuntamiento. Demostración disponible bajo petición. Objetivo del Sandbox: TRL 7 en entorno operacional municipal.
 
 ### 1.4. Interés público (arts. 4 y 10)
 
@@ -114,7 +114,7 @@ Duración total del Protocolo: inferior al máximo legal de cinco años (art. 7)
 
 ### 2.5. Indicadores y criterios de éxito
 
-Véase Cuestionario Inicial (documento 2). Resumen: adherencia ({{ADHERENCIA_DIARIA}}), abandono ({{TASA_ABANDONO}}), n fase 1 ≥30, n fase 2 ≥50, solapamiento intrasujeto ≥70 %, 0 incidentes de reidentificación, utilidad percibida ≥3,5/5, entrega del informe art. 19.
+Véase Cuestionario Inicial (documento 2). Resumen: adherencia y abandono según umbrales fijados tras el preflight previo, n fase 1 ≥30, n fase 2 ≥50, solapamiento intrasujeto ≥70 %, 0 incidentes de reidentificación, utilidad percibida ≥3,5/5, entrega del informe art. 19.
 
 ### 2.6. Seguimiento municipal (art. 18)
 
@@ -235,7 +235,7 @@ Conforme al principio de proporcionalidad (recursos públicos puestos a disposic
 
 3. **Entrega / acceso gratuito de ejemplares del prototipo testeado**
    - Acceso temporal (p. ej. 90 días tras el cierre) a una instancia demo operativa del cuadro de mando agregado y de la app, sin coste, para personal designado por el Ayuntamiento.
-   - URL de referencia pública durante el piloto: {{URL_DEMO}}.
+   - Durante el piloto, demostración disponible bajo petición (sin URL pública desplegada en el momento de la solicitud).
 
 Esta propuesta podrá ser validada o modificada por la Comisión de Valoración (art. 14.4.k) en el marco del art. 22.
 
@@ -277,7 +277,7 @@ Esta propuesta podrá ser validada o modificada por la Comisión de Valoración 
 
 ## 11. Comunicación social (art. 26)
 
-El promotor incluirá la imagen corporativa del Ayuntamiento y la identidad de marca del Sandbox Urbano en elementos de difusión del piloto, y colaborará con el Kit de Recursos Comunicativos cuando esté disponible. La demo pública {{URL_DEMO}} podrá enlazarse desde materiales informativos del Sandbox, previo acuerdo.
+El promotor incluirá la imagen corporativa del Ayuntamiento y la identidad de marca del Sandbox Urbano en elementos de difusión del piloto, y colaborará con el Kit de Recursos Comunicativos cuando esté disponible. Se podrá concertar una demostración para materiales informativos del Sandbox, previo acuerdo.
 
 ---
 
@@ -304,14 +304,3 @@ Max Borra Palau
 Persona física promotora — PulsePath  
 max@getpulsepath.com  
 Fecha: _______________
-
----
-
-## Marcadores pendientes de cumplimentar con datos reales
-
-| Marcador | Significado |
-|----------|-------------|
-| `{{N_PARTICIPANTES_PREFLIGHT}}` | Número de voluntarios del preflight |
-| `{{ADHERENCIA_DIARIA}}` | Adherencia diaria del preflight |
-| `{{TASA_ABANDONO}}` | Tasa de abandono del preflight |
-| `{{URL_DEMO}}` | URL de la demo pública funcional |

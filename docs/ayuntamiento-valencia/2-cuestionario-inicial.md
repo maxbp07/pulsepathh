@@ -77,7 +77,7 @@ No hay producto comercializado. Respecto a soluciones de mercado cercanas (apps 
 
 **¿Ha sido probado ya en laboratorio u otro entorno de pruebas?**
 
-Sí, en entorno técnico controlado: prototipo integrado (app participante, API, base de datos, cuadro de mando), pruebas end-to-end y ejercicios con datos sintéticos. **Pendiente / en curso antes de la presentación formal:** preflight real con {{N_PARTICIPANTES_PREFLIGHT}} voluntarios externos durante 7–14 días (usabilidad, sincronización, ejercicio del derecho de supresión, verificación K≥5). Resultados previstos a incorporar: adherencia {{ADHERENCIA_DIARIA}}, abandono {{TASA_ABANDONO}}. Demo pública: {{URL_DEMO}}.
+Sí, en entorno técnico controlado: prototipo integrado (app participante, API, base de datos, cuadro de mando), pruebas end-to-end y ejercicios con datos sintéticos. **Antes de activar a ninguna persona trabajadora municipal** se ejecutará un preflight con voluntariado adulto externo (objetivo: 30 personas, 14 días), con criterios de puerta definidos —adherencia, abandono, latencia del PVT, incidencias de sincronización y cero pérdida de datos—, y sus resultados se entregarán al Ayuntamiento antes del inicio. Demostración disponible **bajo petición**; no hay URL pública desplegada en el momento de esta solicitud.
 
 Existe además una solicitud en curso ante el Ajuntament de Barcelona (Espais d’Experimentació), expediente **20260001771**, de carácter independiente. No se presenta como autorización previa ni como aval del presente piloto.
 
@@ -115,7 +115,7 @@ Las fechas exactas se fijarán en el Protocolo de pruebas una vez conocida la re
 
 **H1 (principal).** En las personas que participan en ambas fases, los indicadores agregados de fatiga (PVT: latencia media / lapse rate; KSS) serán más desfavorables en la ventana Fallas que en la carga ordinaria.
 
-**H2.** La adherencia diaria se mantendrá por encima del umbral operativo fijado tras el preflight (referencia a completar: {{ADHERENCIA_DIARIA}}).
+**H2.** La adherencia diaria se mantendrá por encima del umbral operativo fijado tras el preflight previo a la activación municipal.
 
 **H3.** El cuadro de mando no expondrá ningún segmento con menos de 5 personas; la tasa de segmentos ocultos por K<5 será documentada.
 
@@ -125,12 +125,12 @@ No se hipotetiza reducción clínica del burnout ni mejora de desempeño.
 
 **Métricas de éxito**
 
-Criterios de éxito del piloto (orientativos; se confirman tras preflight):
+Criterios de éxito del piloto (orientativos; se confirman tras el preflight previo):
 
 | Criterio | Umbral |
 |----------|--------|
-| Adherencia media diaria (fase 1 y fase 2) | ≥ umbral derivado del preflight (marcador {{ADHERENCIA_DIARIA}}) y, en todo caso, suficiente para análisis agregados estables |
-| Tasa de abandono | ≤ referencia del preflight ({{TASA_ABANDONO}}) o justificada |
+| Adherencia media diaria (fase 1 y fase 2) | ≥ umbral derivado del preflight y, en todo caso, suficiente para análisis agregados estables |
+| Tasa de abandono | ≤ referencia del preflight o justificada |
 | Tamaño muestral fase 1 | ≥ 30 voluntarios activos al cierre de la ventana ordinaria |
 | Tamaño muestral fase 2 | ≥ 50 voluntarios activos en la ventana Fallas, con solapamiento máximo posible respecto a fase 1 |
 | Comparación intrasujeto | ≥ 70 % de la cohorte de fase 1 con datos utilizables también en fase 2 |
@@ -144,16 +144,16 @@ Criterios de éxito del piloto (orientativos; se confirman tras preflight):
 
 **TRL actual**
 
-**TRL 6** (declaración a formalizar con datos del preflight real). El sistema se habrá demostrado en un entorno relevante controlado (voluntarios externos, 7–14 días) antes de la presentación o, como máximo, como condición suspensiva documentada al inicio del piloto municipal.
+**TRL 5** (tecnología validada en entorno relevante). El sistema está construido e integrado, pero aún no ha sido validado operativamente con una plantilla laboral real; por eso se solicita el Sandbox. Antes de activar a ninguna persona trabajadora municipal se ejecutará un preflight con voluntariado adulto externo (objetivo: 30 personas, 14 días) y se entregarán sus resultados al Ayuntamiento.
 
-Evidencias de base ya existentes (TRL 5→6):
+Evidencias de base ya existentes:
 
-- prototipo integrado desplegable;
+- prototipo integrado en entorno de pruebas;
 - PVT-BA, KSS, DASS-21, GAD-7 y CBI en flujo de estudio;
 - activación por código pseudónimo;
 - cifrado en tránsito; derecho de supresión;
 - supresión de agregados con K&lt;5;
-- demo pública: {{URL_DEMO}}.
+- demostración disponible bajo petición (sin URL pública desplegada en este momento).
 
 **TRL objetivo**
 
@@ -240,14 +240,3 @@ No requiere toma de corriente adicional ni consumo eléctrico relevante más all
 
 - **Art. 16.1:** seguro de responsabilidad civil — **compromiso de aportarlo** en los 15 días hábiles posteriores a la aprobación (**art. 15.3**). No se aporta ahora.
 - **Art. 16.2:** garantía por daños a bienes públicos — se solicita dimensionamiento mínimo / no exigencia, por tipología de actividad sin intervención física.
-
----
-
-## Marcadores pendientes de cumplimentar con datos reales
-
-| Marcador | Significado |
-|----------|-------------|
-| `{{N_PARTICIPANTES_PREFLIGHT}}` | Número de voluntarios del preflight |
-| `{{ADHERENCIA_DIARIA}}` | Adherencia diaria del preflight |
-| `{{TASA_ABANDONO}}` | Tasa de abandono del preflight |
-| `{{URL_DEMO}}` | URL de la demo pública funcional |

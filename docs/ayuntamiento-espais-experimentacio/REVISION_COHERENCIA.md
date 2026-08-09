@@ -19,7 +19,7 @@ Es decir: **cifrado en tránsito y en reposo, pero no cifrado de extremo a extre
 
 **El expediente actual no contiene promesas falsas sobre cifrado.** Éste era el riesgo principal a descartar y está descartado. La propuesta dice «les dades viatgen xifrades i es guarden xifrades en una infraestructura acordada» y «xifrat en trànsit i en repòs», que es exactamente lo que hace el código, y afirma correctamente que el código de participante es un **seudónimo y no un anónimo**.
 
-Los problemas encontrados son de otra naturaleza y, en un caso, más serios que un matiz de cifrado: **hay afirmaciones en pasado sobre hechos que todavía no han ocurrido** (despliegue público y preflight). Ese es hoy el mayor riesgo del expediente.
+Los problemas encontrados eran de otra naturaleza: **había afirmaciones en pasado sobre hechos que todavía no habían ocurrido** (despliegue público y preflight). **Estado a 9 d'agost de 2026:** el expediente se ha realineado a **TRL 5**, sin cifras inventadas de preflight, sin URL pública de demo, y con el preflight como compromiso previo a la activación municipal.
 
 ---
 
@@ -30,20 +30,20 @@ Los problemas encontrados son de otra naturaleza y, en un caso, más serios que 
 - **Decía:** «El sistema està desplegat i operativa amb l'inventari de funcionalitats descrit» y «Existeix i està desplegat el conjunt següent».
 - **Realidad:** `docs/DEPLOY_BLOCKERS.md` documenta que el acceso SSH al VPS falla, que `app.getpulsepath.com` **no está verificado** por HTTPS y que el gate de despliegue está en NO-GO. La URL de demo del expediente sigue siendo un marcador `{{URL_DEMO}}`.
 - **Riesgo:** es una afirmación fácticamente comprobable por el evaluador en treinta segundos, abriendo la URL. Si falla, contamina la credibilidad de todo lo demás, incluida la argumentación jurídica.
-- **Estado: CORREGIDO.** Se ha reformulado a desarrollo completo y operativo en entorno de pruebas, con despliegue público en curso, y se ha añadido una nota explícita de que la demo pública se habilitará antes de la evaluación.
+- **Estado: CORREGIDO (9 ago 2026).** Sin URL pública; demostración bajo petición; capturas del entorno de pruebas como evidencia. TRL declarado en 5.
 
 ### H-2 — CRÍTICO · El preflight se narraba en pasado y no se ha ejecutado
 
 - **Decía:** «Abans de presentar aquesta versió s'ha executat un preflight amb voluntariat extern» y «El preflight ha servit per verificar…».
 - **Realidad:** todos los indicadores del preflight son marcadores sin valor (`{{N_PARTICIPANTS_PREFLIGHT}}`, `{{ADHERENCIA_DIARIA}}`, `{{TASA_ABANDONO}}`, fechas). Un preflight ejecutado tendría cifras.
 - **Riesgo:** la contradicción es interna y visible en la misma página: se afirma en pasado algo cuyos resultados están en blanco. Es el tipo de incoherencia que un evaluador detecta sin esfuerzo.
-- **Estado: CORREGIDO.** Reescrito en futuro comprometido («s'executarà… abans de la presentació»), coherente con la nota de marcadores pendientes que el propio documento ya incluía.
+- **Estado: CORREGIDO (9 ago 2026).** Eliminada la tabla de resultados con marcadores. Compromiso explícito de preflight (objetivo 30 personas / 14 días) **antes de activar personal municipal**, con entrega de resultados al Ajuntament. Sin cifras inventadas.
 
 ### H-3 — ALTO · «Copia de seguridad con restauración probada» sobreestima la evidencia
 
 - **Decía:** «Còpia de seguretat amb restauració provada».
 - **Realidad:** `docs/RESTORE_TEST.md` registra un `DRY_RUN=1` que comprueba la existencia e integridad del `.gz` y que `DATABASE_URL` está definida. El propio documento dice, en su apartado «Pendiente»: restore **real** no ejecutado. Los scripts `backup-db.sh` y `restore-db.sh` existen y el procedimiento está escrito, pero la restauración completa no se ha realizado.
-- **Estado: CORREGIDO.** Reformulado a scripts de copia y restauración con procedimiento documentado y verificación de integridad ejecutada, indicando que la restauración completa se validará en la preparación previa. Se recomienda ejecutar el restore real contra una rama desechable **antes** de presentar, y actualizar entonces la frase: es una hora de trabajo que convierte un matiz defensivo en una afirmación fuerte.
+- **Estado: CORREGIDO (9 ago 2026).** Formulación honest: dry-run de integridad ejecutado; restauración completa aún no probada en producción; se validará en la preparación previa.
 
 ### H-4 — ALTO · Desalineación de calendario: el documento promete semanas 4 y 8, el código impone D0/D7/D14
 
@@ -115,10 +115,10 @@ Conviene dejar constancia de lo que **sí** se sostiene, porque es la parte defe
 
 Ordenadas por prioridad:
 
-1. **Desplegar la demo HTTPS** y sustituir `{{URL_DEMO}}` y `{{CREDENCIALS_AVALUADOR}}`. Bloqueante para presentar.
-2. **Ejecutar el preflight externo** y rellenar los seis marcadores asociados. Bloqueante para presentar.
-3. **Fijar la build que se presenta** (vía de estudio, sin Stroop) — hallazgo H-6.
-4. **Parametrizar la malla de timepoints** a D0 / semana 4 / semana 8 — hallazgo H-4. Bloqueante para iniciar el piloto, no para presentar.
-5. **Ejecutar un restore real** contra base desechable y actualizar `RESTORE_TEST.md` — hallazgo H-3.
-6. **Limitar el cruce simultáneo de dimensiones** en el panel y registrar consultas — hallazgo H-7.
-7. **Sustituir las capturas** por capturas del build desplegado cuando exista. Las actuales son de entorno local y así están identificadas en los pies de figura, que es lo correcto mientras tanto.
+1. **Ejecutar el preflight externo** (objetivo 30 / 14 días) **antes de activar personal municipal** y entregar resultados al Ajuntament. Ya no es bloqueante para presentar el expediente documental; sí lo es para el inicio material.
+2. **Fijar la build que se presenta** (vía de estudio, sin Stroop) — hallazgo H-6.
+3. **Parametrizar la malla de timepoints** a D0 / semana 4 / semana 8 — hallazgo H-4. Bloqueante para iniciar el piloto, no para presentar.
+4. **Ejecutar un restore real** contra base desechable y actualizar `RESTORE_TEST.md` — hallazgo H-3.
+5. **Limitar el cruce simultáneo de dimensiones** en el panel y registrar consultas — hallazgo H-7.
+6. **Desplegar demo HTTPS** si se quiere ofrecer URL pública (opcional; hoy basta demostración bajo petición + capturas).
+7. **Sustituir las capturas** por capturas del build desplegado cuando exista. Las actuales son de entorno de pruebas y así están identificadas.

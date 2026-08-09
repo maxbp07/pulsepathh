@@ -9,9 +9,6 @@ Sortides:
     docs/ayuntamiento-valencia/2_Cuestionario_Inicial_PulsePath.docx
     docs/ayuntamiento-valencia/3_Protocolo_Pruebas_PulsePath.docx
 
-Els marcadors {{...}} es mantenen visibles i ressaltats: encara no hi ha xifres
-de preflight i no s'han d'inventar.
-
 Ús:  python scripts/build_expedientes_docx.py
 """
 
@@ -40,7 +37,7 @@ OUTPUT_DECL = DECL / "Declaracions_responsables_PulsePath.docx"
 BODY_FONT = "Source Sans Pro"
 MONO_FONT = "Consolas"
 HEADER_FILL = "D9EAF7"
-MARKER_COLOR = RGBColor(0xB1, 0x4B, 0x00)
+MISSING_ASSET_COLOR = RGBColor(0xB1, 0x4B, 0x00)
 
 # Seccions H3 del markdown -> títols fixos de la plantilla oficial.
 HEADING_MAP = {
@@ -170,7 +167,6 @@ def split_blocks(lines: list[str]) -> list[tuple[str, object]]:
 # --------------------------------------------------------------------------
 
 INLINE_RE = re.compile(r"(\*\*.+?\*\*|\*[^*]+?\*|`.+?`)")
-MARKER_RE = re.compile(r"^\{\{.+\}\}$")
 
 
 def add_inline_markdown(paragraph, text: str) -> None:
@@ -182,14 +178,9 @@ def add_inline_markdown(paragraph, text: str) -> None:
         elif part.startswith("*") and part.endswith("*") and len(part) > 2:
             paragraph.add_run(part[1:-1]).italic = True
         elif part.startswith("`") and part.endswith("`"):
-            inner = part[1:-1]
-            run = paragraph.add_run(inner)
+            run = paragraph.add_run(part[1:-1])
             run.font.name = MONO_FONT
             run.font.size = Pt(9.5)
-            # Els marcadors pendents s'han de veure: no s'inventen xifres.
-            if MARKER_RE.match(inner):
-                run.bold = True
-                run.font.color.rgb = MARKER_COLOR
         else:
             paragraph.add_run(part)
 
@@ -390,9 +381,9 @@ def append_references_and_evidence(doc: Document) -> None:
 
     disclaimer = doc.add_paragraph()
     disclaimer.add_run(
-        "Nota: les captures següents corresponen a l'entorn de proves. El desplegament públic "
-        "amb HTTPS es completarà abans de l'avaluació de l'expedient i aquestes imatges se "
-        "substituiran per captures de l'entorn desplegat, amb la URL visible."
+        "Nota: les captures següents corresponen a l'entorn de proves i acrediten l'estat "
+        "actual del sistema. No hi ha una URL pública de demostració desplegada; es pot "
+        "concertar una demostració sota petició."
     ).italic = True
 
     images = [
@@ -417,7 +408,7 @@ def append_references_and_evidence(doc: Document) -> None:
         else:
             placeholder = p.add_run(f"[PENDENT DE CAPTURA — {image_path.name}]")
             placeholder.bold = True
-            placeholder.font.color.rgb = MARKER_COLOR
+            placeholder.font.color.rgb = MISSING_ASSET_COLOR
         cap = doc.add_paragraph(caption, style="Caption")
         cap.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
@@ -440,7 +431,7 @@ def parse_h2_section(markdown: str, prefix: str) -> tuple[str, list[str]] | None
 
 
 def append_annexes(doc: Document, markdown: str) -> None:
-    for prefix in ("Annex A", "Annex B"):
+    for prefix in ("Annex A",):
         parsed = parse_h2_section(markdown, prefix)
         if not parsed:
             continue
@@ -477,7 +468,7 @@ def build_barcelona() -> Path:
     cover.style = doc.styles["Normal"]
     cover.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
     cover.add_run("Promotor: Max Borra Palau · PulsePath\n").bold = True
-    cover.add_run("Barcelona · Agost de 2026\n")
+    cover.add_run("Barcelona · 9 d'agost de 2026\n")
     cover.add_run("Tràmit 20260001771 · Accés als Espais d'experimentació")
 
     for source_heading, template_heading in HEADING_MAP.items():
@@ -516,8 +507,8 @@ def build_declaracions() -> Path:
     intro = doc.add_paragraph()
     intro.add_run(
         "Aquest document recull les sis declaracions responsables exigides per l'article 10.3.b. "
-        "Cada declaració es pot presentar també com a document independent i signat per separat. "
-        "Els camps entre claus dobles s'han d'emplenar abans de la signatura."
+        "Cada declaració es pot presentar també com a document independent. "
+        "Cal emplenar a mà les dades personals del declarant i signar abans de presentar."
     ).italic = True
 
     for index, path in enumerate(files):

@@ -16,12 +16,12 @@ Aquest document és una redacció substancial provisional en absència (o penden
 
 | Camp | Valor |
 |---|---|
-| Nom i cognoms | {{NOM_COMPLET}} |
-| NIF / NIE | {{NIF}} |
+| Nom i cognoms | ______________________ |
+| NIF / NIE | ______________________ |
 | En qualitat de | Persona física promotora del projecte PulsePath |
-| Domicili a efectes de notificacions | {{DOMICILI}} |
-| Correu electrònic | {{EMAIL}} |
-| Telèfon | {{TELEFON}} |
+| Domicili a efectes de notificacions | ______________________ |
+| Correu electrònic | ______________________ |
+| Telèfon | ______________________ |
 
 ## Manifestacions
 
@@ -39,7 +39,7 @@ El/la sotasignant, en la seva condició de persona promotora del projecte esment
 
 6. Que accepta el règim de modificació, suspensió i acabament anticipat dels articles 15 i 16, i el règim de responsabilitat de l'article 21.
 
-7. Que assumeix, en els termes de l'article 13.4 i del conveni, les despeses directes i indirectes que la prova pugui ocasionar als serveis municipals, amb el límit econòmic màxim que s'acordi expressament al conveni (`{{TOPALL_COSTOS_MUNICIPALS_EUR}}` euros), i reconeix que aquest límit no minorarà la responsabilitat davant de terceres persones.
+7. Que assumeix, en els termes de l'article 13.4 i del conveni, les despeses directes i indirectes que la prova pugui ocasionar als serveis municipals, amb el límit econòmic màxim que s'acordi expressament al conveni (**1.000 €**), i reconeix que aquest límit no minorarà la responsabilitat davant de terceres persones.
 
 8. Que es relacionarà amb l'Ajuntament exclusivament per mitjans electrònics, d'acord amb la disposició addicional segona de l'Ordenança.
 
@@ -49,9 +49,9 @@ El/la sotasignant, en la seva condició de persona promotora del projecte esment
 
 ## Lloc, data i signatura
 
-A {{LLOC}}, el {{DATA_DECLARACIO}}.
+A Barcelona, el ______________________.
 
 Signatura del/de la declarant:
 
 _______________________________  
-{{NOM_COMPLET}}
+Nom i cognoms: ______________________

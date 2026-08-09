@@ -2,7 +2,7 @@
 
 **Per a:** Albert; Vicente Solsona (Ajuntament de Barcelona — Espais d’Experimentació)  
 **De:** Max Borra Palau \<max@getpulsepath.com\>  
-**Assumpte:** Expedient 20260001771 — substitució de la proposta tècnica i demo pública
+**Assumpte:** Expedient 20260001771 — substitució de la proposta tècnica
 
 ---
 
@@ -12,7 +12,7 @@ Em adreço a vosaltres en relació amb l’expedient **20260001771**, en què se
 
 He atès el requeriment i procediré a **substituir el document a “Els meus tràmits”** per una versió ajustada a l’ordenança i als criteris formals indicats.
 
-Així mateix, aportarè una **demo pública funcional** del prototip ({{URL_DEMO}}) per facilitar-ne la revisió.
+Així mateix, puc **concertar una demostració** del prototip quan us resulti útil; no hi ha una URL pública desplegada en aquest moment.
 
 Restem a l’espera de les vostres indicacions. Gràcies per l’atenció.
 
@@ -20,11 +20,3 @@ Atentament,
 Max Borra Palau  
 PulsePath  
 max@getpulsepath.com
-
----
-
-## Marcadors pendents
-
-| Marcador | Significat |
-|----------|------------|
-| `{{URL_DEMO}}` | URL de la demo pública funcional |

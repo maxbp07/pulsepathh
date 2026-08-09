@@ -1,7 +1,7 @@
 # PulsePath: prova pilot de detecció preventiva i agregada de fatiga i estrès en equips municipals de Serveis Socials i Atenció Ciutadana
 
 **Promotor:** Max Borra Palau (persona física) · PulsePath  
-**Data:** {{DATA_DOCUMENT}} (agost / setembre de 2026)  
+**Data:** 9 d'agost de 2026  
 **Tràmit:** 20260001771 · Accés als Espais d'experimentació de Barcelona  
 **Marc:** Ordenança dels espais d'experimentació de Barcelona (aprovada el 27 de març de 2026)
 
@@ -50,8 +50,8 @@ La prova no té com a objectiu demostrar una reducció clínica del burnout ni a
 - Max Borra Palau estudia Digital Business a ESIC i compta amb la seva xarxa acadèmica i d'emprenedoria com a entorn de suport.
 - S'ha mantingut una conversa sobre el concepte amb el Dr. Mathias Basner (University of Pennsylvania), investigador de referència del PVT. No va consistir en una auditoria de la implementació i no constitueix un aval formal.
 - Existeix també una **sol·licitud en curs** davant l'Ajuntament de València, en el marc del seu Sandbox Urbà. Es tracta d'una sol·licitud presentada, no d'una aprovació ni d'una autorització atorgada. Es menciona només com a senyal d'interès institucional concurrent.
-- El sistema està **desenvolupat i plenament operatiu en entorn de proves**, amb l'inventari de funcionalitats descrit a l'apartat de maduresa tecnològica. El **desplegament públic amb HTTPS està en curs** i s'habilitarà abans de l'avaluació de l'expedient. Encara no hi ha clients ni ingressos. Aquesta seria la primera prova en un entorn laboral públic real.
-- **Abans de presentar l'expedient s'executarà un preflight amb voluntariat adult extern**, els resultats del qual s'incorporaran als marcadors `{{...}}` de l'apartat de maduresa tecnològica.
+- El sistema està **desenvolupat i integrat en entorn de proves**, amb l'inventari de funcionalitats descrit a l'apartat de maduresa tecnològica. Encara no hi ha desplegament públic amb HTTPS ni clients ni ingressos. Aquesta seria la primera prova en un entorn laboral públic real.
+- **Abans d'activar cap persona treballadora municipal** s'executarà un preflight amb voluntariat adult extern; els resultats es lliuraran a l'Ajuntament abans de l'inici de la prova.
 
 ---
 
@@ -59,11 +59,11 @@ La prova no té com a objectiu demostrar una reducció clínica del burnout ni a
 
 ### Nivell de maduresa tecnològica
 
-El projecte es declara en **TRL 6** (tecnologia demostrada en entorn rellevant), d'acord amb l'article 12.2.a de l'Ordenança (TRL 5 o superior).
+El projecte es declara en **TRL 5** (tecnologia validada en entorn relevant), conforme a l'article 12.2.a de l'Ordenança, que exigeix TRL 5 o superior. El sistema està **construït i integrat** (aplicació de participant, backend, quadre de comandament agregat i suite de proves), però **encara no ha estat validat operativament amb una plantilla laboral real**; per això se sol·licita aquesta prova.
 
-**Evidència del producte desplegat (inventari precís)**
+**Evidència del producte construït (inventari precís)**
 
-El sistema no es presenta com a simple esborrany conceptual. Està desenvolupat, provat i operatiu en entorn de proves el conjunt següent (el desplegament públic amb HTTPS es completarà abans de l'avaluació):
+El sistema no es presenta com a simple esborrany conceptual. Està desenvolupat, provat i operatiu en entorn de proves el conjunt següent:
 
 1. **Aplicació de participant (PWA):** onboarding, consentiment informat versionat, check-in diari amb context, KSS i PVT-BA, resultat individual privat, historial i analítica personal. El context recollit es limita a tres camps: hores de son (0-12), qualitat del descans (1-5) i consum de cafeïna (sí/no); el servidor rebutja qualsevol camp addicional no previst.
 2. **Qüestionaris planificats:** DASS-21, GAD-7 i Copenhagen Burnout Inventory, amb finestres temporals (inici, setmana 4 i setmana 8).
@@ -72,31 +72,20 @@ El sistema no es presenta com a simple esborrany conceptual. Està desenvolupat,
 5. **Backend:** ingesta de payload íntegre, gestió de qüestionaris, panell d'administració i endpoints d'operació.
 6. **Panell agregat per a l'organització** amb supressió automàtica K ≥ 5, comptant **persones úniques** (no sessions) i aplicada també cel·la a cel·la en les vistes creuades.
 7. **Exportació estructurada** per a anàlisi.
-8. **Scripts de còpia de seguretat i de restauració** amb procediment documentat i verificació d'integritat executada. La restauració completa contra una base de dades d'un sol ús es validarà durant la preparació prèvia.
+8. **Scripts de còpia de seguretat** amb procediment documentat i **verificació d'integritat (dry-run)** executada. La restauració completa contra una base de dades d'un sol ús **encara no s'ha provat en producció** i es validarà durant la preparació prèvia a l'activació municipal.
 9. **Suite de tests automatitzats** del producte i integració contínua.
 
 **Demo per a l'avaluació**
 
-- URL de demostració pública: `{{URL_DEMO}}` (prevista: `https://app.getpulsepath.com`).
-- Credencials per a la persona avaluadora: `{{CREDENCIALS_AVALUADOR}}`.
-- El desplegament públic amb HTTPS es completarà abans de l'avaluació de l'expedient. Fins llavors, les captures adjuntes corresponen a l'entorn de proves i s'identifiquen com a tals.
+- Demostració disponible **sota petició**: es pot concertar una sessió en directe amb la persona avaluadora.
+- Les **captures del sistema** incloses en aquest document constitueixen l'evidència visual del prototip en entorn de proves.
+- En el moment de presentar l'expedient **no hi ha una URL pública de demostració desplegada**.
 
-**Preflight amb voluntariat extern (base del TRL 6)**
+**Preflight amb voluntariat extern (compromís previ a l'activació municipal)**
 
-Abans de la presentació s'executarà un preflight real amb voluntariat adult extern, no municipal:
-
-| Indicador | Valor |
-|---|---|
-| Nombre de participants del preflight | `{{N_PARTICIPANTS_PREFLIGHT}}` |
-| Dies de durada del preflight | `{{DIES_PREFLIGHT}}` |
-| Adherència diària observada | `{{ADHERENCIA_DIARIA}}` |
-| Taxa d'abandonament | `{{TASA_ABANDONO}}` |
-| Incidents crítics oberts en tancar el preflight | `{{INCIDENTS_CRITICS_PREFLIGHT}}` |
-| Data d'inici / fi del preflight | `{{DATA_INICI_PREFLIGHT}}` / `{{DATA_FI_PREFLIGHT}}` |
+Abans d'activar cap persona treballadora municipal s'executarà un preflight amb voluntariat adult extern (objectiu: **30 persones**, **14 dies**), amb criteris de porta definits —adherència, abandonament, latència del PVT, incidències de sincronització i zero pèrdua de dades—. Els resultats es lliuraran a l'Ajuntament abans de l'inici de la prova.
 
 El preflight servirà per verificar usabilitat, compatibilitat entre dispositius, sincronització, suport, exercici del dret de supressió i aplicació de K ≥ 5. No constituirà una validació científica ni una avaluació laboral municipal. Les dades tècniques mínimes del preflight s'eliminaran segons el protocol acordat; cap resultat del preflight s'utilitzarà per entrenar models destinats a la prova municipal sense consentiment específic.
-
-**Nota sobre marcadors pendents.** Els valors `{{...}}` d'aquest apartat s'han d'emplenar amb les xifres reals del preflight abans de presentar l'expedient. No s'han d'inventar.
 
 ### Compliment algorítmic
 
@@ -419,7 +408,7 @@ L'article 13.4 estableix que, llevat de motius d'interès públic prou justifica
 
 Atès que el promotor és una **persona física sense finançament dinerari específic** per a aquesta prova, es proposa incloure en el conveni una clàusula amb el contingut següent:
 
-1. **Límit econòmic màxim acordat:** les eventuals despeses municipals repercutibles al promotor no excediran de **`{{TOPALL_COSTOS_MUNICIPALS_EUR}}` euros**, import a fixar de mutu acord en la fase de negociació del conveni.
+1. **Límit econòmic màxim acordat:** les eventuals despeses municipals repercutibles al promotor no excediran de **1.000 €**, import a fixar de mutu acord en la fase de negociació del conveni.
 2. **Disseny de cost gairebé nul per a l'Ajuntament:** la prova està concebuda per no generar cost material municipal perquè:
    - no hi ha desplegament físic ni ocupació de via pública;
    - no hi ha obra civil ni adequació d'espais;
@@ -447,7 +436,7 @@ Atès que el promotor és una **persona física sense finançament dinerari espe
 
 Max Borra Palau serà el responsable únic de PulsePath i dedicarà més de 20 hores setmanals a l'operació. Té experiència en desenvolupament de negoci i captació d'oportunitats i disposa del suport d'entorn d'ESIC i de la comunitat 1517. Aquestes xarxes no es presenten com a membres de l'equip ni com a avalistes.
 
-La tecnologia disposa de l'inventari funcional descrit a l'apartat de maduresa, del preflight amb voluntariat extern i de gates de producció (HTTPS, còpia i restauració, monitoratge, pla d'incidències, consentiment i cohort sentinella).
+La tecnologia disposa de l'inventari funcional descrit a l'apartat de maduresa. Abans de l'activació municipal es completarà el preflight amb voluntariat extern i els gates de producció (HTTPS, còpia amb verificació d'integritat, restauració completa validada, monitoratge, pla d'incidències, consentiment i cohort sentinella).
 
 El principal risc de capacitat és la dependència d'una sola persona. Es mitigarà amb documentació operativa, automatització de còpies i monitoratge, calendari de suport, persona coordinadora municipal i criteri de pausa davant una incidència crítica.
 
@@ -583,7 +572,7 @@ L'objectiu no és flexibilitzar obligacions, sinó provar un marc supervisat que
 
 1. Aplicació de participant: accés mitjançant codi pseudònim i consentiment previ.
 2. Quadre de comandament: vista agregada amb supressió K ≥ 5. Si es mostren captures amb dades, cal identificar-les com a sintètiques o de demostració.
-3. Demo operativa: `{{URL_DEMO}}` amb `{{CREDENCIALS_AVALUADOR}}`.
+3. Demostració disponible sota petició; les captures adjuntes acrediten l'estat actual del sistema.
 
 ---
 
@@ -597,21 +586,3 @@ Les sis declaracions responsables exigides per l'article 10.3.b es presenten com
 4. `declaracions/04-seguretat-persones-infraestructures.md`
 5. `declaracions/05-condicions-ordenanca.md`
 6. `declaracions/06-protocol-sistemes-algoritmics.md`
-
-## Annex B — Marcadors pendents d'emplenar abans de presentar
-
-| Marcador | Contingut esperat |
-|---|---|
-| `{{DATA_DOCUMENT}}` | Data de presentació (agost o setembre de 2026) |
-| `{{N_PARTICIPANTS_PREFLIGHT}}` | Nombre real de voluntaris del preflight (objectiu **30** externs; durada 7–14 dies) |
-| `{{DIES_PREFLIGHT}}` | Dies reals de durada (objectiu 7-14) |
-| `{{ADHERENCIA_DIARIA}}` | Percentatge o ràtio d'adherència diària observada |
-| `{{TASA_ABANDONO}}` | Taxa d'abandonament del preflight |
-| `{{INCIDENTS_CRITICS_PREFLIGHT}}` | Nombre d'incidents crítics oberts en tancar |
-| `{{DATA_INICI_PREFLIGHT}}` | Data d'inici del preflight |
-| `{{DATA_FI_PREFLIGHT}}` | Data de fi del preflight |
-| `{{URL_DEMO}}` | URL pública de demo (prevista: https://app.getpulsepath.com) |
-| `{{CREDENCIALS_AVALUADOR}}` | Usuari/contrasenya o codi per a la persona avaluadora |
-| `{{TOPALL_COSTOS_MUNICIPALS_EUR}}` | Límit econòmic màxim a acordar al conveni (art. 13.4) |
-
-**No inventar cap xifra.** Si un marcador encara no té valor verificable, cal mantenir-lo visible o ajornar la presentació fins a disposar-ne.

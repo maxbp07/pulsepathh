@@ -17,12 +17,12 @@ Aquest document és una redacció substancial provisional en absència (o penden
 
 | Camp | Valor |
 |---|---|
-| Nom i cognoms | {{NOM_COMPLET}} |
-| NIF / NIE | {{NIF}} |
+| Nom i cognoms | ______________________ |
+| NIF / NIE | ______________________ |
 | En qualitat de | Persona física promotora del projecte PulsePath |
-| Domicili a efectes de notificacions | {{DOMICILI}} |
-| Correu electrònic | {{EMAIL}} |
-| Telèfon | {{TELEFON}} |
+| Domicili a efectes de notificacions | ______________________ |
+| Correu electrònic | ______________________ |
+| Telèfon | ______________________ |
 
 ## Manifestacions
 
@@ -59,9 +59,9 @@ El/la sotasignant, en la seva condició de persona promotora del projecte esment
 
 ## Lloc, data i signatura
 
-A {{LLOC}}, el {{DATA_DECLARACIO}}.
+A Barcelona, el ______________________.
 
 Signatura del/de la declarant:
 
 _______________________________  
-{{NOM_COMPLET}}
+Nom i cognoms: ______________________
