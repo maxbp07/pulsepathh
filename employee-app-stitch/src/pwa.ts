@@ -4,7 +4,7 @@
  * vite-plugin-pwa (registerType: 'autoUpdate') generates the SW; we register it
  * here with full guards so it can NEVER throw on the insecure (HTTP) origin that
  * mobile browsers reject. Service workers require a secure context (HTTPS or
- * localhost); on http://158.220.119.17 the registration is rejected by the
+ * localhost); on plain HTTP the registration is rejected by the
  * browser and we swallow it. The durable fix is HTTPS — see deploy notes.
  */
 import { registerSW } from 'virtual:pwa-register';

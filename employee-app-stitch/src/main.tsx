@@ -26,5 +26,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 );
 
 // Registra el Service Worker (PWA) de forma crash-safe. En origen HTTP
-// (158.220.119.17) el navegador rechaza el registro y lo ignoramos sin error.
+// el navegador rechaza el registro y lo ignoramos sin error.
 registerPwa();

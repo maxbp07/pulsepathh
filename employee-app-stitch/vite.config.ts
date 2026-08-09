@@ -2,8 +2,8 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// Despliegue como ruta estática en el VPS MatForge: http://158.220.119.17/pulsepath/
-const DEPLOY_BASE = process.env.VITE_BASE_PATH ?? '/pulsepath/';
+// Despliegue canónico: https://app.getpulsepath.com (raíz). Override: VITE_BASE_PATH
+const DEPLOY_BASE = process.env.VITE_BASE_PATH ?? '/';
 
 export default defineConfig({
   base: DEPLOY_BASE,

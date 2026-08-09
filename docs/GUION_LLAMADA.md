@@ -1,7 +1,7 @@
 # Guión de llamada de venta — PulsePath (15 min)
 
 ## Pre-llamada (2 min)
-- Demo dashboard abierta en `http://158.220.119.17:3001/dashboard/` (modo Demo)
+- Demo dashboard abierta en `http://161.97.69.228:3001/dashboard/` (modo Demo)
 - App en móvil lista para mostrar check-in en vivo
 - One-pager enviado por email antes de la llamada
 

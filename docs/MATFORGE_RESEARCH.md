@@ -1864,7 +1864,7 @@ MatFuse → --lotus-depth (height) → QA1
 
 ```
 batch_pack --execute → parse JSON zip path
-→ Telegram: "Pack {name} listo: http://158.220.119.17:8080" (Filebrowser)
+→ Telegram: "Pack {name} listo: http://161.97.69.228:8080" (Filebrowser)
 ```
 
 **Filebrowser** ya sirve `packs_finales/` (matforge-vps.md).
