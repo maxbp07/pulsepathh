@@ -48,6 +48,7 @@ export default function Settings() {
     clearRemindersEnabled();
     setCleared(true);
     setConfirmingClear(false);
+    navigate('/login', { replace: true });
   };
   const handleSignOut = () => {
     clearAccessCode();
@@ -78,6 +79,7 @@ export default function Settings() {
         <div className="px-md py-md flex items-center gap-xs border-t border-surface-variant/60">
           <LangBtn active={lang === 'en'} onClick={() => changeLang('en')} label={t('settings.languageEn')} />
           <LangBtn active={lang === 'es'} onClick={() => changeLang('es')} label={t('settings.languageEs')} />
+          <LangBtn active={lang === 'ca'} onClick={() => changeLang('ca')} label={t('settings.languageCa')} />
         </div>
       </Section>
 

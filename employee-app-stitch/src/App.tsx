@@ -53,6 +53,7 @@ export default function App() {
       />
 
       <Route
+        path="/notifications"
         element={
           <RequireAuth>
             <NotificationOptIn />

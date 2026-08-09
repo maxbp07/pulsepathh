@@ -5,7 +5,7 @@ import { isValidAccessCode, setAccessCode, isOnboarded } from '../lib/prefs';
 
 
 /**
- * /login — Privacy-first. Solo pide un "Access Code" (formato ABC-123).
+ * /login — Privacy-first. Solo pide un "Access Code" (formato PP-2026-001).
  * El código SE convierte en la identidad del participante (sin contraseña,
  * pseudónimo local). La activación en servidor ocurre tras el consentimiento. Si el dispositivo ya está onboarding-do, va a Home.
  */

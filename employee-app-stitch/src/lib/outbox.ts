@@ -19,6 +19,7 @@ import {
   type QuestionnairePayload,
   type SyncResult,
 } from './api';
+import { hasConsent } from './prefs';
 
 const MAX_ATTEMPTS = 8;
 const BASE_DELAY_MS = 5_000;
@@ -38,6 +39,7 @@ function backoffMs(attempts: number): number {
 }
 
 export async function enqueueDaily(payload: DailyCheckinPayload): Promise<void> {
+  if (!hasConsent()) return;
   const existing = await findPendingQueueEntry('daily', payload.client_record_id);
   if (!existing) {
     await addSyncQueueEntry({
@@ -50,6 +52,7 @@ export async function enqueueDaily(payload: DailyCheckinPayload): Promise<void> 
 }
 
 export async function enqueueQuestionnaire(payload: QuestionnairePayload): Promise<void> {
+  if (!hasConsent()) return;
   const existing = await findPendingQueueEntry('questionnaire', payload.client_record_id);
   if (!existing) {
     await addSyncQueueEntry({
@@ -68,7 +71,7 @@ function classifyResult(result: SyncResult): 'ok' | 'retry' | 'drop' {
 }
 
 async function dispatch(entry: SyncQueueEntry): Promise<'ok' | 'retry' | 'drop'> {
-  if (!isApiEnabled()) return 'retry';
+  if (!isApiEnabled() || !hasConsent()) return 'retry';
 
   if (entry.kind === 'daily') {
     const result = await syncDailyCheckin(entry.payload as DailyCheckinPayload);

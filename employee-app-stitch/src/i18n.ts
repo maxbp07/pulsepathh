@@ -1,5 +1,5 @@
 /**
- * PulsePath — i18n (EN / ES) vía react-i18next.
+ * PulsePath — i18n (EN / ES / CA) vía react-i18next.
  * El idioma se lee de prefs (localStorage) y se puede cambiar en Ajustes;
  * al cambiar, se persiste y se aplica inmediatamente.
  */
@@ -8,11 +8,13 @@ import { initReactI18next } from 'react-i18next';
 import { getLang } from './lib/prefs';
 import en from './locales/en';
 import es from './locales/es';
+import ca from './locales/ca';
 
 void i18n.use(initReactI18next).init({
   resources: {
     en: { translation: en },
     es: { translation: es },
+    ca: { translation: ca },
   },
   lng: getLang(),
   fallbackLng: 'es',

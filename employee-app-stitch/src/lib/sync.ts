@@ -1,16 +1,19 @@
 /**
  * Sincroniza sesiones y cuestionarios vía outbox durable.
+ * No encola nada sin consentimiento aceptado (CONSENT_VERSION).
  */
 import type { DailySession } from './types';
 import { isApiEnabled } from './api';
 import { APP_VERSION as LOCAL_APP_VERSION } from './db';
 import { enqueueDaily } from './outbox';
+import { hasConsent } from './prefs';
 import { localDateISO, setStudyDay0, getStudyDay0 } from './studySchedule';
 
 export async function syncDailySession(
   session: DailySession,
 ): Promise<'queued' | 'skipped' | 'failed'> {
   if (!isApiEnabled()) return 'skipped';
+  if (!hasConsent()) return 'skipped';
   if (!session.context) return 'failed';
 
   if (!getStudyDay0()) {

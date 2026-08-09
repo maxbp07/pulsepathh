@@ -2,11 +2,13 @@
  * PulsePath — cliente API backend Node (piloto estudio ML).
  */
 import { hashAccessCode } from './hash';
+import { CONSENT_VERSION } from './prefs';
 
 const API_BASE = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '') ?? '';
 const ORG_SLUG = (import.meta.env.VITE_ORG_SLUG as string | undefined) ?? 'study_mixed_2026';
-const POLICY_VERSION = '2026-07-17';
 const TOKEN_KEY = 'pulsepath.apiToken';
+
+export { CONSENT_VERSION };
 
 export function isApiEnabled(): boolean {
   return Boolean(API_BASE);
@@ -53,7 +55,7 @@ export async function activateWithBackend(accessCode: string): Promise<ActivateR
       org_slug: ORG_SLUG,
       code_hash: codeHash,
       consent: true,
-      policy_version: POLICY_VERSION,
+      policy_version: CONSENT_VERSION,
     }),
   });
   if (!res.ok) return null;

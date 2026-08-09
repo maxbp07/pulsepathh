@@ -1,13 +1,13 @@
 import { useState, type ReactNode } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getAccessCode, setOnboarded } from '../lib/prefs';
+import { acceptConsent, getAccessCode, setOnboarded } from '../lib/prefs';
 import { activateWithBackend, isApiEnabled } from '../lib/api';
 import { setStudyDay0, localDateISO } from '../lib/studySchedule';
 
 /**
- * Onboarding (3 slides explicativos del PVT-BA) + consentimiento.
- * Persiste el flag "onboarded" en localStorage y va a Home.
+ * Onboarding (3 slides explicativos del PVT-BA) + consentimiento versionado.
+ * Persiste consent (CONSENT_VERSION) + flag "onboarded" y va a notificaciones.
  */
 export default function Onboarding() {
   const { t } = useTranslation();
@@ -49,6 +49,7 @@ export default function Onboarding() {
     } else {
       setStudyDay0(localDateISO());
     }
+    acceptConsent();
     setOnboarded();
     setActivating(false);
     navigate('/notifications', { replace: true });

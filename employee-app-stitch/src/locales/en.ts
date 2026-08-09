@@ -20,10 +20,11 @@ const en = {
   login: {
     title: 'Welcome to PulsePath',
     subtitle: 'Enter your access code to continue. No password needed.',
-    placeholder: 'e.g. BCN-492',
+    placeholder: 'e.g. PP-2026-001',
     button: 'Login',
-    error: 'Access codes look like ABC-123 (3 letters, a dash, 3 digits).',
-    privacy: 'Pseudonymous code · encrypted sync to secure server with your consent.',
+    error: 'Invalid code. Use the format PP-2026-001.',
+    privacy:
+      'Pseudonymous code · sent over HTTPS to the study server (encrypted at rest) with your consent.',
   },
   notifications: {
     title: 'Daily reminders',
@@ -40,14 +41,14 @@ const en = {
       'A validated brief PVT (Basner) measures your reaction time with millisecond precision.',
     slide2Title: 'Private by design',
     slide2Body:
-      'Your responses sync encrypted to a secure server. We only use your access code as a pseudonym — no name or email.',
+      'Your responses are sent over HTTPS to the study server and stored encrypted at rest. We only use your access code as a pseudonym — no name or email.',
     slide3Title: 'Understand your patterns',
     slide3Body:
       'A Fatigue Risk Index turns your data into a clear 0–100 vitality score.',
     activationError: 'Could not activate your code on the server. Check your connection and try again.',
     consent:
       'I have read the informed consent and agree to participate. I understand PulsePath is a self-monitoring and research tool, not a medical device, and does not provide a diagnosis.',
-    consentLink: 'Read informed consent (v2026-07-17)',
+    consentLink: 'Read informed consent (v1.0)',
     getStarted: 'Get started',
   },
   home: {
@@ -123,12 +124,13 @@ const en = {
     appearance: 'Language',
     languageEn: 'English',
     languageEs: 'Español',
+    languageCa: 'Català',
     signOut: 'Sign Out',
     signOutConfirm:
       'Sign out? Your data stays on this device. You will need your access code to return.',
     data: 'Your data',
     dataBody:
-      'All data is stored locally on this device (IndexedDB), anonymized under a local pseudonym. No name, email, or IP is ever stored. Nothing leaves your device.',
+      'Check-ins and questionnaires are stored locally (IndexedDB) and sent over HTTPS to the study server, where payloads are encrypted at rest (AES-GCM). We do not store your name or email on the server. You can erase everything at any time.',
     exportPdf: 'Export Cognitive Report (PDF)',
     exportJson: 'Export anonymized data (JSON)',
     danger: 'Danger zone',
@@ -197,7 +199,7 @@ const en = {
       lapses: 'Lapses',
       fastest10: 'Fastest 10%',
       falseStarts: 'False starts',
-      savedLocally: 'Saved locally (anonymized). No data left your device.',
+      savedLocally: 'Saved locally. It will sync to the server when you are online.',
       done: 'Done',
     },
   },
@@ -248,12 +250,12 @@ const en = {
   },
   consent: {
     title: 'Informed consent',
-    version: 'Policy version: 2026-07-17',
+    version: 'Consent version: 1.0',
     back: 'Back to onboarding',
     sections: [
       'Purpose: research on alertness, fatigue and occupational wellbeing using standardized questionnaires (DASS-21, GAD-7, CBI) and daily PVT-BA check-ins.',
-      'Data: pseudonym (access code), questionnaire responses, reaction metrics and sleep context. We do not collect name, email or IP.',
-      'Storage: local copy on your device and encrypted sync to the study secure server. Maximum retention 6 months.',
+      'Data: pseudonym (hashed access code), questionnaire responses, reaction metrics and sleep context. We do not collect name or email on the study server.',
+      'Storage: local copy on your device (IndexedDB). When online, the client sends JSON over HTTPS to the server; there the payload is encrypted at rest (AES-GCM). Maximum retention 6 months.',
       'Rights: you can delete all your data in Settings at any time. Not a medical device and not a substitute for clinical evaluation.',
       'Controller contact: ops@study.pulsepath.local (internal pilot).',
     ],

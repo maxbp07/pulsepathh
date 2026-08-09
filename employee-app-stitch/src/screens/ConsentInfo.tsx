@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 
-/** Consentimiento informado v2026-07-17 (resumen in-app). */
+/** Consentimiento informado v1.0 (resumen in-app). */
 export default function ConsentInfo() {
   const { t } = useTranslation();
 

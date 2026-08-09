@@ -22,8 +22,9 @@ const es = {
     subtitle: 'Introduce tu código de acceso para continuar. Sin contraseña.',
     placeholder: 'p. ej. PP-2026-001',
     button: 'Entrar',
-    error: 'Código inválido. Usa PP-2026-001 (estudio) o ABC-123 (demo).',
-    privacy: 'Pseudónimo por código · datos cifrados en servidor seguro con tu consentimiento.',
+    error: 'Código inválido. Usa el formato PP-2026-001.',
+    privacy:
+      'Pseudónimo por código · se envía por HTTPS al servidor del estudio (almacenamiento cifrado en reposo) con tu consentimiento.',
   },
   notifications: {
     title: 'Recordatorios diarios',
@@ -40,14 +41,14 @@ const es = {
       'Un PVT breve validado (Basner) mide tu tiempo de reacción con precisión de milisegundos.',
     slide2Title: 'Privado por diseño',
     slide2Body:
-      'Tus respuestas se sincronizan de forma cifrada con un servidor seguro. Solo usamos tu código de acceso como pseudónimo — sin nombre ni email.',
+      'Tus respuestas se envían por HTTPS al servidor del estudio y se almacenan cifradas en reposo. Solo usamos tu código de acceso como pseudónimo — sin nombre ni email.',
     slide3Title: 'Entiende tus patrones',
     slide3Body:
       'Un Índice de Riesgo de Fatiga convierte tus datos en una puntuación de vitalidad de 0 a 100.',
     activationError: 'No se pudo activar el código en el servidor. Revisa conexión e inténtalo de nuevo.',
     consent:
       'He leído el consentimiento informado y acepto participar. Entiendo que PulsePath es una herramienta de autocontrol e investigación, no un dispositivo médico, y no proporciona un diagnóstico.',
-    consentLink: 'Leer consentimiento informado (v2026-07-17)',
+    consentLink: 'Leer consentimiento informado (v1.0)',
     getStarted: 'Empezar',
   },
   home: {
@@ -120,12 +121,13 @@ const es = {
     appearance: 'Idioma',
     languageEn: 'English',
     languageEs: 'Español',
+    languageCa: 'Català',
     signOut: 'Cerrar sesión',
     signOutConfirm:
       '¿Cerrar sesión? Tus datos locales se conservan en este dispositivo. Necesitarás tu código de acceso para volver.',
     data: 'Tus datos',
     dataBody:
-      'Los check-ins y cuestionarios se guardan localmente (IndexedDB) y se sincronizan cifrados con el servidor del estudio. No guardamos nombre, email ni IP. Puedes borrar todo en cualquier momento.',
+      'Los check-ins y cuestionarios se guardan localmente (IndexedDB) y se envían por HTTPS al servidor del estudio, donde el payload se almacena cifrado en reposo (AES-GCM). No guardamos nombre ni email en el servidor. Puedes borrar todo en cualquier momento.',
     exportPdf: 'Exportar informe cognitivo (PDF)',
     exportJson: 'Exportar datos anonimizados (JSON)',
     danger: 'Zona de peligro',
@@ -245,12 +247,12 @@ const es = {
   },
   consent: {
     title: 'Consentimiento informado',
-    version: 'Versión de política: 2026-07-17',
+    version: 'Versión de consentimiento: 1.0',
     back: 'Volver al onboarding',
     sections: [
       'Finalidad: investigación sobre alerta, fatiga y bienestar laboral con cuestionarios estandarizados (DASS-21, GAD-7, CBI) y check-ins diarios PVT-BA.',
-      'Datos: pseudónimo (código de acceso), respuestas a cuestionarios, métricas de reacción y contexto de sueño. No recogemos nombre, email ni IP.',
-      'Almacenamiento: copia local en tu dispositivo y sincronización cifrada con servidor seguro del estudio. Retención máxima 6 meses.',
+      'Datos: pseudónimo (código de acceso en forma de hash), respuestas a cuestionarios, métricas de reacción y contexto de sueño. No recogemos nombre ni email en el servidor del estudio.',
+      'Almacenamiento: copia local en tu dispositivo (IndexedDB). Con conexión, el cliente envía el JSON por HTTPS al servidor; allí el payload se almacena cifrado en reposo (AES-GCM). Retención máxima 6 meses.',
       'Derechos: puedes borrar todos tus datos en Ajustes en cualquier momento. No es un dispositivo médico ni sustituye evaluación clínica.',
       'Contacto del responsable: ops@study.pulsepath.local (piloto interno).',
     ],
