@@ -29,7 +29,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico,woff,woff2}'],
-        // No hijackear rutas ajenas en el VPS compartido
+        importScripts: ['push-handler.js'],
         navigateFallback: `${DEPLOY_BASE}index.html`,
         navigateFallbackDenylist: [/^\/$/, /^\/(webhook|webhook\/)/],
       },

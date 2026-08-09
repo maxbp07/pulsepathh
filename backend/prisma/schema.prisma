@@ -1,4 +1,4 @@
-// PulsePath — PostgreSQL schema (piloto Ayuntamiento de Barcelona)
+// PulsePath — PostgreSQL schema (piloto B2B + estudio ML)
 // Índices cifrados (BYTEA); nunca datos biométricos crudos ni PII de empleados.
 
 generator client {
@@ -11,17 +11,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Organization {
-  id             String   @id @default(uuid()) @db.Uuid
-  name           String
-  slug           String   @unique
-  pilotRef       String?  @map("pilot_ref")
-  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
-  retentionUntil DateTime @map("retention_until") @db.Date
+enum StudyTimepoint {
+  D0
+  D7
+  D14
+}
 
-  accessCodes   AccessCode[]
-  sessions      Session[]
-  employerUsers EmployerUser[]
+enum QuestionnaireInstrument {
+  DASS21_STRESS
+  DASS21_FULL
+  GAD7
+  CBI
+}
+
+model Organization {
+  id              String    @id @default(uuid()) @db.Uuid
+  name            String
+  slug            String    @unique
+  pilotRef        String?   @map("pilot_ref")
+  kind            String    @default("b2b")
+  studyStartsAt   DateTime? @map("study_starts_at") @db.Date
+  studyEndsAt     DateTime? @map("study_ends_at") @db.Date
+  protocolVersion String?   @map("protocol_version")
+  targetN         Int?      @map("target_n")
+  codePoolSize    Int?      @map("code_pool_size")
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  retentionUntil  DateTime  @map("retention_until") @db.Date
+
+  accessCodes                AccessCode[]
+  sessions                   Session[]
+  employerUsers              EmployerUser[]
+  dailyCheckins              DailyCheckin[]
+  questionnaireSubmissions   QuestionnaireSubmission[]
+  pushSubscriptions          PushSubscription[]
+  ingestAuditLogs            IngestAuditLog[]
 
   @@map("organizations")
 }
@@ -30,17 +53,24 @@ model AccessCode {
   id          String    @id @default(uuid()) @db.Uuid
   orgId       String    @map("org_id") @db.Uuid
   codeHash    String    @unique @map("code_hash")
-  department  String
+  department  String?
   shift       String?
   gender      String?
   ageBand     String?   @map("age_band")
   tenureBand  String?   @map("tenure_band")
+  slotLabel   String?   @map("slot_label")
+  studyDay0   DateTime? @map("study_day0") @db.Date
+  profileEnc  Bytes?    @map("profile_enc")
   activatedAt DateTime? @map("activated_at") @db.Timestamptz(6)
+  lastSeenAt  DateTime? @map("last_seen_at") @db.Timestamptz(6)
   revoked     Boolean   @default(false)
 
-  organization Organization @relation(fields: [orgId], references: [id])
-  sessions     Session[]
-  consent      Consent?
+  organization             Organization              @relation(fields: [orgId], references: [id])
+  sessions                 Session[]
+  consent                  Consent?
+  dailyCheckins            DailyCheckin[]
+  questionnaireSubmissions QuestionnaireSubmission[]
+  pushSubscriptions        PushSubscription[]
 
   @@index([orgId])
   @@map("access_codes")
@@ -50,7 +80,7 @@ model Session {
   id             String   @id @default(uuid()) @db.Uuid
   orgId          String   @map("org_id") @db.Uuid
   codeHash       String   @map("code_hash")
-  department     String
+  department     String?
   shift          String?
   gender         String?
   ageBand        String?  @map("age_band")
@@ -70,6 +100,85 @@ model Session {
   @@index([department])
   @@index([takenAt])
   @@map("sessions")
+}
+
+model DailyCheckin {
+  id             String   @id @default(uuid()) @db.Uuid
+  orgId          String   @map("org_id") @db.Uuid
+  codeHash       String   @map("code_hash")
+  dateLocal      DateTime @map("date_local") @db.Date
+  tz             String
+  takenAt        DateTime @map("taken_at") @db.Timestamptz(6)
+  clientRecordId String   @map("client_record_id")
+  payloadEnc     Bytes    @map("payload_enc")
+  payloadSha256  String   @map("payload_sha256")
+  appVersion     String?  @map("app_version")
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [orgId], references: [id])
+  accessCode   AccessCode   @relation(fields: [codeHash], references: [codeHash])
+
+  @@unique([codeHash, dateLocal])
+  @@unique([codeHash, clientRecordId])
+  @@index([orgId, dateLocal])
+  @@map("daily_checkins")
+}
+
+model QuestionnaireSubmission {
+  id              String                  @id @default(uuid()) @db.Uuid
+  orgId           String                  @map("org_id") @db.Uuid
+  codeHash        String                  @map("code_hash")
+  instrument      QuestionnaireInstrument
+  timepoint       StudyTimepoint
+  takenAt         DateTime                @map("taken_at") @db.Timestamptz(6)
+  clientRecordId  String                  @map("client_record_id")
+  responsesEnc    Bytes                   @map("responses_enc")
+  responsesSha256 String                  @map("responses_sha256")
+  schemaVersion   String                  @map("schema_version")
+  appVersion      String?                 @map("app_version")
+  createdAt       DateTime                @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [orgId], references: [id])
+  accessCode   AccessCode   @relation(fields: [codeHash], references: [codeHash])
+
+  @@unique([codeHash, instrument, timepoint])
+  @@unique([codeHash, clientRecordId])
+  @@index([orgId, timepoint])
+  @@map("questionnaire_submissions")
+}
+
+model PushSubscription {
+  id        String   @id @default(uuid()) @db.Uuid
+  orgId     String   @map("org_id") @db.Uuid
+  codeHash  String   @map("code_hash")
+  endpoint  String
+  p256dh    String
+  auth      String
+  timezone  String?
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [orgId], references: [id])
+  accessCode   AccessCode   @relation(fields: [codeHash], references: [codeHash])
+
+  @@unique([codeHash, endpoint])
+  @@index([orgId])
+  @@map("push_subscriptions")
+}
+
+model IngestAuditLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  orgId     String   @map("org_id") @db.Uuid
+  codeHash  String?  @map("code_hash")
+  route     String
+  status    Int
+  clientId  String?  @map("client_id")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [orgId], references: [id])
+
+  @@index([orgId, createdAt])
+  @@map("ingest_audit_logs")
 }
 
 model EmployerUser {

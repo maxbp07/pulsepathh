@@ -1,0 +1,90 @@
+P1|None|PROPOSTA DE PILOT
+P2|None|PulsePath × Ajuntament de Barcelona
+P5|None|Eina Edge AI per a la Monitorització del
+P6|None|Benestar Cognitiu i Prevenció de Riscos Psicosocials
+P8|None|Versió 4.0 — Juny 2026
+P9|None|Preparat per: Max Borra Palau — PulsePath
+P11|Heading 1|1. Resum Executiu
+P12|None|PulsePath proposa un pilot d'innovació en salut laboral d'11 setmanes amb 50 funcionaris de l'Ajuntament de Barcelona.
+P14|None|El projecte farà servir una eina digital basada en Edge AI per mesurar de forma objectiva la fatiga cognitiva dels empleats. L'aplicació s'instal·la als dispositius personals dels usuaris (BYOD) i processa mètriques de temps de reacció sense enviar mai dades biomètriques al núvol. L'objectiu és proporcionar a l'Ajuntament un dashboard anonimitzat per a la detecció primerenca de riscos psicosocials (burnout) i l'optimització del benestar laboral.
+P17|Heading 1|2. Fonamentació Tecnològica i Científica
+P18|None|Tot i que aquest pilot s'emmarca en la Prevenció de Riscos Laborals (PRL) i el benestar de Recursos Humans, l'eina PulsePath està construïda sobre bases científiques rigoroses.
+P20|Heading 2|2.1 Revisió Post-Pilot amb el Dr. Mathias Basner (Universitat de Pennsilvània)
+P21|None|PulsePath ha programat una sessió de revisió post-pilot amb el Dr. Mathias Basner (Universitat de Pennsilvània), investigador principal del test PVT, perquè avaluï els resultats i proporcioni feedback sobre la implementació. Això garanteix que l'eina seguirà estrictament les directrius científiques de mesura de fatiga per temps de reacció i podrà ser iterada a partir de la seva validació experta.
+P23|Heading 2|2.2 Auditoria Científica (Opcional)
+P24|None|Si l'Ajuntament ho desitja per a ús intern o publicacions futures, el protocol de recollida de dades i els resultats anonimitzats podran ser revisats per investigadors afiliats a universitats locals (UB/UAB/UPF) en una fase posterior.
+P26|Heading 1|3. Selecció de Departaments
+P27|None|Per demostrar la capacitat de discriminació de l'eina, el pilot inclourà 4 departaments amb diferents nivells de demanda cognitiva i estrès ambiental.
+P30|Heading 1|4. Funcionament del Pilot
+P31|Heading 2|4.1 Ús de l'Aplicació Mòbil (Empleats)
+P34|Heading 2|4.2 Qüestionaris de Contrast (CBI)
+P35|None|Per validar la precisió de l'algorisme d'IA, els empleats completaran el CBI (Copenhagen Burnout Inventory) en tres moments:
+P36|List Paragraph|— Setmana 0 (Línia base)
+P37|List Paragraph|— Setmana 4 (Equador)
+P38|List Paragraph|— Setmana 8 (Tancament)
+P40|None|El CBI és un instrument gratuït, lliure de drets i validat internacionalment per a l'avaluació del burnout laboral.
+P42|Heading 2|4.3 Onboarding Asíncron (Zero Disrupció)
+P43|None|Per no paralitzar l'operativa dels departaments, l'onboarding serà 100% digital i asíncron:
+P44|List Paragraph|Vídeo demostratiu (~5 minuts) explicant pas a pas la instal·lació i l'ús de l'app.
+P45|List Paragraph|PDF de "Preguntes Freqüents" de 2 pàgines adjunt al correu d'invitació.
+P46|List Paragraph|Suport tècnic via canal digital directe per resoldre incidències d'instal·lació en menys de 24h.
+P48|Heading 1|5. Marc Legal i Privacitat (RGPD)
+P49|None|El projecte s'estructura com la provisió d'una eina SaaS (Software as a Service) B2G estàndard per a l'optimització de recursos humans.
+P51|Heading 2|5.1 Rols de Protecció de Dades
+P55|None|Aquesta estructura manté la governança total de la informació dins del consistori i s'adapta al marc jurídic a determinar conjuntament amb els equips legals de l'Ajuntament.
+P57|Heading 2|5.2 Privacitat per Disseny (Edge AI i K-Anonimitat)
+P58|List Paragraph|Edge Computing: Totes les dades de temps de reacció (biomarcadors cognitius) es processen localment al processador del smartphone de l'empleat. Al núvol només s'envia l'índex de fatiga encriptat.
+P59|List Paragraph|K-Anonimitat (K=5): El dashboard de RRHH està protegit mitjançant l'algorisme K-Anonimitat configurat a K=5. L'Ajuntament només veurà dades agregades; si un subgrup de visualització té menys de 5 persones, el sistema oculta les dades automàticament per impedir la identificació individual.
+P61|Heading 1|6. Resultats Lliurables per a l'Ajuntament
+P62|None|En finalitzar la setmana 8 d'ús, PulsePath presentarà un informe de resultats que inclourà:
+P65|Heading 1|7. Pla de Desplegament (10 Setmanes)
+P66|None|Els terminis de la fase de validació interna es definiran conjuntament amb l'Ajuntament segons els seus processos interns.
+P73|Heading 1|8. Continuïtat i Escalabilitat
+P74|None|En finalitzar el pilot, si els resultats demostren l'eficàcia de PulsePath com a eina de Prevenció de Riscos Psicosocials i optimització del benestar laboral, es proposarà un marc de col·laboració per a un desplegament B2G ampliat a l'Ajuntament.
+P76|None|Les condicions operatives (expansió a la Guàrdia Urbana, Bombers o altres departaments crítics) es definirien de mutu acord després d'avaluar l'èxit d'aquesta prova pilot.
+P78|None|Document preparat per PulsePath — Edge AI per a la Salut Mental Laboral
+P79|None|Contacte: Max Borra Palau
+=== TABLES ===
+--- TABLE 0 (7x2) ---
+  R0: Dato clave || Valor
+  R1: Durada del pilot || 10 setmanes (1 de desplegament + 8 d'ús + 1 de recopilació i presentació de resultats)
+  R2: Participants || 50 funcionaris de 4 departaments (estricte BYOD)
+  R3: Cost per a l'Ajuntament || Cap — pilot d'innovació gratuït
+  R4: Compromís diari per empleat || ~9 minuts (inici i final de jornada)
+  R5: Onboarding || 100% asíncrono (sin disrupción del servicio público)
+  R6: Marc Legal || PulsePath actua com a Encarregat del Tractament (B2G SaaS estàndard)
+--- TABLE 1 (5x5) ---
+  R0: Grup || Departament || Càrrega Cognitiva || Persones || Justificació
+  R1: A || Serveis Socials || 🔴 ALTA || 13 || Treball emocional intens, atenció directa a ciutadans en crisi
+  R2: B || Atenció Ciutadana (010) / OAC || 🔴 ALTA || 12 || Atenció massiva, gestió de queixes, pics de demanda telefònica
+  R3: C || Urbanisme / Recursos Humans || 🟡 MODERADA || 13 || Treball administratiu orientat a projectes i terminis
+  R4: D || Gestió Administrativa / IMI || 🟢 BAJA-MOD. || 12 || Tasques estructurades de back-office
+--- TABLE 2 (5x4) ---
+  R0: Activitat || Moment || Durada || Descripció
+  R1: Test PVT Matutí || Inici de jornada || 3 min || Avaluació d'alerta base en iniciar el torn
+  R2: Test PVT Vespertí || Final de jornada || 3 min || Mesura de fatiga acumulada
+  R3: Test Stroop || Final de jornada || 3 min || Mesura d'interferència executiva
+  R4: Check-in Benestar || Divendres (fi de torn) || 2 min || Qüestionari breu integrat de 4 preguntes
+--- TABLE 3 (1x1) ---
+  R0: 📱 Estricte BYOD (Bring Your Own Device) / L'app de PulsePath s'instal·larà al smartphone personal o corporatiu de l'empleat. Si un empleat no disposa d'un dispositiu compatible o no desitja utilitzar-lo, simplement no participarà en el pilot i serà substituït per un altre funcionari, garantint agilitat i zero costos de maquinari.
+--- TABLE 4 (1x1) ---
+  R0: ⚖️ Responsable del Tractament (Data Controller): Ajuntament de Barcelona / L'empresari és el propietari de les dades i és qui defineix el propòsit (benestar laboral / prevenció de riscos) de la recollida de dades dels seus treballadors.
+--- TABLE 5 (1x1) ---
+  R0: 🔧 Encarregat del Tractament (Data Processor): PulsePath / PulsePath actua exclusivament com a proveïdor tecnològic. Proveeix la infraestructura (app i dashboard) per processar les dades per compte del Responsable, sense utilitzar les dades per a fins propis més enllà de la millora anònima dels algorismes.
+--- TABLE 6 (5x2) ---
+  R0: Lliurable || Descripció
+  R1: Mapa de Calor de Fatiga || Diferències objectives en l'esgotament cognitiu entre els 4 departaments (Serveis Socials vs. Administrativa, etc.)
+  R2: Degradació de Torn || Anàlisi de l'impacte de la jornada laboral en la reducció del temps de reacció des de l'hora d'entrada a l'hora de sortida
+  R3: Validació del Risc || Correlació entre la fatiga detectada per PulsePath (Edge AI) i els nivells d'estrès autodeclarats (CBI) dels empleats
+  R4: Dashboard Empresarial || Accés temporal a la plataforma de visualització de PulsePath amb les dades del pilot
+--- TABLE 7 (1x2) ---
+  R0: 📋 || Validació Interna   Durada a determinar amb l'Ajuntament / Fase a càrrec de l'Ajuntament: validació jurídica, RGPD, Servei de Prevenció i negociació sindical si escau. PulsePath proporcionarà tota la documentació tècnica necessària.
+--- TABLE 8 (1x2) ---
+  R0: 🚀 || Desplegament   Setmana 1 / Formalització de rols RGPD; distribució de l'onboarding asíncron; instal·lació de l'app (BYOD).
+--- TABLE 9 (1x2) ---
+  R0: 📊 || Línia Base   Setmanes 2–3 / Els empleats comencen a usar l'app i completen el primer qüestionari CBI. S'estableix el rendiment base individual.
+--- TABLE 10 (1x2) ---
+  R0: 🔍 || Monitorització   Setmanes 4–8 / Ús continu (2 PVT + 1 Stroop diari). Qüestionari CBI intermedi a la setmana 5. Suport asíncron actiu.
+--- TABLE 11 (1x2) ---
+  R0: 📝 || Recopilació i Resultats   Setmana 9 / Processament de dades, preparació de l'informe i presentació executiva de conclusions a l'Ajuntament.
+=== PROPS === core.title='' author='Un-named'

@@ -4,26 +4,39 @@
 
 ## Qué es
 - PWA React + TypeScript + Tailwind (tema azul Google Stitch `#264dd9`)
-- Instrumentos: PVT-BA adaptativo (Basner 2022) + KSS + DASS-21 estrés + SIB burnout
-- Índice: Fatigue Risk Index (FRI) → Vitality 0-100
+- Protocolo estudio ML: check-in diario (PVT-BA + KSS + contexto) + DASS-21 completo + GAD-7 + CBI en D0/D7/D14
+- Sync cifrado al backend Node (`DailyCheckin` / `QuestionnaireSubmission`)
 - i18n: ES (default) + EN
-- Datos locales (IndexedDB) + sync opcional al backend Node
+- Panel ops: adherencia sin scores individuales
 
 ## Archivado (NO usar)
-- `Downloads/Proyecto Dentista/pulsepath-app` — JSX duplicado del otro agente (solo diseño de referencia)
-- `Downloads/Proyecto Dentista/pulsepath-backend` — FastAPI descartado (usamos `pulsepath-v2/backend` Node)
-- `employee-app/` — versión vieja (PVT+Stroop+CBI)
+- `employee-app/` — versión vieja (PVT+Stroop+CBI demo Ayuntamiento)
+- Prototipos sueltos fuera del repo
 
-## Deploy
+## Deploy canónico (Contabo)
 ```bash
-cd employee-app-stitch
-npm run build
-python ../scripts/deploy_stitch.py
+# En el VPS Contabo (/opt/pulsepath)
+bash deploy-prod.sh
 ```
-URL: `http://158.220.119.17/pulsepath/` (HTTPS pendiente: `app.getpulsepath.com`)
+- App: `https://app.getpulsepath.com/` (base path `/`)
+- Dashboard: `https://app.getpulsepath.com/dashboard/`
+- API: `https://app.getpulsepath.com/api/` (o `api.getpulsepath.com`)
 
-## Variables de entorno (`.env`)
+Org del estudio: `study_mixed_2026` · códigos `PP-2026-001`…`120`
+
+## Variables de entorno (`.env` de build)
 ```
-VITE_API_URL=https://api.getpulsepath.com/api/v1
-VITE_ORG_SLUG=bcn
+VITE_API_URL=https://app.getpulsepath.com/api/v1
+VITE_ORG_SLUG=study_mixed_2026
+VITE_BASE_PATH=/
 ```
+
+## Preflight local ML
+```bash
+cd backend
+npm run seed:study
+npm run dev
+# otra terminal
+node scripts/preflight-study-flow.js
+```
+Export + baseline quedan en `backend/exports/preflight-local/`.

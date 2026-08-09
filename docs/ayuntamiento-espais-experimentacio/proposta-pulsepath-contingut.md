@@ -1,0 +1,386 @@
+# PulsePath: prova pilot de detecció preventiva i agregada de fatiga i estrès en equips municipals
+
+## 1. Resum i context
+
+### Descripció
+
+PulsePath és una plataforma digital no clínica de benestar laboral que ajuda a identificar tendències de fatiga, somnolència, estrès, ansietat i desgast professional abans que es converteixin en problemes més greus. La solució combina:
+
+- un check-in breu per jornada laboral amb l'escala de somnolència de Karolinska (KSS) i una prova de vigilància psicomotora breu i adaptativa (PVT-BA);
+- qüestionaris validats en tres moments de la prova (DASS-21, GAD-7 i Copenhagen Burnout Inventory);
+- retorn privat per a cada participant, amb evolució personal i recomanacions generals de benestar;
+- un quadre de comandament per a l'organització que només mostra resultats agregats quan hi ha un mínim de cinc persones per segment (K ≥ 5).
+
+La proposta respon a una limitació de moltes eines de benestar laboral: depenen exclusivament d'enquestes llargues i puntuals, ofereixen una fotografia tardana i poden generar poca adherència. PulsePath hi afegeix una mesura conductual breu, repetida i compatible amb el mòbil. No diagnostica trastorns, no substitueix la vigilància de la salut ni pren decisions laborals.
+
+La prova es planteja amb 50 persones treballadores municipals, distribuïdes en dos equips amb càrrega elevada o torns i un o dos equips administratius de comparació. La participació serà voluntària i es farà dins d'una franja pactada de la jornada laboral.
+
+### Objectius de la prova
+
+**Objectiu principal**
+
+Validar si PulsePath pot detectar tendències agregades i útils de fatiga i malestar emocional amb una adherència suficient, sense permetre la identificació individual per part de comandaments o recursos humans.
+
+**Objectius específics**
+
+1. Mesurar la viabilitat d'un check-in breu una vegada per jornada laboral durant vuit setmanes.
+2. Comprovar l'adherència, l'abandonament, l'acceptabilitat i la utilitat percebuda per les persones participants.
+3. Analitzar si les tendències del PVT-BA i la KSS s'associen de manera exploratòria amb l'evolució de DASS-21, GAD-7 i CBI.
+4. Comparar patrons agregats entre equips amb càrrega o torns diferents, sense fer inferències individuals.
+5. Validar la utilitat del quadre de comandament i dels informes quinzenals per orientar converses preventives.
+6. Provar el protocol de privacitat, consentiment, minimització, supressió K ≥ 5, drets i eliminació.
+7. Generar un informe final i un taller de retorn amb aprenentatges transferibles a altres serveis públics.
+8. Valorar, només com a resultat secundari, la viabilitat d'un model estadístic o d'aprenentatge automàtic exploratori. No es presentarà com un model clínic ni validat.
+
+La prova no té com a objectiu demostrar una reducció clínica del burnout ni avaluar el rendiment individual.
+
+### Antecedents
+
+- PulsePath va ser finalista nacional, Top 5 d'Espanya, de Red Bull Basement 2026. No es presenta com un reconeixement mundial.
+- El projecte forma part de la comunitat de 1517 Fund i disposa d'aproximadament 20.000 dòlars en crèdits de computació al núvol (10.000 dòlars d'AWS i 10.000 de Lambda Labs). Són crèdits tecnològics, no inversió en efectiu.
+- Max Borra Palau estudia Digital Business a ESIC i compta amb la seva xarxa acadèmica i d'emprenedoria com a entorn de suport.
+- S'ha mantingut una conversa sobre el concepte amb el Dr. Mathias Basner (University of Pennsylvania), investigador de referència del PVT. No va consistir en una auditoria de la implementació i no constitueix un aval formal.
+- Existeix un prototip funcional integrat: aplicació web progressiva per a participants, backend de sincronització xifrada, base de dades, exportació per a anàlisi i quadre de comandament agregat.
+- S'han completat proves end-to-end en entorn controlat i un preflight amb dades sintètiques. Encara no hi ha clients, ingressos ni una validació operativa amb persones usuàries reals. Aquesta seria la primera prova en un entorn laboral real.
+
+Abans d'activar cap participant municipal, PulsePath completarà una prova tècnica prèvia controlada de 7 a 14 dies amb entre 10 i 20 persones voluntàries adultes externes, procedents de xarxes personals i professionals. Aquesta prova encara no s'ha realitzat en la data de presentació i no es presenta com una validació científica ni laboral. Servirà per verificar usabilitat, compatibilitat entre dispositius, sincronització, suport, exercici del dret de supressió i supressió K ≥ 5. No s'hi recolliran respostes reals de DASS-21, GAD-7 o CBI: aquests recorreguts es provaran amb perfils de prova. Les dades tècniques mínimes s'eliminaran en acabar el preflight i cap resultat s'utilitzarà per entrenar models.
+
+## 2. Requisits per participar (elegibilitat)
+
+### Nivell de maduresa tecnològica
+
+El projecte es considera en un **TRL 5 tècnic**, amb una limitació explícita: encara no ha estat validat operativament amb una plantilla real.
+
+Evidències del nivell actual:
+
+- prototip integrat i desplegable de l'aplicació de participant, API, base de dades i quadre de comandament;
+- activació mitjançant codis pseudònims, sense necessitat de nom ni correu electrònic;
+- flux de consentiment informat versionat abans de la recollida;
+- PVT-BA, KSS, DASS-21, GAD-7 i CBI implementats en el flux d'estudi;
+- sincronització xifrada, cua de reintents, exportació estructurada i dret de supressió;
+- supressió de resultats agregats en grups de menys de cinc persones;
+- 120 codis d'estudi generables i pipeline d'exportació i anàlisi provat amb dades sintètiques;
+- compilació i proves tècniques del frontend i del backend.
+
+No es declara TRL 6 o 7. La prova municipal és necessària per passar de la validació tècnica controlada a l'evidència d'ús, adherència, governança i utilitat en un entorn laboral rellevant.
+
+Les captures incloses al final del document mostren el prototip actual. Les dades del quadre de comandament són sintètiques i estan identificades com a demostració. Es pot facilitar una demo privada sota petició.
+
+La prova tècnica prèvia amb voluntariat extern serà un gate obligatori de preparació, però no substituirà la validació en l'entorn municipal ni es farà servir per exagerar el nivell de maduresa actual.
+
+### El valor de provar en un entorn real
+
+La validesa de la proposta depèn de factors que no es poden reproduir amb dades sintètiques:
+
+- la diversitat de dispositius mòbils i contextos d'ús;
+- els efectes dels torns, la càrrega percebuda i el moment de la jornada;
+- l'adherència sostinguda durant diverses setmanes;
+- la confiança de la plantilla en una eina vinculada al benestar laboral;
+- la interpretació responsable de resultats agregats per part de l'organització;
+- la coordinació entre innovació, persones, prevenció de riscos laborals i protecció de dades.
+
+Barcelona ofereix un entorn especialment rellevant per la seva diversitat de serveis i perfils laborals i perquè ja disposa de polítiques actives de salut mental a la feina. La prova permetria validar tant la tecnologia com el model de governança, que és tan important com el producte.
+
+### Coherència amb els objectius estratègics municipals
+
+La proposta és coherent amb:
+
+- el **II Pla de Salut Mental de Barcelona 2023-2030**, orientat a la promoció del benestar psicològic i la prevenció del malestar;
+- l'**Acord de ciutat per cuidar la salut mental a la feina**, que promou la detecció precoç, la participació de les persones treballadores i la reducció dels riscos psicosocials;
+- el **Pla per a la reducció de l'absentisme del personal de l'Ajuntament de Barcelona i ens adherits (2026)**, que identifica la fatiga física i mental, l'estrès acumulat i l'equilibri entre vida laboral i personal com a factors preventius;
+- l'Agenda 2030 de Barcelona, especialment els ODS 3 (salut i benestar), 8 (treball digne) i 9 (innovació).
+
+PulsePath no pretén substituir les avaluacions reglamentàries de riscos psicosocials. Aspira a complementar-les amb una capa voluntària, freqüent i agregada que ajudi a observar canvis entre avaluacions puntuals.
+
+### Durada prevista
+
+La prova tindrà una durada total de **vuit setmanes**, més una preparació prèvia d'entre dues i quatre setmanes després de la signatura del conveni. Dins d'aquesta preparació es completarà el preflight amb voluntariat extern; no s'activarà cap participant municipal fins que s'hagin superat els criteris tècnics, de privacitat i de seguretat.
+
+- Setmanes 1-2: validació inicial, cohort sentinella, ajust operatiu i primer gate de continuïtat.
+- Setmanes 3-8: desplegament principal, seguiment, informes quinzenals i tancament.
+
+La durada és molt inferior al màxim de 24 mesos establert pel tràmit.
+
+## 3. Innovació i valor per a Barcelona
+
+### Què ens fa diferents? (innovació i valor diferencial)
+
+1. **Mesura conductual més enllà de l'enquesta.** El PVT-BA aporta una senyal breu sobre vigilància psicomotora. Els qüestionaris continuen sent necessaris, però deixen de ser l'única font.
+2. **Alta freqüència amb baixa càrrega.** El check-in ordinari es completa aproximadament en dos o tres minuts, una vegada per jornada laboral.
+3. **Doble retorn sense vigilància individual.** La persona veu la seva evolució privada; l'organització només veu agregats K ≥ 5.
+4. **Privacitat separada de l'adherència.** L'Ajuntament conserva la relació entre codi i participant per a invitacions i recordatoris. PulsePath no rep noms ni correus. L'estat de completitud es manté separat dels resultats.
+5. **Disseny no clínic i preventiu.** No diagnostica, no determina aptituds, no puntua el rendiment i no genera alertes individuals a comandaments.
+6. **Desplegament lleuger.** És una PWA: funciona en navegador mòbil, sense sensors, wearables, obra ni instal·lació corporativa complexa.
+7. **Experimentació mesurable.** La proposta defineix prèviament hipòtesis, gates, indicadors, riscos, retenció i criteris de finalització.
+
+La innovació no és afirmar que una fórmula pròpia ja prediu el burnout. L'element diferencial és integrar mesura conductual, autoinforme validat, privacitat per disseny i retorn agregat en un protocol operatiu verificable.
+
+### Encaix amb Barcelona
+
+La contribució operativa als plans municipals seria:
+
+- provar una eina de detecció precoç i seguiment agregat coherent amb l'Acord de ciutat per cuidar la salut mental a la feina;
+- generar evidència sobre adherència i confiança en diferents tipus d'equips municipals;
+- aportar indicadors complementaris, no substitutius, al Servei de Prevenció de Riscos Laborals;
+- identificar si els patrons de fatiga i malestar varien segons torn, franja o tipus d'equip;
+- oferir retorn privat i recursos oficials a les persones participants;
+- produir una metodologia i un informe agregat reutilitzables en altres organismes.
+
+La selecció proposada —dos equips amb alta càrrega o torns i un o dos equips administratius— permet comparar contextos sense crear un grup clínic ni etiquetar col·lectius.
+
+### Potencial de creixement
+
+La solució es pot reproduir en altres serveis municipals, ens públics i organitzacions amb equips distribuïts o torns. L'escalabilitat deriva de:
+
+- accés web multiplataforma;
+- codis pseudònims i configuració per organització;
+- instruments i calendari parametrizables;
+- infraestructura de baix cost i desplegable en entorns europeus;
+- informes i quadres de comandament per segments amb supressió automàtica K ≥ 5;
+- absència d'equipament físic.
+
+Qualsevol ampliació es faria per fases. La prova amb 50 persones no justificaria per si sola una generalització a tota la plantilla ni un model predictiu de producció.
+
+## 4. El pla d'acció (com es farà la prova)
+
+### Metodologia
+
+La prova serà un estudi pilot observacional i preventiu, no un assaig clínic.
+
+**Població**
+
+- 50 persones treballadores municipals voluntàries.
+- Dos equips amb alta càrrega o treball per torns.
+- Un o dos equips administratius de comparació.
+- Cap resultat individual serà accessible a comandaments, recursos humans o altres participants.
+
+**Recorregut de participació**
+
+1. L'Ajuntament selecciona els equips, designa una persona coordinadora i conserva de manera separada la relació codi-participant.
+2. Cada persona rep un codi pseudònim i la informació de participació.
+3. Abans de recollir dades, la persona llegeix i accepta un consentiment informat versionat.
+4. Una vegada per jornada laboral, en una franja pactada, completa KSS + PVT-BA i un context mínim.
+5. A l'inici, setmana 4 i setmana 8 completa DASS-21, GAD-7 i CBI (aproximadament 8-12 minuts).
+6. Rep retorn privat, no diagnòstic, sobre la seva pròpia tendència i recomanacions generals.
+7. El quadre de comandament calcula únicament agregats de grups amb cinc o més persones.
+8. PulsePath lliura informes quinzenals i facilita un taller final.
+
+**Protocol davant puntuacions elevades**
+
+La persona rep un avís privat, una explicació que el resultat no és un diagnòstic i recursos sanitaris o municipals oficials. No s'envia cap alerta nominativa a l'organització. PulsePath no és un servei d'emergència.
+
+**Governança de dades**
+
+- El codi és un pseudònim; no s'afirmarà que les dades crues són anònimes.
+- PulsePath no rep nom, correu ni identificador laboral.
+- Les dades viatgen xifrades i es guarden xifrades en una infraestructura acordada.
+- L'Ajuntament conserva la taula codi-persona només per a coordinació i recordatoris.
+- Els resultats organitzatius s'oculten si el segment té menys de cinc persones.
+- La reutilització per a recerca o millora de models requerirà un consentiment separat i no condicionarà la participació.
+- Les dades pseudonimitzades s'eliminaran com a màxim sis mesos després de l'informe final. Només es podran conservar resultats irreversiblement agregats.
+- Abans de començar es farà una revisió jurídica especialitzada, es definiran els rols RGPD, l'acord de tractament, l'anàlisi de riscos i, si correspon, una avaluació d'impacte.
+
+### Cronograma i fases d'execució
+
+**Preparació prèvia (2-4 setmanes després del conveni)**
+
+- designació de responsable municipal;
+- selecció d'equips i comunicació interna;
+- revisió jurídica, protecció de dades i seguretat;
+- configuració de l'entorn, codis, idioma i segments;
+- preflight de 7 a 14 dies amb 10-20 persones voluntàries adultes externes, informació específica, dades mínimes i eliminació en finalitzar;
+- verificació de compatibilitat, sincronització, supressió, K ≥ 5, còpia/restauració i protocol d'incidències;
+- gate de sortida: cap incident crític obert i correcció de qualsevol problema bloquejant abans d'activar personal municipal;
+- formació i protocol d'incidències.
+
+**Setmana 1**
+
+- sessió informativa i activació;
+- consentiment;
+- avaluació inicial DASS-21 + GAD-7 + CBI;
+- inici de check-ins;
+- cohort sentinella per verificar sincronització, suport i supressió K.
+
+**Setmana 2**
+
+- primer gate: continuïtat només si no hi ha incidents crítics i el flux és estable;
+- ajustos de comunicació i usabilitat;
+- primer informe operatiu.
+
+**Setmanes 3-4**
+
+- operació ordinària;
+- seguiment de l'adherència per part de la persona coordinadora, sense accés a puntuacions;
+- informe quinzenal;
+- avaluació intermèdia a la setmana 4.
+
+**Setmanes 5-7**
+
+- continuació dels check-ins;
+- tercer informe quinzenal;
+- revisió qualitativa amb representants municipals.
+
+**Setmana 8 i tancament**
+
+- avaluació final;
+- enquesta d'utilitat i confiança;
+- anàlisi agregada;
+- informe final i taller de retorn;
+- acord sobre eliminació, conservació agregada i possibles passos posteriors.
+
+Cap data concreta condiciona la viabilitat. L'inici pot fixar-se entre quatre i sis setmanes després de formalitzar el conveni i completar la revisió legal.
+
+### Actius necessaris
+
+**Aportació municipal**
+
+- accés voluntari a 50 persones de 2-4 equips;
+- una persona coordinadora interna;
+- implicació puntual de Persones/Recursos Humans, Prevenció de Riscos Laborals, Protecció de Dades i, si escau, representació de les persones treballadores;
+- canal de comunicació interna per a invitacions i recordatoris;
+- aproximadament 2-3 minuts dins de la jornada per al check-in i 8-12 minuts en tres fites;
+- espai virtual o físic per a la sessió inicial i el taller final.
+
+**Aportació de PulsePath**
+
+- ús sense cost de llicència durant la prova;
+- configuració, suport, infraestructura i manteniment;
+- aplicació, quadre de comandament, informes i taller final;
+- dedicació del responsable del projecte superior a 20 hores setmanals durant la prova.
+
+No es demanen dades de recursos humans, historials clínics, baixes, productivitat individual ni accés a sistemes municipals.
+
+### Necessitats tècniques i adequació
+
+- telèfon o ordinador amb navegador modern i connexió a internet;
+- infraestructura web amb HTTPS, xifrat en trànsit i en repòs, còpies de seguretat i control d'accés;
+- navegador en català i castellà abans de l'inici;
+- cap sensor, wearable, càmera, micròfon, geolocalització o accés a altres aplicacions;
+- cap obra civil, intervenció física ni afectació de l'espai públic;
+- suport remot i canal d'incidències;
+- validació prèvia de compatibilitat i latència en una mostra de dispositius.
+
+## 5. Viabilitat i convivència a la ciutat
+
+### Capacitat d'execució
+
+Max Borra Palau serà el responsable únic de PulsePath i dedicarà més de 20 hores setmanals a l'operació. Té experiència en desenvolupament de negoci i captació d'oportunitats i disposa del suport d'entorn d'ESIC i de la comunitat 1517. Aquestes xarxes no es presenten com a membres de l'equip ni com a avalistes.
+
+La tecnologia ja disposa d'un prototip integrat i de proves tècniques controlades. Abans de l'inici s'exigiran gates de producció: preflight amb voluntariat extern, HTTPS, còpia i restauració verificades, monitoratge, pla d'incidències, revisió de permisos, consentiment final i prova amb cohort sentinella. La comunitat 1517 i les xarxes personals o professionals poden facilitar l'accés a voluntariat, però no es presenten com a patrocinadores, sòcies ni avalistes de la prova.
+
+El principal risc de capacitat és la dependència d'una sola persona. Es mitigarà amb documentació operativa, automatització de còpies i monitoratge, calendari de suport, persona coordinadora municipal i criteri de pausa davant una incidència crítica.
+
+No se sol·licita una exempció de la normativa laboral, sanitària, de seguretat o protecció de dades. Les qüestions a concretar són els rols RGPD, l'acord de tractament, la base i forma del consentiment, la consulta a Prevenció i representació laboral i el conveni de la prova. Max presenta com a persona física i assumirà una revisió jurídica especialitzada abans de recollir dades.
+
+### Integració urbana
+
+La prova és digital, voluntària i de baixa intensitat. Es realitzarà dins d'una franja pactada, sense alterar torns, funcions, retribució, avaluació ni prestació de serveis. Una persona pot abandonar en qualsevol moment sense conseqüències.
+
+Els informes no identificaran equips quan la combinació de filtres pugui reduir el grup per sota de K = 5. No es publicaran rànquings d'equips ni s'utilitzaran puntuacions per comparar rendiment.
+
+### Seguretat i prevenció
+
+| Risc | Mesura de mitigació |
+|---|---|
+| Percepció de vigilància | comunicació clara, voluntarietat, retorn privat i prohibició d'ús individual |
+| Reidentificació | pseudonimització, separació de la taula codi-persona, K ≥ 5 i limitació de filtres |
+| Bretxa de dades | xifrat, mínim privilegi, secrets fora del codi, còpies, logs i pla d'incident |
+| Puntuació alta de malestar | avís privat no diagnòstic i derivació a recursos oficials, sense alerta a RRHH |
+| Baixa adherència | temps dins de jornada, recordatoris no invasius, coordinació i monitoratge de completitud separat |
+| Biaix de mostra o gènere | reclutament divers, anàlisi d'abandonament i interpretació no generalitzable |
+| Errors o indisponibilitat | preflight extern abans de l'activació municipal, cohort sentinella, monitoratge, reintents, còpia/restauració i possibilitat de pausa |
+| Latència entre dispositius | prova prèvia, registre de context tècnic mínim i anàlisi de sensibilitat |
+| Interpretació clínica o causal | etiquetatge exploratori, documentació de limitacions i revisió humana |
+| Ús secundari no esperat | consentiment separat i dret a participar sense autoritzar ML |
+
+## 6. Coneixement compartit i retorn a la ciutat
+
+### Compromís amb la diversitat i inclusió
+
+- Reclutament voluntari que procuri diversitat de gènere, edat, funció, torn i competència digital, d'acord amb la composició real dels equips.
+- Aplicació en català i castellà, llenguatge clar i recorregut accessible des de mòbil o ordinador.
+- Cap exclusió per no voler instal·lar una app: es podrà utilitzar des del navegador.
+- Seguiment de diferències d'activació i abandonament, sempre que els grups compleixin K ≥ 5.
+- Absència de penalització per no participar o abandonar.
+- La composició unipersonal actual de PulsePath es declararà amb transparència; la perspectiva d'inclusió s'incorporarà mitjançant el protocol, la revisió municipal i el feedback dels participants.
+
+### Criteris socioambientals i d'impacte de gènere
+
+La prova és digital i no requereix desplaçaments, equipament nou ni intervencions físiques. Es prioritzarà infraestructura proporcionada a l'escala de 50 persones, minimització de dades i retenció limitada.
+
+L'anàlisi explorarà diferències d'adherència i tendència per gènere i altres variables només quan hi hagi consentiment, necessitat analítica i grups prou grans. No s'inferirà el gènere i s'inclouran opcions inclusives. Els resultats no s'utilitzaran per atribuir diferències a característiques personals sense considerar torns, càrrega, cures i altres determinants socials.
+
+### Valor públic i retorn social
+
+La prova deixarà:
+
+- una metodologia documentada per a pilots digitals de benestar laboral amb privacitat K ≥ 5;
+- evidència d'adherència, acceptabilitat i limitacions en diferents contextos municipals;
+- recomanacions pràctiques per a la detecció preventiva i la comunicació interna;
+- un informe de resultats agregats i un taller de transferència;
+- un protocol de governança, consentiment, retenció i resposta davant puntuacions elevades;
+- criteris per decidir amb evidència si cal aturar, adaptar, ampliar o descartar la solució.
+
+Es podran publicar metodologia, indicadors i resultats agregats acordats amb l'Ajuntament. El codi, els models i la propietat intel·lectual de PulsePath es mantindran com a actius propis. No es publicarà cap dada individual.
+
+### Aprenentatge normatiu i millora de la gestió
+
+La prova pot generar aprenentatges sobre:
+
+- com coordinar Innovació, Persones, Prevenció, Protecció de Dades i representació laboral en una eina preventiva;
+- quina separació és necessària entre adherència, resultats individuals i informació organitzativa;
+- quins criteris mínims hauria de complir una eina digital no clínica abans d'utilitzar-se amb personal públic;
+- com aplicar K-anonimitat i minimització en equips petits;
+- quin consentiment i quin protocol de retorn generen confiança;
+- quan un indicador freqüent complementa —i quan no— les avaluacions reglamentàries.
+
+L'objectiu no és flexibilitzar obligacions, sinó provar un marc supervisat que les compleixi i que pugui informar futurs procediments municipals.
+
+### Indicadors clau (KPI)
+
+**Adopció i adherència**
+
+- 50 persones convidades.
+- Activació: objectiu ≥ 90%.
+- Check-ins completats sobre els programats: gate de viabilitat ≥ 70%.
+- Avaluacions DASS-21 + GAD-7 + CBI completes a inici, setmana 4 i setmana 8: ≥ 80%.
+- Abandonament i motius, sense penalització.
+
+**Qualitat tècnica**
+
+- Preflight extern completat abans d'activar participants municipals, amb 0 incidents crítics oberts i 100% de les proves de supressió i K ≥ 5 superades.
+- Sincronitzacions correctes: ≥ 98%.
+- Disponibilitat del servei durant franges pactades: ≥ 99%.
+- Aplicació automàtica de K ≥ 5: 100% dels resultats organitzatius.
+- Incidents crítics de privacitat o seguretat: 0.
+- Exercicis de dret de supressió resolts dins del termini pactat: 100%.
+
+**Utilitat i confiança**
+
+- Participants que consideren útil o comprensible el retorn privat: ≥ 75%.
+- Participants que entenen que RRHH no veu resultats individuals: ≥ 80%.
+- Interlocutors municipals que consideren útils el quadre i els informes per a converses preventives: ≥ 75%.
+
+**Evidència exploratòria**
+
+- Capacitat d'observar tendències temporals i diferències agregades entre contextos, sense objectiu de significació clínica.
+- Associació exploratòria entre mètriques PVT-BA/KSS i DASS-21/GAD-7/CBI.
+- Rendiment d'un baseline estadístic amb validació deixant una persona fora, reportat només si el volum i la qualitat són suficients.
+
+**Retorn**
+
+- Tres informes quinzenals, un informe final i un taller de transferència.
+- Documentació de limitacions, incidents, biaixos i decisió final: ampliar, adaptar, repetir o aturar.
+
+## Referències públiques
+
+- Ajuntament de Barcelona. *II Pla de Salut Mental de Barcelona 2023-2030*.
+- Ajuntament de Barcelona. *Acord de ciutat per cuidar la salut mental a la feina*.
+- Ajuntament de Barcelona. *Pla per a la reducció de l'absentisme del personal de l'Ajuntament de Barcelona i ens adherits a l'Acord de condicions* (2026).
+- Ajuntament de Barcelona. *Agenda 2030 de Barcelona*.
+- Basner M. et al. Publicacions sobre PVT-B i PVT-BA. La referència al paradigma no implica validació de la implementació de PulsePath.
+
+## Evidència visual
+
+1. Aplicació de participant: accés mitjançant codi pseudònim i consentiment previ.
+2. Quadre de comandament: vista agregada amb supressió K ≥ 5. Les dades mostrades són sintètiques i només serveixen de demostració.

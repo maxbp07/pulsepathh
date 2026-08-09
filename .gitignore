@@ -34,3 +34,6 @@ node_modules/
 cleanup-log-*.txt
 recovery-log-*.txt
 aesthetic-cleanup-log.txt
+
+# ML exports (pueden contener datos de estudio descifrados)
+backend/exports/

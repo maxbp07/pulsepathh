@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import {
   requestNotificationPermission,
   setRemindersEnabled,
-  scheduleDailyReminder,
+  subscribeToPush,
 } from '../lib/notifications';
 
 /**
- * /notifications — Opt-in de recordatorios (portado del mockup Dentista, conectado a lógica real).
+ * /notifications — Opt-in de recordatorios Web Push.
  */
 export default function NotificationOptIn() {
   const { t } = useTranslation();
@@ -15,13 +15,17 @@ export default function NotificationOptIn() {
 
   const finish = (enable: boolean) => {
     setRemindersEnabled(enable);
-    if (enable) void scheduleDailyReminder();
     navigate('/', { replace: true });
   };
 
   const handleAllow = async () => {
     const perm = await requestNotificationPermission();
-    finish(perm === 'granted');
+    if (perm === 'granted') {
+      await subscribeToPush();
+      finish(true);
+    } else {
+      finish(false);
+    }
   };
 
   return (

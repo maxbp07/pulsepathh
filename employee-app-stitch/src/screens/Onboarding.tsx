@@ -1,7 +1,9 @@
 import { useState, type ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { setOnboarded } from '../lib/prefs';
+import { getAccessCode, setOnboarded } from '../lib/prefs';
+import { activateWithBackend, isApiEnabled } from '../lib/api';
+import { setStudyDay0, localDateISO } from '../lib/studySchedule';
 
 /**
  * Onboarding (3 slides explicativos del PVT-BA) + consentimiento.
@@ -12,6 +14,8 @@ export default function Onboarding() {
   const navigate = useNavigate();
   const [slide, setSlide] = useState(0);
   const [agree, setAgree] = useState(false);
+  const [activating, setActivating] = useState(false);
+  const [activationError, setActivationError] = useState(false);
 
   const slides: { icon: string; title: string; body: string }[] = [
     { icon: 'biotech', title: t('onboarding.slide1Title'), body: t('onboarding.slide1Body') },
@@ -21,13 +25,32 @@ export default function Onboarding() {
 
   const isLast = slide === slides.length - 1;
 
-  const next = () => {
+  const next = async () => {
     if (!isLast) {
       setSlide((s) => s + 1);
       return;
     }
-    if (!agree) return;
+    if (!agree || activating) return;
+    setActivating(true);
+    setActivationError(false);
+    if (isApiEnabled()) {
+      const code = getAccessCode();
+      const activated = code ? await activateWithBackend(code) : null;
+      if (!activated) {
+        setActivationError(true);
+        setActivating(false);
+        return;
+      }
+      if (activated.studyDay0) {
+        setStudyDay0(activated.studyDay0);
+      } else {
+        setStudyDay0(localDateISO());
+      }
+    } else {
+      setStudyDay0(localDateISO());
+    }
     setOnboarded();
+    setActivating(false);
     navigate('/notifications', { replace: true });
   };
 
@@ -66,6 +89,9 @@ export default function Onboarding() {
           ))}
         </div>
 
+        {isLast && activationError && (
+          <p className="font-caption text-caption text-error text-center">{t('onboarding.activationError')}</p>
+        )}
         {isLast && (
           <label className="flex items-start gap-sm cursor-pointer">
             <input
@@ -74,7 +100,12 @@ export default function Onboarding() {
               onChange={(e) => setAgree(e.target.checked)}
               className="mt-1 w-5 h-5 accent-[#264dd9]"
             />
-            <span className="font-body-md text-body-md text-on-surface-variant">{t('onboarding.consent')}</span>
+            <span className="font-body-md text-body-md text-on-surface-variant">
+              {t('onboarding.consent')}{' '}
+              <Link to="/consent" className="text-primary underline">
+                {t('onboarding.consentLink')}
+              </Link>
+            </span>
           </label>
         )}
 

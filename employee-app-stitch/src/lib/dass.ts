@@ -1,31 +1,71 @@
 /**
- * DASS-21 — subescala de ESTRÉS (7 ítems). Libre / uso comercial OK.
- * Cada ítem 0-3 sobre "la última semana". Raw 0-21.
- * Tabla de severidad Lovibond & Lovibond (1995) ×2 para la escala completa
- * (aquí solo subescala estrés, sin multiplicar, por brevedad clínica).
+ * DASS-21 completo — depresión, ansiedad y estrés (21 ítems, 0-3 cada uno).
+ * Subescalas raw 0-21; severidad según Lovibond & Lovibond (1995).
  */
 
 export type DassSeverity = 'normal' | 'mild' | 'moderate' | 'severe' | 'extremely severe';
+export type DassSubscale = 'depression' | 'anxiety' | 'stress';
 
-/** Raw 0-21 → severidad (umbrales subescala Estrés DASS-21). */
-export function dassStressSeverity(raw: number): DassSeverity {
-  if (raw <= 7) return 'normal';
-  if (raw <= 9) return 'mild';
-  if (raw <= 12) return 'moderate';
-  if (raw <= 16) return 'severe';
+/** Índices 0-based de cada subescala en el orden estándar DASS-21. */
+export const DASS_SUBSCALE_ITEMS: Record<DassSubscale, number[]> = {
+  stress: [0, 5, 7, 10, 11, 13, 17],
+  anxiety: [1, 3, 6, 8, 14, 18, 19],
+  depression: [2, 4, 9, 12, 15, 16, 20],
+};
+
+const SEVERITY_THRESHOLDS: Record<DassSubscale, [number, number, number, number]> = {
+  depression: [9, 13, 20, 27],
+  anxiety: [7, 9, 14, 19],
+  stress: [14, 18, 25, 33],
+};
+
+export interface DassFullScores {
+  depression: number;
+  anxiety: number;
+  stress: number;
+  total: number;
+}
+
+export function dassSubscaleSeverity(subscale: DassSubscale, raw: number): DassSeverity {
+  const [mild, moderate, severe, extreme] = SEVERITY_THRESHOLDS[subscale];
+  if (raw <= mild) return 'normal';
+  if (raw <= moderate) return 'mild';
+  if (raw <= severe) return 'moderate';
+  if (raw <= extreme) return 'severe';
   return 'extremely severe';
 }
 
-/** Raw 0-21 → índice 0-100 (mayor = más estrés). */
-export function dassStressIndex(raw: number): number {
+/** Raw 0-21 → índice 0-100 (mayor = peor). */
+export function dassSubscaleIndex(raw: number): number {
   return Math.round(clamp(raw, 0, 21) * (100 / 21));
 }
 
-/** Suma las respuestas 0-3. Ignora valores fuera de rango. */
-export function scoreDassStress(answers: number[]): number {
-  return answers
-    .map((a) => clamp(Math.round(a), 0, 3))
+export function scoreDassSubscale(answers: number[], indices: number[]): number {
+  return indices
+    .map((i) => clamp(Math.round(answers[i] ?? 0), 0, 3))
     .reduce((acc, a) => acc + a, 0);
+}
+
+export function scoreDassFull(answers: number[]): DassFullScores {
+  const depression = scoreDassSubscale(answers, DASS_SUBSCALE_ITEMS.depression);
+  const anxiety = scoreDassSubscale(answers, DASS_SUBSCALE_ITEMS.anxiety);
+  const stress = scoreDassSubscale(answers, DASS_SUBSCALE_ITEMS.stress);
+  return { depression, anxiety, stress, total: depression + anxiety + stress };
+}
+
+/** @deprecated use scoreDassFull */
+export function scoreDassStress(answers: number[]): number {
+  return scoreDassSubscale(answers, DASS_SUBSCALE_ITEMS.stress);
+}
+
+/** @deprecated use dassSubscaleSeverity('stress', raw) */
+export function dassStressSeverity(raw: number): DassSeverity {
+  return dassSubscaleSeverity('stress', raw);
+}
+
+/** @deprecated use dassSubscaleIndex */
+export function dassStressIndex(raw: number): number {
+  return dassSubscaleIndex(raw);
 }
 
 function clamp(v: number, min: number, max: number): number {

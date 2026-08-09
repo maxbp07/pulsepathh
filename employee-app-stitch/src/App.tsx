@@ -13,7 +13,12 @@ import CheckInPvt from './screens/CheckInPvt';
 import CheckInResult from './screens/CheckInResult';
 import WeeklyStress from './screens/WeeklyStress';
 import WeeklyWellness from './screens/WeeklyWellness';
+import StudyHub from './screens/StudyHub';
+import StudyDass from './screens/StudyDass';
+import StudyGad7 from './screens/StudyGad7';
+import StudyCbi from './screens/StudyCbi';
 import NotificationOptIn from './screens/NotificationOptIn';
+import ConsentInfo from './screens/ConsentInfo';
 
 /**
  * Routing (HashRouter en main.tsx: subpath-safe).
@@ -39,7 +44,15 @@ export default function App() {
       />
 
       <Route
-        path="/notifications"
+        path="/consent"
+        element={
+          <RequireAuth>
+            <ConsentInfo />
+          </RequireAuth>
+        }
+      />
+
+      <Route
         element={
           <RequireAuth>
             <NotificationOptIn />
@@ -116,6 +129,40 @@ export default function App() {
         element={
           <RequireAuth requireOnboarded>
             <WeeklyWellness />
+          </RequireAuth>
+        }
+      />
+
+      {/* Estudio D0/D7/D14 */}
+      <Route
+        path="/study"
+        element={
+          <RequireAuth requireOnboarded>
+            <StudyHub />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/study/dass"
+        element={
+          <RequireAuth requireOnboarded>
+            <StudyDass />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/study/gad7"
+        element={
+          <RequireAuth requireOnboarded>
+            <StudyGad7 />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/study/cbi"
+        element={
+          <RequireAuth requireOnboarded>
+            <StudyCbi />
           </RequireAuth>
         }
       />

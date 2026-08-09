@@ -20,4 +20,13 @@ export const config = {
   encryptionKey,
   adminSecret: process.env.ADMIN_SECRET,
   nodeEnv: process.env.NODE_ENV || 'development',
+  corsOrigins: (process.env.CORS_ORIGINS ?? 'http://localhost:5173,http://localhost:5174')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean),
+  vapidPublicKey: process.env.VAPID_PUBLIC_KEY ?? null,
+  vapidPrivateKey: process.env.VAPID_PRIVATE_KEY ?? null,
+  vapidSubject: process.env.VAPID_SUBJECT ?? 'mailto:ops@study.pulsepath.local',
+  alertWebhookUrl: process.env.ALERT_WEBHOOK_URL ?? null,
+  gitSha: process.env.GIT_SHA ?? 'dev',
 };

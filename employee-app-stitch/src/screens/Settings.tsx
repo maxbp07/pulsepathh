@@ -1,10 +1,12 @@
-import { useState, type ReactNode } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { clearAll, getSessions } from '../lib/db';
+import { clearAll, getSessions, APP_VERSION } from '../lib/db';
 import { buildBundle, downloadJson, exportPdf } from '../lib/export';
-import { clearAccessCode, getAccessCode, getLang, setLang, type Lang } from '../lib/prefs';
-import { APP_VERSION } from '../lib/db';
+import { clearAccessCode, clearOnboarded, clearRemindersEnabled, getAccessCode, getLang, setLang, type Lang } from '../lib/prefs';
+import { clearApiToken, deleteRemoteData, isApiEnabled } from '../lib/api';
+import { unsubscribeFromPush } from '../lib/notifications';
+import { flushOutbox, getSyncStatus } from '../lib/outbox';
 
 export default function Settings() {
   const { t, i18n } = useTranslation();
@@ -13,8 +15,17 @@ export default function Settings() {
   const [confirmingSignOut, setConfirmingSignOut] = useState(false);
   const [confirmingClear, setConfirmingClear] = useState(false);
   const [cleared, setCleared] = useState(false);
+  const [syncPending, setSyncPending] = useState(0);
+  const [syncTerminal, setSyncTerminal] = useState(0);
 
   const userId = getAccessCode() ?? '—';
+
+  useEffect(() => {
+    getSyncStatus().then((s) => {
+      setSyncPending(s.pending);
+      setSyncTerminal(s.terminalErrors);
+    });
+  }, []);
 
   const changeLang = (next: Lang) => {
     setLangState(next);
@@ -28,12 +39,19 @@ export default function Settings() {
     exportPdf(sessions);
   };
   const handleClear = async () => {
+    await deleteRemoteData();
+    if (isApiEnabled()) await unsubscribeFromPush();
+    clearApiToken();
     await clearAll();
+    clearAccessCode();
+    clearOnboarded();
+    clearRemindersEnabled();
     setCleared(true);
     setConfirmingClear(false);
   };
   const handleSignOut = () => {
     clearAccessCode();
+    clearOnboarded();
     navigate('/login', { replace: true });
   };
 
@@ -91,6 +109,27 @@ export default function Settings() {
       {/* Data & privacy */}
       <Section title={t('settings.data')}>
         <p className="font-body-md text-body-md text-on-surface-variant px-md pt-md">{t('settings.dataBody')}</p>
+        {syncTerminal > 0 && (
+          <p className="font-caption text-caption text-error px-md pb-sm">
+            {t('settings.syncTerminal', { n: syncTerminal })}
+          </p>
+        )}
+        {syncPending > 0 && (
+          <div className="px-md py-sm flex items-center justify-between">
+            <span className="font-caption text-caption text-on-surface-variant">{t('settings.syncPending', { n: syncPending })}</span>
+            <button
+              onClick={async () => {
+                await flushOutbox();
+                const s = await getSyncStatus();
+                setSyncPending(s.pending);
+                setSyncTerminal(s.terminalErrors);
+              }}
+              className="font-label-bold text-label-bold text-primary"
+            >
+              {t('settings.syncRetry')}
+            </button>
+          </div>
+        )}
         <ActionRow icon="description" label={t('settings.exportPdf')} onClick={handlePdf} />
         <ActionRow icon="download" label={t('settings.exportJson')} onClick={handleJson} />
       </Section>

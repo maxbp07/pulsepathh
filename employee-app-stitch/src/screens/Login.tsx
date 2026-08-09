@@ -2,12 +2,12 @@ import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { isValidAccessCode, setAccessCode, isOnboarded } from '../lib/prefs';
-import { activateWithBackend, isApiEnabled } from '../lib/api';
+
 
 /**
  * /login — Privacy-first. Solo pide un "Access Code" (formato ABC-123).
  * El código SE convierte en la identidad del participante (sin contraseña,
- * sin servidor). Si el dispositivo ya está onboarding-do, va a Home.
+ * pseudónimo local). La activación en servidor ocurre tras el consentimiento. Si el dispositivo ya está onboarding-do, va a Home.
  */
 export default function Login() {
   const { t } = useTranslation();
@@ -24,14 +24,6 @@ export default function Login() {
       return;
     }
     setLoading(true);
-    if (isApiEnabled()) {
-      const activated = await activateWithBackend(normalized);
-      if (!activated) {
-        setError(true);
-        setLoading(false);
-        return;
-      }
-    }
     setAccessCode(normalized);
     setLoading(false);
     navigate(isOnboarded() ? '/' : '/onboarding', { replace: true });

@@ -19,10 +19,11 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
+      CORS_ORIGINS: ${CORS_ORIGINS:-https://app.getpulsepath.com,http://localhost:3001}
     networks:
       - pulsepath-internal
     healthcheck:
-      test: ["CMD", "node", "-e", "const h=require('http');h.get('http://localhost:3000/',r=>{process.exit(r.statusCode<400?0:1)}).on('error',()=>process.exit(1))"]
+      test: ["CMD", "node", "-e", "const h=require('http');h.get('http://localhost:3000/health',r=>{process.exit(r.statusCode<400?0:1)}).on('error',()=>process.exit(1))"]
       interval: 30s
       timeout: 10s
       start_period: 45s

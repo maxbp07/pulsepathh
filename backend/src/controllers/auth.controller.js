@@ -103,9 +103,12 @@ export async function activateAnonymous(req, res) {
     { expiresIn: '30d' }
   );
 
+  const refreshed = await prisma.accessCode.findUnique({ where: { codeHash: code_hash } });
+
   return res.status(200).json({
     token,
     department: accessCode.department,
     shift: accessCode.shift,
+    study_day0: refreshed?.studyDay0?.toISOString().slice(0, 10) ?? null,
   });
 }

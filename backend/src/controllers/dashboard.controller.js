@@ -47,6 +47,14 @@ const prisma = new PrismaClient();
  */
 export async function getDashboard(req, res) {
   const { orgId } = req.params;
+  const org = await prisma.organization.findUnique({ where: { id: orgId } });
+  if (!org) {
+    return res.status(404).json({ error: 'Organization not found.' });
+  }
+  if (org.kind === 'study') {
+    return res.status(403).json({ error: 'Dashboard aggregates disabled for study cohorts. Use /api/v1/ops instead.' });
+  }
+
 
   // Verify the authenticated employer belongs to the requested org.
   if (req.employer.orgId !== orgId) {

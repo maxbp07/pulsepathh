@@ -54,9 +54,10 @@ export function clearAccessCode(): void {
   remove(K_PARTICIPANT);
 }
 
-/** Validates the access-code format: 3 letters, dash, 3 digits (e.g. BCN-492). */
+/** Validates study (PP-2026-001) and legacy demo (BCN-492) access codes. */
 export function isValidAccessCode(code: string): boolean {
-  return /^[A-Z]{3}-\d{3}$/.test(code.trim().toUpperCase());
+  const c = code.trim().toUpperCase();
+  return /^(PP-\d{4}-\d{3}|[A-Z]{3}-\d{3})$/.test(c);
 }
 
 // ─── Onboarding (once per device) ────────────────────────────────────────────
@@ -67,6 +68,16 @@ export function isOnboarded(): boolean {
 
 export function setOnboarded(): void {
   write(K_ONBOARDED, '1');
+}
+
+export function clearOnboarded(): void {
+  remove(K_ONBOARDED);
+}
+
+const K_REMINDERS = 'pulsepath.remindersEnabled';
+
+export function clearRemindersEnabled(): void {
+  remove(K_REMINDERS);
 }
 
 // ─── Language ────────────────────────────────────────────────────────────────

@@ -148,6 +148,24 @@ export default function Dashboard() {
           </Link>
         </div>
 
+        {/* Study assessments (piloto ML) */}
+        <div className="md:col-span-12 flex flex-col gap-sm">
+          <div className="flex justify-between items-center px-2">
+            <h3 className="font-headline-md text-headline-md text-on-background">{t('study.cardTitle')}</h3>
+          </div>
+          <Link
+            to="/study"
+            className="flex items-center gap-md p-md bg-surface-container-lowest border border-primary/30 rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] hover:shadow-lg active:scale-95 transition"
+          >
+            <span className="material-symbols-outlined text-primary text-3xl">science</span>
+            <div className="flex-grow">
+              <div className="font-body-md text-body-md text-on-surface">{t('study.cardBody')}</div>
+              <div className="font-caption text-caption text-outline-variant">{t('study.notDiagnostic')}</div>
+            </div>
+            <span className="font-label-bold text-label-bold text-primary">{t('study.cardCta')}</span>
+          </Link>
+        </div>
+
         {/* Weekly assessments */}
         <div className="md:col-span-12 flex flex-col gap-sm">
           <div className="flex justify-between items-center px-2">

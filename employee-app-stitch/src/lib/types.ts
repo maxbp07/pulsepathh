@@ -77,3 +77,30 @@ export interface AppConfig {
   onboarded: boolean;
   createdAt: string;
 }
+
+export type StudyTimepoint = 'D0' | 'D7' | 'D14';
+
+/** Cuestionario del estudio guardado localmente (DASS / GAD-7 / CBI). */
+export interface AssessmentEntry {
+  id: string;
+  participantId: string;
+  instrument: 'DASS21_FULL' | 'GAD7' | 'CBI';
+  timepoint: StudyTimepoint;
+  takenAt: string;
+  synced: boolean;
+  appVersion: string;
+}
+
+export type SyncQueueKind = 'daily' | 'questionnaire';
+
+export interface SyncQueueEntry {
+  id: string;
+  kind: SyncQueueKind;
+  clientRecordId: string;
+  payload: unknown;
+  createdAt: string;
+  attempts: number;
+  lastError?: string;
+  nextRetryAt: string;
+  synced: boolean;
+}

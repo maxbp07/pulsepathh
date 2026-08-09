@@ -1,9 +1,15 @@
 /**
- * PulsePath — recordatorios PWA (check-in diario).
- * Requiere HTTPS + permiso concedido.
+ * PulsePath — Web Push VAPID + permisos de notificación.
  */
+import {
+  fetchVapidPublicKey,
+  isApiEnabled,
+  registerPushSubscription,
+  unregisterPushSubscription,
+} from './api';
+
 const REMINDER_KEY = 'pulsepath.remindersEnabled';
-const REMINDER_HOUR = 9; // 09:00 hora local
+const PUSH_ENDPOINT_KEY = 'pulsepath.pushEndpoint';
 
 export function areRemindersEnabled(): boolean {
   try {
@@ -28,24 +34,63 @@ export async function requestNotificationPermission(): Promise<NotificationPermi
   return Notification.requestPermission();
 }
 
-/** Programa un recordatorio local vía Service Worker si está disponible. */
-export async function scheduleDailyReminder(): Promise<void> {
-  if (!areRemindersEnabled()) return;
-  if (typeof window === 'undefined' || !('serviceWorker' in navigator)) return;
-  const reg = await navigator.serviceWorker.ready.catch(() => null);
-  if (!reg || !('showNotification' in reg)) return;
+function urlBase64ToUint8Array(base64: string): Uint8Array {
+  const padding = '='.repeat((4 - (base64.length % 4)) % 4);
+  const b64 = (base64 + padding).replace(/-/g, '+').replace(/_/g, '/');
+  const raw = atob(b64);
+  const out = new Uint8Array(raw.length);
+  for (let i = 0; i < raw.length; i += 1) out[i] = raw.charCodeAt(i);
+  return out;
+}
 
-  const now = new Date();
-  const next = new Date(now);
-  next.setHours(REMINDER_HOUR, 0, 0, 0);
-  if (next <= now) next.setDate(next.getDate() + 1);
-  const delay = next.getTime() - now.getTime();
+export async function subscribeToPush(): Promise<boolean> {
+  if (!isApiEnabled()) return false;
+  if (!('serviceWorker' in navigator) || !('PushManager' in window)) return false;
 
-  setTimeout(() => {
-    void reg.showNotification('PulsePath', {
-      body: 'Tu check-in diario te espera (~2 min).',
-      icon: '/pulsepath/icons/icon.svg',
-      tag: 'pulsepath-daily',
+  const perm = await requestNotificationPermission();
+  if (perm !== 'granted') return false;
+
+  const vapid = await fetchVapidPublicKey();
+  if (!vapid) return false;
+
+  const reg = await navigator.serviceWorker.ready;
+  let sub = await reg.pushManager.getSubscription();
+  if (!sub) {
+    sub = await reg.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(vapid) as BufferSource,
     });
-  }, delay);
+  }
+
+  const json = sub.toJSON();
+  const ok = await registerPushSubscription(json);
+  if (ok && json.endpoint) {
+    try {
+      localStorage.setItem(PUSH_ENDPOINT_KEY, json.endpoint);
+    } catch {
+      /* noop */
+    }
+  }
+  return ok;
+}
+
+export async function unsubscribeFromPush(): Promise<void> {
+  if (!('serviceWorker' in navigator)) return;
+  const reg = await navigator.serviceWorker.ready;
+  const sub = await reg.pushManager.getSubscription();
+  if (sub) {
+    const endpoint = sub.endpoint;
+    await unregisterPushSubscription(endpoint);
+    await sub.unsubscribe();
+    try {
+      localStorage.removeItem(PUSH_ENDPOINT_KEY);
+    } catch {
+      /* noop */
+    }
+  }
+}
+
+/** @deprecated use subscribeToPush */
+export async function scheduleDailyReminder(): Promise<void> {
+  if (areRemindersEnabled()) await subscribeToPush();
 }

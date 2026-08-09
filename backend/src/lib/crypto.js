@@ -148,3 +148,40 @@ export function decryptNumber(buffer) {
 
   return parsed;
 }
+
+
+/**
+ * Canonical JSON serialisation for stable hashing (sorted keys, no whitespace).
+ */
+export function canonicalJson(value) {
+  if (value === null || typeof value !== 'object') {
+    return JSON.stringify(value);
+  }
+  if (Array.isArray(value)) {
+    return '[' + value.map((item) => canonicalJson(item)).join(',') + ']';
+  }
+  const keys = Object.keys(value).sort();
+  const entries = keys.map((key) => JSON.stringify(key) + ':' + canonicalJson(value[key]));
+  return '{' + entries.join(',') + '}';
+}
+
+export function sha256Hex(value) {
+  return crypto.createHash('sha256').update(value, 'utf8').digest('hex');
+}
+
+export function hashCanonicalJson(value) {
+  return sha256Hex(canonicalJson(value));
+}
+
+export function encryptJson(value) {
+  return encryptString(JSON.stringify(value));
+}
+
+export function decryptJson(buffer) {
+  const decrypted = decryptString(buffer);
+  try {
+    return JSON.parse(decrypted);
+  } catch {
+    throw new Error('decryptJson: decrypted payload is not valid JSON.');
+  }
+}
