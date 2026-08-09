@@ -37,3 +37,6 @@ aesthetic-cleanup-log.txt
 
 # ML exports (pueden contener datos de estudio descifrados)
 backend/exports/
+
+# Backups locales de Postgres (no versionar dumps)
+backend/backups/
