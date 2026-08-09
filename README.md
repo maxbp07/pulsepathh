@@ -146,11 +146,11 @@ Ejecuta este checklist de forma secuencial para validar el slice vertical E2E de
 
 | Rol | Dato | Valor |
 |---|---|---|
-| Empleado | Código de acceso | `BCN-2026-A001` (atencion_ciudadana / morning) |
+| Empleado | Código de acceso | `PP-2026-001` (atencion_ciudadana / morning) |
 | RRHH | Email | `rrhh@bcn.cat` |
 | RRHH | Contraseña | `demo1234` |
 
-> Códigos disponibles: `BCN-2026-A001` → `BCN-2026-A050`  
+> Códigos disponibles: `PP-2026-001` → `PP-2026-050`  
 > A001–A025: departamento `atencion_ciudadana`, turno `morning`  
 > A026–A050: departamento `informatica`, turno `afternoon`
 
@@ -158,7 +158,7 @@ Ejecuta este checklist de forma secuencial para validar el slice vertical E2E de
 
 **Employee App** — http://localhost:5173
 
-- [ ] Abrir la app y completar el onboarding introduciendo el código `BCN-2026-A001`
+- [ ] Abrir la app y completar el onboarding introduciendo el código `PP-2026-001`
 - [ ] Completar un check-in completo: PVT (tiempo de reacción) + test de Stroop
 - [ ] Verificar que el resultado aparece en la pantalla de inicio (semáforo / puntuación)
 - [ ] Navegar a "Historial" y confirmar que aparece la gráfica con el check-in registrado

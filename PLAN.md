@@ -30,7 +30,7 @@ Antes de empezar, referencia rápida de cuándo usar qué. Aplícala en cada sec
 
 | Tema               | Decisión                                                                                             |
 | ------------------ | ---------------------------------------------------------------------------------------------------- |
-| Punto de partida   | Proyecto nuevo en `/pulsepath/`, prototipo como referencia                                           |
+| Punto de partida   | Proyecto nuevo en `/`, prototipo como referencia                                           |
 | Modelo de riesgo   | Fórmula determinista (pesos 0.40/0.25/0.25/0.10), módulo `risk_engine` aislado y reemplazable por ML |
 | Check-in           | Diario ligero (PVT + Stroop + micro-check 3 preguntas) + CBI semanal (19 preguntas fijas)            |
 | Adaptatividad      | Por reglas simples (no LLM — destruiría el argumento de privacidad Edge AI)                          |
@@ -181,7 +181,7 @@ Cada entrada incluye: descripción, complejidad y modelo de IA recomendado.
 | `backend/Dockerfile`   | Imagen Node 20 LTS + dependencias                                           | Simple      | **composer-2.5-fast** |
 | `backend/package.json` | Dependencias del backend                                                    | Simple      | **composer-2.5-fast** |
 | `prisma/schema.prisma` | Define todas las tablas (ver §Esquema DB)                                   | Media       | **composer-2.5**      |
-| `prisma/seed.js`       | Crea org BCN + 50 códigos `BCN-2026-Axxx` + hashea cada uno                 | Media       | **composer-2.5**      |
+| `prisma/seed.js`       | Crea org BCN + 50 códigos `PP-2026-NNN` + hashea cada uno                 | Media       | **composer-2.5**      |
 | `src/index.js`         | Configura Express, carga middlewares, monta rutas, manejo de errores global | Simple      | **composer-2.5**      |
 | `src/config/env.js`    | Carga y valida variables de entorno; falla si falta alguna crítica          | Simple      | **composer-2.5-fast** |
 
@@ -477,9 +477,9 @@ Genera N códigos para una org. Devuelve la lista en claro **una sola vez** (par
 
 ```json
 // request
-{ "org_slug": "ayuntamiento_bcn", "count": 50, "department_map": { "BCN-2026-A001-A025": "atencion_ciudadana", "BCN-2026-A026-A050": "informatica" } }
+{ "org_slug": "ayuntamiento_bcn", "count": 50, "department_map": { "PP-2026-001-A025": "atencion_ciudadana", "BCN-2026-A026-A050": "informatica" } }
 // response 201
-{ "codes": ["BCN-2026-A001", "BCN-2026-A002", ...] }
+{ "codes": ["PP-2026-001", "BCN-2026-A002", ...] }
 ```
 
 ---
@@ -490,7 +490,7 @@ Genera N códigos para una org. Devuelve la lista en claro **una sola vez** (par
 
 1. Abre la PWA → detecta que no hay token local → redirige a **onboarding**.
 2. Lee la pantalla de **consentimiento RGPD** (qué se recoge, qué no, derecho de supresión). Acepta.
-3. Introduce su código `BCN-2026-A007`.
+3. Introduce su código `PP-2026-007`.
 4. El cliente hashea el código con **SHA-256** en el dispositivo → `code_hash`. El código en claro nunca sale del dispositivo.
 5. `POST /auth/anonymous` → recibe token anónimo + departamento + turno.
 6. Token se cifra con Web Crypto y se guarda en **IndexedDB**.

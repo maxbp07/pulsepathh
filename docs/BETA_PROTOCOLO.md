@@ -4,7 +4,7 @@
 
 ## Participantes
 - **N:** 20-30 personas (ESIC, gimnasio, fútbol, familia)
-- **Código:** cada uno recibe un código único formato `ABC-123` (registrar en hoja)
+- **Código:** cada uno recibe un código único formato `PP-2026-001` (registrar en hoja)
 - **App:** `https://app.getpulsepath.com` (o URL VPS mientras no haya HTTPS)
 
 ## Calendario

@@ -108,7 +108,7 @@ function hashCode(code) {
 }
 
 function buildAccessCode(index) {
-  return `BCN-2026-A${String(index).padStart(3, '0')}`;
+  return `PP-2026-${String(index).padStart(3, '0')}`;
 }
 
 // Departamento + turno por índice (mantiene la narrativa del pitch y crea

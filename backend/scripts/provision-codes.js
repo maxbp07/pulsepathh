@@ -1,4 +1,19 @@
-﻿import 'dotenv/config';
+﻿/**
+ * Provision access codes for the PulsePath study pilot.
+ *
+ * Canonical format: PP-YYYY-NNN (e.g. PP-2026-001)
+ * Canonical org slug: study_mixed_2026
+ *
+ * Seed 120 codes (default):
+ *   node scripts/provision-codes.js
+ *   node scripts/provision-codes.js --org-slug study_mixed_2026 --count 120 --prefix PP-2026
+ *
+ * Output: provision-YYYY-MM-DD.csv with columns slot_label,plain_code
+ * Do NOT run against production without an explicit ops decision.
+ *
+ * First create the org with: node scripts/seed-study.js
+ */
+import 'dotenv/config';
 import { createHash, randomUUID } from 'node:crypto';
 import { writeFileSync } from 'node:fs';
 import { PrismaClient } from '@prisma/client';
@@ -22,6 +37,9 @@ function parseArgs() {
 
 async function main() {
   const { orgSlug, count, prefix } = parseArgs();
+  if (!/^PP-\d{4}$/.test(prefix)) {
+    throw new Error(`prefix must match PP-YYYY (got ${prefix}); plain codes are ${prefix}-NNN`);
+  }
   const org = await prisma.organization.findUnique({ where: { slug: orgSlug } });
   if (!org) throw new Error(`Organization not found: ${orgSlug}`);
 
@@ -53,6 +71,7 @@ async function main() {
   const filename = `provision-${new Date().toISOString().slice(0, 10)}.csv`;
   writeFileSync(filename, rows.join('\n'), 'utf8');
   console.log(`Provisioned ${count} codes for ${orgSlug}. CSV: ${filename}`);
+  console.log(`Format: ${prefix}-NNN (e.g. ${prefix}-001). App validates /^PP-\\d{4}-\\d{3}$/.`);
 }
 
 main()
