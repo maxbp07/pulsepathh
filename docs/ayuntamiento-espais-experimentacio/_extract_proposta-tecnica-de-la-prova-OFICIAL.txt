@@ -1,0 +1,53 @@
+-428621195388
+Proposta tècnica de la prova
+Títol de la proposta
+1. Resum i context
+Descripció
+Expliqueu què és la vostra solució, com funciona i a quina necessitat respon.
+Objectius de la prova
+Definiu quins aspectes específics voleu validar o provar a l’espai d’experimentació.
+Antecedents
+Enumereu les vostres fites, com ara l’obtenció de subvencions o suports de qualsevol administració pública. Esmenteu sobretot la vostra participació en programes d’acceleració o incubació promoguts per l’Ajuntament de Barcelona, els seus ens instrumentals o altres institucions que hagin impulsat el vostre creixement.
+2. Requisits per participar (elegibilitat)
+Nivell de maduresa tecnològica
+Justifiqueu que el projecte es troba en un nivell TRL 5 o superior.
+El valor de provar en un entorn real
+Expliqueu per què cal fer la prova en un espai d’experimentació de Barcelona i com contribuirà en el desenvolupament del vostre projecte.
+Coherència amb els objectius estratègics municipals
+Argumenteu de quina manera la finalitat del projecte s’integra i resulta coherent amb les línies principals d’actuació i amb el model de ciutat de Barcelona. L’objectiu és demostrar que la vostra missió global està alineada amb la visió institucional.
+Durada prevista
+Proposeu una estimació de la durada total de la prova (amb un màxim de 24 mesos).
+3. Innovació i valor per a Barcelona
+Què us fa diferents? (innovació i valor diferencial)
+Expliqueu-nos què fa que la vostra solució sigui única i quin és el vostre avantatge competitiu davant del que ja hi ha al mercat. Descriviu els elements innovadors que us diferencien i com les vostres funcionalitats resolen les necessitats de Barcelona de forma més eficaç.
+Encaix amb Barcelona
+Detalleu el grau d’alineació operativa amb els reptes específics i les polítiques públiques vigents a la ciutat. A diferència de la coherència estratègica (requisits per participar-hi), aquí es valora la vostra contribució directa a plans i actuacions concretes de l’agenda urbana actual de Barcelona.
+Potencial de creixement
+Valoreu la capacitat de la solució per a ser escalada o reproduïda en altres contextos.
+4. El pla d’acció (com es farà la prova)
+Metodologia
+Compartiu els passos, processos i tècniques que seguireu per dur a terme l’experimentació.
+Cronograma i fases d’execució
+Detalleu la seqüència temporal de la prova dividida en etapes, tot marcant les fites que defineixen el vostre pla de treball i indicant si alguna data condiciona la viabilitat del projecte.
+Actius necessaris
+Identifiqueu els actius —béns, recursos, espais físics (carrers, places o edificis), infraestructures, serveis, esdeveniments o dades públiques i privades— on voleu fer la prova. Consulteu el catàleg d’actius disponibles per seleccionar els recursos més adequats i justifiqueu-ne la idoneïtat per a la prova.
+Necessitats tècniques i adequació
+Detalleu les necessitats per al funcionament (com ara llum, dades o potència) i especifiqueu si la prova requereix intervencions físiques com obra civil o adequació de l’espai. En cas de productes físics, incloeu les seves dimensions i una imatge o croquis.
+5. Viabilitat i convivència a la ciutat
+Capacitat d’execució
+Justifiqueu la solidesa del vostre equip i de la tecnologia per dur a terme la prova amb èxit. Identifiqueu quines normes o barreres legals municipals limiten actualment el vostre desplegament i detalleu per què necessiteu un marc de flexibilització normativa perquè la prova sigui possible.
+Integració urbana
+Expliqueu com conviurà la prova amb els serveis públics i l’entorn sense interrompre el dia a dia de la ciutat.
+Seguretat i prevenció
+Avalueu possibles riscos per a les persones o infraestructures i proposeu mesures per mitigar-los.
+6. Coneixement compartit i retorn a la ciutat
+Compromís amb la diversitat i inclusió
+Informeu sobre la incorporació de criteris de diversitat, equitat de gènere i inclusió, tant de la proposta com de l’equip de persones que la presenta.
+Criteris socioambientals i d’impacte de gènere
+Detalleu la incorporació de criteris socioambientals i d’impacte de gènere en el projecte.
+Valor públic i retorn social
+Expliqueu quin llegat positiu es preveu que deixi la prova i com contribueix a generar un benefici directe a les persones i l’entorn i ajuda a resoldre reptes de Barcelona.
+Aprenentatge normatiu i millora de la gestió
+Descriviu com contribuirà la prova a generar aprenentatge comú i possibles millores en les normes i procediments del govern de la ciutat.
+Indicadors clau (KPI)
+Concreteu les dades i mètriques que utilitzareu per mesurar el rendiment i l’èxit de l’experimentació.
